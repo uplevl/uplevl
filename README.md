@@ -1,16 +1,14 @@
 # Uplevl
 
-![CodeRabbit Pull Request Reviews](https://img.shields.io/coderabbit/prs/github/uplevl/uplevl?utm_source=oss&utm_medium=github&utm_campaign=uplevl%2Fuplevl&labelColor=171717&color=FF570A&link=https%3A%2F%2Fcoderabbit.ai&label=CodeRabbit+Reviews)
+**Uplevl is an AI-powered marketing automation platform built for small businesses.**
 
-Uplevl is an AI-powered marketing automation platform built for small businesses. It helps service providers save time, increase bookings, and grow faster by automating content creation, lead capture, and customer engagement across social media and websites.
+It is designed to streamline the marketing process for service providers, enabling them to save time, boost bookings, and accelerate growth. This is achieved through the automation of content creation, lead capture, and customer engagement across social media platforms and websites.
 
-## What is Uplevl?
+The process begins with a mobile uploader, allowing business owners to easily submit photos and brief descriptions. Uplevl's AI technology then transforms these uploads into high-quality social media content, scheduling it into targeted drip campaigns. Additionally, the AI responds to comments and direct messages, fostering engagement and interest.
 
-Uplevl is a social media marketing engine built for small businesses. It starts with a mobile uploader where business owners can submit photos and short descriptions. Uplevl’s AI then generates high-quality social media content, schedules it into drip campaigns, and automatically responds to comments and DMs to drive engagement.
+As a result, these social media posts direct interested users to the business's website, where the AI Website Assistant assumes responsibility. This includes answering questions, capturing leads, and managing bookings seamlessly.
 
-These social posts lead interested users to the business’s website, where the AI Website Assistant takes over — answering questions, capturing leads, and handling bookings.
-
-Together, Uplevl handles the full marketing journey, from content upload to customer conversion.
+Ultimately, Uplevl oversees the entire marketing journey, from the initial content upload to the final customer conversion, ensuring a comprehensive and efficient marketing strategy.
 
 ## How It Works
 
