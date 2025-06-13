@@ -1,54 +1,61 @@
-# React + TypeScript + Vite
+# Uplevl
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![CodeRabbit Pull Request Reviews](https://img.shields.io/coderabbit/prs/github/uplevl/uplevl?utm_source=oss&utm_medium=github&utm_campaign=uplevl%2Fuplevl&labelColor=171717&color=FF570A&link=https%3A%2F%2Fcoderabbit.ai&label=CodeRabbit+Reviews)
 
-Currently, two official plugins are available:
+Uplevl is an AI-powered marketing automation platform built for small businesses. It helps service providers save time, increase bookings, and grow faster by automating content creation, lead capture, and customer engagement across social media and websites.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## What is Uplevl?
 
-## Expanding the ESLint configuration
+Uplevl is a social media marketing engine built for small businesses. It starts with a mobile uploader where business owners can submit photos and short descriptions. Uplevl’s AI then generates high-quality social media content, schedules it into drip campaigns, and automatically responds to comments and DMs to drive engagement.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+These social posts lead interested users to the business’s website, where the AI Website Assistant takes over — answering questions, capturing leads, and handling bookings.
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-});
-```
+Together, Uplevl handles the full marketing journey, from content upload to customer conversion.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## How It Works
 
-```js
-// eslint.config.js
-import reactDom from "eslint-plugin-react-dom";
-import reactX from "eslint-plugin-react-x";
+1. **📱 Content Upload**  
+   Business owners upload images and descriptions via Uplevl’s uploader. Files are securely handled via UploadThing.
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    "react-x": reactX,
-    "react-dom": reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs["recommended-typescript"].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-});
-```
+2. **🤖 AI Post Generation**  
+   Uplevl converts uploads into branded, engaging social media posts and schedules them across platforms using a drip campaign model.
+
+3. **💬 Comment & DM Engagement**  
+   The platform monitors comments and direct messages (DMs) on platforms like Instagram, automatically replying to increase engagement and drive interest.
+
+4. **🌐 Website Handoff**  
+   Engaged users are directed to the business’s website, where an embedded AI assistant interacts with them, handles bookings, and promotes offers.
+
+5. **📊 Tracking & Analytics**  
+   Uplevl tracks all touchpoints and outcomes, giving business owners clear insights into engagement and performance.
+
+## Core Features
+
+- Automatically turns photos into branded social media posts
+- Schedules posts as drip campaigns for consistent visibility
+- Engages with comments and DMs to capture interest
+- Directs leads to the website for seamless handoff and booking
+- Converts website visitors into clients with AI-powered assistance
+- Promotes loyalty perks and upsells during interactions
+- Tracks every step from first impression to conversion
+
+## Who It's For
+
+Uplevl is ideal for service-based small business owners — such as med spas, barbershops, dentists, repair shops, or fitness studios — who want to grow online without managing social media or marketing tools manually.
+
+## Tech Stack
+
+- **Backend**: Bun + Hono
+- **Frontend Dashboard**: Vite + React
+- **Authentication**: Clerk
+- **Database**: Neon with Drizzle ORM
+- **AI Integration**: OpenAI (LLM-based)
+- **File Uploads**: UploadThing
+- **Scheduling & Automation**: Upstash QStash
+- **Analytics**: PostHog + internal tracking
+
+## License
+
+Uplevl is licensed under the [Business Source License 1.1](./LICENSE).  
+You may use the code for non-commercial purposes or internal business use.  
+Starting June 13, 2028, the license will convert to Apache 2.0.
