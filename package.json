@@ -11,7 +11,8 @@
     "preview": "vite preview",
     "lint": "bunx --bun eslint .",
     "lint:fix": "bunx --bun eslint . --fix",
-    "format": "bunx --bun prettier --write ."
+    "format": "bunx --bun prettier --write .",
+    "typecheck": "bunx --bun tsc"
   },
   "dependencies": {
     "@radix-ui/react-alert-dialog": "^1.1.14",
@@ -71,5 +72,8 @@
     "typescript-eslint": "^8.30.1",
     "vite": "^6.3.5",
     "vite-tsconfig-paths": "^5.1.4"
+  },
+  "engines": {
+    "bun": "1.2.15"
   }
 }

@@ -3,7 +3,8 @@ import { type VariantProps, cva } from "class-variance-authority";
 
 import { cn } from "@/dashboard/shared/lib/utils";
 
-const buttonVariants = cva(
+// eslint-disable-next-line react-refresh/only-export-components
+export const buttonVariants = cva(
   "focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive inline-flex shrink-0 items-center justify-center gap-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all outline-none focus-visible:ring-[3px] enabled:cursor-pointer aria-disabled:pointer-events-none aria-disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
   {
     variants: {
