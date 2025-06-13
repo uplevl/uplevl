@@ -1,5 +1,7 @@
 # Uplevl
 
+![CodeRabbit Pull Request Reviews](https://img.shields.io/coderabbit/prs/github/uplevl/uplevl?utm_source=oss&utm_medium=github&utm_campaign=uplevl%2Fuplevl&labelColor=171717&color=FF570A&link=https%3A%2F%2Fcoderabbit.ai&label=CodeRabbit+Reviews)
+
 Uplevl is an AI-powered marketing automation platform built for small businesses. It helps service providers save time, increase bookings, and grow faster by automating content creation, lead capture, and customer engagement across social media and websites.
 
 ## What is Uplevl?
