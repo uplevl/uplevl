@@ -9,7 +9,7 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), "");
 
   return {
-    base: env.NODE_ENV === "production" ? "/dashboard" : "/",
+    base: mode === "production" ? "/dashboard" : "/",
     plugins: [
       viteTsConfigPaths({
         root: "./",

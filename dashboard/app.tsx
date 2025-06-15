@@ -1,14 +1,18 @@
+import { Suspense, lazy } from "react";
 import { Route, Routes } from "react-router";
 
 import { Layout } from "./features/layout";
-import DashboardPage from "./pages/dashboard";
+
+const DashboardPage = lazy(() => import("./pages/dashboard"));
 
 export function App() {
   return (
-    <Routes>
-      <Route element={<Layout />}>
-        <Route index element={<DashboardPage />} />
-      </Route>
-    </Routes>
+    <Suspense fallback={<div>Loading...</div>}>
+      <Routes>
+        <Route element={<Layout />}>
+          <Route index element={<DashboardPage />} />
+        </Route>
+      </Routes>
+    </Suspense>
   );
 }

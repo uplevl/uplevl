@@ -37,11 +37,23 @@ export function serveDashboard(app: Hono) {
       root: "./dist/dashboard",
       rewriteRequestPath: (path) => path.replace(/^\/dashboard/, ""),
       precompressed: true,
+      onFound: (_path, c) => {
+        c.header("Cache-Control", "public, max-age=31536000, immutable");
+      },
     }),
   );
 
   // Fallback to index.html for all other routes
-  app.use("/dashboard*", serveStatic({ path: "./dist/dashboard/index.html", precompressed: true }));
+  app.use(
+    "/dashboard*",
+    serveStatic({
+      path: "./dist/dashboard/index.html",
+      precompressed: true,
+      onFound: (_path, c) => {
+        c.header("Cache-Control", "no-cache");
+      },
+    }),
+  );
 
   return app;
 }

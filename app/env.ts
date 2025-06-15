@@ -8,12 +8,12 @@ const EnvSchema = z.object({
   DB_SEEDING: z.coerce.boolean().optional().default(false),
 });
 
-const { data, error } = EnvSchema.safeParse(process.env);
+const parsedResult = EnvSchema.safeParse(process.env);
 
-if (error) {
+if (!parsedResult.success) {
   console.error("❌ Invalid env:");
-  console.error(JSON.stringify(z.treeifyError(error), null, 2));
+  console.error(JSON.stringify(z.treeifyError(parsedResult.error), null, 2));
   process.exit(1);
 }
 
-export const env = data;
+export const env = parsedResult.data;

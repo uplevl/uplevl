@@ -3,8 +3,8 @@ import { createRoot } from "react-dom/client";
 
 import { env } from "@@/env";
 
-import { App } from "@@/app.tsx";
-import { Providers } from "@@/shared/providers/index.tsx";
+import { App } from "@@/app";
+import { Providers } from "@@/shared/providers/index";
 
 import "./index.css";
 

@@ -6,6 +6,7 @@ export const users = pgTable("users", {
   id: serial("id").unique().primaryKey(),
   uuid: uuid("uuid")
     .default(sql`gen_random_uuid()`)
+    .notNull()
     .unique(),
   clerkId: text("clerk_id").unique(),
   stripeId: text("stripe_id").unique(),

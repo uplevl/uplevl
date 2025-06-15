@@ -5,12 +5,12 @@ const EnvSchema = z.object({
   VITE_CLERK_PUBLISHABLE_KEY: z.string().min(1),
 });
 
-const { data, error } = EnvSchema.safeParse(import.meta.env);
+const parsedResult = EnvSchema.safeParse(import.meta.env);
 
-if (error) {
+if (!parsedResult.success) {
   console.error("❌ Invalid env:");
-  console.error(JSON.stringify(z.treeifyError(error), null, 2));
+  console.error(JSON.stringify(z.treeifyError(parsedResult.error), null, 2));
   process.exit(1);
 }
 
-export const env = data;
+export const env = parsedResult.data;
