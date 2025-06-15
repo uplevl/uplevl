@@ -32,7 +32,7 @@ export default defineConfig(({ mode }) => {
     clearScreen: false,
     server: {
       host: true,
-      port: Number(env.DASHBOARD_PORT || "4000"),
+      port: Number.isFinite(Number(env.DASHBOARD_PORT)) ? Number(env.DASHBOARD_PORT) : 4000,
       proxy: {
         "/api": `http://0.0.0.0:${env.APP_PORT}`,
       },
