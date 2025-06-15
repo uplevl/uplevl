@@ -1,4 +1,4 @@
-import { cn } from "@/dashboard/shared/lib/utils";
+import { cn } from "@@/shared/lib/utils";
 
 function Table({ className, ...props }: React.ComponentProps<"table">) {
   return (

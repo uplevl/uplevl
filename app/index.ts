@@ -1,30 +1,16 @@
-import { Hono } from "hono";
-import { cors } from "hono/cors";
+import { createApp } from "@/lib/create-app";
 
-import { env } from "@/env";
+import { serveDashboard } from "./lib/serve-dashboard";
 
-const app = new Hono()
-
-  // Middleware
-
-  .use(
-    "*",
-    cors({
-      origin: env.DASHBOARD_PUBLIC_URL,
-      allowHeaders: ["Content-Type", "Authorization"],
-      allowMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-      exposeHeaders: ["Content-Type", "Authorization"],
-      // credentials: true,
-    }),
-  );
-
-// Routes
+const app = createApp();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const apiRoutes = app.basePath("/api").get("/", (c) => {
+const apiRoutes = app.basePath("/api").get("/", async (c) => {
   return c.json({ message: "Hello from Uplevl!" });
 });
 
 export type ApiRoutes = typeof apiRoutes;
+
+serveDashboard(app);
 
 export default app;

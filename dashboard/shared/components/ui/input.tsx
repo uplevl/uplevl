@@ -1,4 +1,4 @@
-import { cn } from "@/dashboard/shared/lib/utils";
+import { cn } from "@@/shared/lib/utils";
 
 function Input({ className, type, ...props }: React.ComponentProps<"input">) {
   return (

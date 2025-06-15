@@ -1,7 +1,7 @@
 import { Slot } from "@radix-ui/react-slot";
 import { type VariantProps, cva } from "class-variance-authority";
 
-import { cn } from "@/dashboard/shared/lib/utils";
+import { cn } from "@@/shared/lib/utils";
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const buttonVariants = cva(

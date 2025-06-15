@@ -1,11 +1,18 @@
-import { Test } from "./shared/components/test";
-import { Providers } from "./shared/providers";
+import { Suspense, lazy } from "react";
+import { Route, Routes } from "react-router";
+
+import { Layout } from "./features/layout";
+
+const DashboardPage = lazy(() => import("./pages/dashboard"));
 
 export function App() {
   return (
-    <Providers>
-      <h1 className="text-2xl font-semibold">Hello from the Uplevl Dashboard</h1>
-      <Test />
-    </Providers>
+    <Suspense fallback={<div>Loading...</div>}>
+      <Routes>
+        <Route element={<Layout />}>
+          <Route index element={<DashboardPage />} />
+        </Route>
+      </Routes>
+    </Suspense>
   );
 }

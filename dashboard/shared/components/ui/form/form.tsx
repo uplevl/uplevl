@@ -3,8 +3,8 @@ import { Slot } from "@radix-ui/react-slot";
 import { useId } from "react";
 import { Controller, type ControllerProps, type FieldPath, type FieldValues, FormProvider } from "react-hook-form";
 
-import { Label } from "@/dashboard/shared/components/ui/label";
-import { cn } from "@/dashboard/shared/lib/utils";
+import { Label } from "@@/shared/components/ui/label";
+import { cn } from "@@/shared/lib/utils";
 
 import { FormFieldContext, FormItemContext, useFormField } from "./form.contexts";
 

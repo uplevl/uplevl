@@ -1,7 +1,7 @@
 import { Toaster } from "sonner";
 
-// import { DoubleCheckIcon, ErrorIcon, InfoIcon, WarningIcon } from "@/dashboard/shared/components/icons";
-// import Spinner from "@/dashboard/shared/components/spinner";
+// import { DoubleCheckIcon, ErrorIcon, InfoIcon, WarningIcon } from "@@/shared/components/icons";
+// import Spinner from "@@/shared/components/spinner";
 
 function ToastProvider({ children }: { children: React.ReactNode }) {
   return (
