@@ -1,13 +1,13 @@
 import { env } from "@/env";
 
-import app from "@/app";
+import app from "./app";
 
 const IS_DEV = env.NODE_ENV === "development";
 
 const server = Bun.serve({
+  development: IS_DEV,
   hostname: "0.0.0.0",
   port: env.APP_PORT,
-  development: IS_DEV,
   fetch: app.fetch,
 });
 

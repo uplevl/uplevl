@@ -1,7 +1,7 @@
 import { createContext, use, useId, useMemo } from "react";
 import * as RechartsPrimitive from "recharts";
 
-import { cn } from "@/dashboard/shared/lib/utils";
+import { cn } from "@@/shared/lib/utils";
 
 // Format: { THEME_NAME: CSS_SELECTOR }
 const THEMES = { light: "", dark: ".dark" } as const;

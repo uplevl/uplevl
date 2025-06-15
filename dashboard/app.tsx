@@ -1,11 +1,14 @@
-import { Test } from "./shared/components/test";
-import { Providers } from "./shared/providers";
+import { Route, Routes } from "react-router";
+
+import { Layout } from "./features/layout";
+import DashboardPage from "./pages/dashboard";
 
 export function App() {
   return (
-    <Providers>
-      <h1 className="text-2xl font-semibold">Hello from the Uplevl Dashboard</h1>
-      <Test />
-    </Providers>
+    <Routes>
+      <Route element={<Layout />}>
+        <Route index element={<DashboardPage />} />
+      </Route>
+    </Routes>
   );
 }

@@ -3,14 +3,14 @@ import { type VariantProps, cva } from "class-variance-authority";
 import { PanelLeftIcon } from "lucide-react";
 import { useCallback, useEffect, useMemo, useState } from "react";
 
-import { Button } from "@/dashboard/shared/components/ui/button";
-import { Input } from "@/dashboard/shared/components/ui/input";
-import { Separator } from "@/dashboard/shared/components/ui/separator";
-import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from "@/dashboard/shared/components/ui/sheet";
-import { Skeleton } from "@/dashboard/shared/components/ui/skeleton";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/dashboard/shared/components/ui/tooltip";
-import { useIsMobile } from "@/dashboard/shared/hooks/use-mobile";
-import { cn } from "@/dashboard/shared/lib/utils";
+import { Button } from "@@/shared/components/ui/button";
+import { Input } from "@@/shared/components/ui/input";
+import { Separator } from "@@/shared/components/ui/separator";
+import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from "@@/shared/components/ui/sheet";
+import { Skeleton } from "@@/shared/components/ui/skeleton";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@@/shared/components/ui/tooltip";
+import { useIsMobile } from "@@/shared/hooks/use-mobile";
+import { cn } from "@@/shared/lib/utils";
 
 import { SidebarContext, type SidebarContextProps, useSidebar } from "./sidebar.context";
 
