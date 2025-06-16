@@ -1,30 +1,36 @@
 import { type Hono } from "hono";
 import { serveStatic } from "hono/bun";
+import type { Dirent } from "node:fs";
 import { readdir } from "node:fs/promises";
 
 export async function serveStaticWebsite(name: string, app: Hono) {
-  let files: string[];
+  let entries: Dirent<string>[];
+
   try {
-    files = await readdir(`./dist/${name}`);
+    entries = await readdir(`./dist/${name}`, { withFileTypes: true });
   } catch {
     console.warn(`[serveStaticWebsite] Static site "${name}" not found at ${`./dist/${name}`} – skipping registration`);
     return;
   }
 
-  files.forEach((file) => {
-    if (!file.endsWith(".html")) {
+  entries
+    .filter((entry) => entry.isFile())
+    .forEach((entry) => {
+      if (!entry.name.endsWith(".html")) {
+        return;
+      }
+
       app.use(
-        `/${name}/${file}`,
+        `/${name}/${entry.name}`,
         serveStatic({
-          path: `./dist/${name}/${file}`,
+          path: `./dist/${name}/${entry.name}`,
           precompressed: true,
           onFound: (_path, c) => {
             c.header("Cache-Control", "public, max-age=31536000, immutable");
           },
         }),
       );
-    }
-  });
+    });
 
   app.use(
     `/${name}/assets/*`,
