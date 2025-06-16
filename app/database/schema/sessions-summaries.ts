@@ -9,7 +9,9 @@ export const sessionsSummaries = pgTable(
     // IDs
     id: serial("id").unique().primaryKey(),
     // References
-    sessionId: integer("session_id").references(() => sessions.id),
+    sessionId: integer("session_id")
+      .references(() => sessions.id, { onDelete: "cascade" })
+      .notNull(),
     // Data
     converted: boolean("converted").notNull().default(false),
     conversationType: text("conversation_type"),

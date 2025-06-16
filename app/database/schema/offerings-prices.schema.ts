@@ -7,7 +7,9 @@ export const offeringsPrices = pgTable("offerings_prices", {
   // IDs
   id: serial("id").unique().primaryKey(),
   // References
-  offeringId: integer("offering_id").references(() => offerings.id, { onDelete: "cascade" }),
+  offeringId: integer("offering_id")
+    .references(() => offerings.id, { onDelete: "cascade" })
+    .notNull(),
   // Prices
   price: integer("price").notNull(),
   tier: text("tier"),

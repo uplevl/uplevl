@@ -1,4 +1,4 @@
-export { users, userRelations, USER_ROLES, type UserRole } from "./users.schema";
+export { users, userRelations, USER_ROLES, type UserRole, userRolesEnum } from "./users.schema";
 export { agents, agentsRelations } from "./agents.schema";
 export { offerings, offeringsRelations } from "./offerings.schema";
 export { offeringsPrices, offeringsPricesRelations } from "./offerings-prices.schema";

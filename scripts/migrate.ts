@@ -1,5 +1,3 @@
-import { config } from "dotenv";
-import { expand } from "dotenv-expand";
 import { migrate } from "drizzle-orm/postgres-js/migrator";
 
 import { env } from "@/env";
@@ -7,8 +5,6 @@ import { env } from "@/env";
 import { connection, db } from "@/database";
 
 import drizzleConfig from "../drizzle.config";
-
-expand(config());
 
 if (!env.DB_MIGRATING) {
   throw new Error("You must set DB_MIGRATING to true when running migrations");

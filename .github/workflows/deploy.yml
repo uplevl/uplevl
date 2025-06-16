@@ -17,9 +17,9 @@ jobs:
         uses: oven-sh/setup-bun@v2
         with:
           bun-version: 1.2.15
+      - name: Add NPM credentials
+        uses: ./.github/actions/add-npm-credentials
       - name: Install dependencies
-        env:
-          HUGEICONS_TOKEN: ${{ secrets.HUGEICONS_TOKEN }}
         run: bun install --frozen-lockfile
       - name: Build
         run: bun run build:dashboard
@@ -27,6 +27,8 @@ jobs:
           VITE_CLERK_PUBLISHABLE_KEY: ${{ secrets.VITE_CLERK_PUBLISHABLE_KEY }}
           VITE_POSTHOG_KEY: ${{ secrets.VITE_POSTHOG_KEY }}
           VITE_POSTHOG_HOST: ${{ vars.VITE_POSTHOG_HOST }}
+      - name: Remove NPM credentials
+        uses: ./.github/actions/remove-npm-credentials
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
         with:
@@ -43,11 +45,12 @@ jobs:
         uses: oven-sh/setup-bun@v2
         with:
           bun-version: 1.2.15
-      - run: |
-          echo "@hugeicons-pro:registry=https://npm.hugeicons.com/" > .npmrc
-          echo "//npm.hugeicons.com/:_authToken=${{ secrets.HUGEICONS_TOKEN }}" >> .npmrc
+      - name: Add NPM credentials
+        uses: ./.github/actions/add-npm-credentials
       - name: Install dependencies
         run: bun install --frozen-lockfile
+      - name: Remove NPM credentials
+        uses: ./.github/actions/remove-npm-credentials
       - name: Migrate Database
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
@@ -72,9 +75,6 @@ jobs:
       - uses: superfly/flyctl-actions/setup-flyctl@master
         with:
           version: 0.3.142
-      - run: |
-          echo "@hugeicons-pro:registry=https://npm.hugeicons.com/" > .npmrc
-          echo "//npm.hugeicons.com/:_authToken=${{ secrets.HUGEICONS_TOKEN }}" >> .npmrc
 
       - run: flyctl deploy
         env:

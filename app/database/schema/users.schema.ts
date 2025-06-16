@@ -1,5 +1,5 @@
 import { relations, sql } from "drizzle-orm";
-import { boolean, index, integer, pgTable, serial, text, timestamp, uuid } from "drizzle-orm/pg-core";
+import { boolean, index, integer, pgEnum, pgTable, serial, text, timestamp, uuid } from "drizzle-orm/pg-core";
 
 import { agents } from "./agents.schema";
 import { packages } from "./packages.schema";
@@ -7,9 +7,12 @@ import { packages } from "./packages.schema";
 export const USER_ROLES = {
   ADMIN: "admin",
   USER: "user",
+  SUPERADMIN: "superadmin",
 } as const;
 
 export type UserRole = (typeof USER_ROLES)[keyof typeof USER_ROLES];
+
+export const userRolesEnum = pgEnum("user_roles", [USER_ROLES.ADMIN, USER_ROLES.USER, USER_ROLES.SUPERADMIN]);
 
 export const users = pgTable(
   "users",
@@ -29,6 +32,7 @@ export const users = pgTable(
     email: text("email").notNull().unique(),
     firstName: text("first_name"),
     lastName: text("last_name"),
+    role: userRolesEnum("role").notNull().default(USER_ROLES.USER),
     // Flags
     isActive: boolean("is_active").notNull().default(true),
     // Timestamps

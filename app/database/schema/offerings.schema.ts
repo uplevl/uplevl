@@ -10,7 +10,9 @@ export const offerings = pgTable(
     // IDs
     id: serial("id").unique().primaryKey(),
     // References
-    agentId: uuid("agent_id").references(() => agents.uuid, { onDelete: "cascade", onUpdate: "cascade" }),
+    agentId: uuid("agent_id")
+      .references(() => agents.uuid, { onDelete: "cascade", onUpdate: "cascade" })
+      .notNull(),
     // Offerings
     title: text("title").notNull(),
     description: text("description").notNull(),

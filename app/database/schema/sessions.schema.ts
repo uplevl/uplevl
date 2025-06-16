@@ -1,5 +1,5 @@
 import { relations } from "drizzle-orm";
-import { index, pgEnum, pgTable, serial, text, timestamp, uniqueIndex, uuid } from "drizzle-orm/pg-core";
+import { index, pgEnum, pgTable, serial, text, timestamp, uuid } from "drizzle-orm/pg-core";
 
 import { agents } from "./agents.schema";
 import { sessionsSummaries } from "./sessions-summaries";
@@ -61,7 +61,7 @@ export const sessions = pgTable(
     agentId: uuid("agent_id").references(() => agents.uuid),
     // Info
     source: sessionSource("source").notNull(),
-    status: sessionStatus("status").notNull().default("open"),
+    status: sessionStatus("status").notNull().default(SESSION_STATUSES.OPEN),
     intent: sessionIntent("intent"),
     // User info
     userName: text("user_name"),
@@ -76,7 +76,6 @@ export const sessions = pgTable(
     deletedAt: timestamp("deleted_at", { mode: "string" }),
   },
   (table) => [
-    uniqueIndex("sessions_session_id_agent_id_unique_idx").on(table.sessionId, table.agentId),
     index("sessions_session_id_idx").on(table.sessionId),
     index("sessions_agent_id_idx").on(table.agentId),
     index("sessions_deleted_at_idx").on(table.deletedAt),

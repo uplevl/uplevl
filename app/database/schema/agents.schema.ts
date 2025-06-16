@@ -10,11 +10,13 @@ export const agents = pgTable(
   "agents",
   {
     // IDs
-    id: serial("id").unique().primaryKey(),
+    id: serial("id").primaryKey(),
     uuid: uuid("uuid")
       .default(sql`gen_random_uuid()`)
       .unique(),
-    userId: text("user_id").references(() => users.clerkId),
+    userId: text("user_id")
+      .references(() => users.clerkId, { onDelete: "cascade" })
+      .notNull(),
     // Business data
     businessName: text("business_name"),
     businessDescription: text("business_description"),
