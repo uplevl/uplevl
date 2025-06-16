@@ -20,7 +20,7 @@ export const integrations = pgTable(
   "integrations",
   {
     // Ids
-    id: serial("id").unique().primaryKey(),
+    id: serial("id").primaryKey(),
     userId: text("user_id")
       .references(() => users.clerkId)
       .notNull(),
