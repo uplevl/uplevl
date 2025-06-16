@@ -4,6 +4,7 @@ import { Route, Routes } from "react-router";
 import { Layout } from "./features/layout";
 
 const DashboardPage = lazy(() => import("./pages/dashboard"));
+const SettingsPage = lazy(() => import("./pages/settings"));
 
 export function App() {
   return (
@@ -11,6 +12,7 @@ export function App() {
       <Routes>
         <Route element={<Layout />}>
           <Route index element={<DashboardPage />} />
+          <Route path="settings" element={<SettingsPage />} />
         </Route>
       </Routes>
     </Suspense>
