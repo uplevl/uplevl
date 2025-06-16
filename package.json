@@ -11,8 +11,10 @@
     "start": "NODE_ENV=production bun index.ts",
     "lint": "bunx --bun eslint .",
     "lint:fix": "bunx --bun eslint . --fix",
+    "lint:staged": "lint-staged -q",
     "format": "bunx --bun prettier --write .",
-    "typecheck": "bunx --bun tsc"
+    "typecheck": "bunx --bun tsc",
+    "prepare": "husky"
   },
   "dependencies": {
     "@clerk/react-router": "^1.6.0",
@@ -61,6 +63,8 @@
     "@typescript-eslint/parser": "^8.34.0",
     "@vitejs/plugin-react": "^4.4.1",
     "babel-plugin-react-compiler": "^19.1.0-rc.2",
+    "bun-types": "^1.2.16",
+    "cosmiconfig": "^9.0.0",
     "drizzle-kit": "^0.31.1",
     "eslint": "^9.25.0",
     "eslint-config-prettier": "^10.1.5",
@@ -75,6 +79,8 @@
     "eslint-plugin-react-refresh": "^0.4.19",
     "eslint-plugin-unused-imports": "^4.1.4",
     "globals": "^16.0.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.1.2",
     "prettier": "^3.5.3",
     "prettier-plugin-tailwindcss": "^0.6.12",
     "typescript": "5.8.3",
@@ -84,5 +90,17 @@
   },
   "engines": {
     "bun": "1.2.15"
+  },
+  "lint-staged": {
+    "**/*.{ts,tsx}": [
+      "prettier --write",
+      "eslint --fix",
+      "tsc"
+    ]
+  },
+  "prepare-commit-msg": {
+    "messagePattern": "[$J] $M",
+    "jiraTicketPattern": "(CU-[a-z0-9]+)",
+    "ignoreBranchesMissingTickets": true
   }
 }
