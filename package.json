@@ -14,7 +14,10 @@
     "lint:staged": "lint-staged -q",
     "format": "prettier --write .",
     "typecheck": "tsc",
-    "prepare": "husky"
+    "prepare": "husky",
+    "db:generate": "drizzle-kit generate --config=drizzle.config.ts",
+    "db:migrate": "DB_MIGRATING=true bun run scripts/migrate.ts",
+    "db:studio": "drizzle-kit studio --config=drizzle.config.ts"
   },
   "dependencies": {
     "@clerk/react-router": "^1.6.0",
@@ -63,6 +66,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.25.0",
+    "@flydotio/dockerfile": "^0.7.10",
     "@tanstack/eslint-plugin-query": "^5.78.0",
     "@trivago/prettier-plugin-sort-imports": "^5.2.2",
     "@types/bun": "^1.2.16",
@@ -108,5 +112,10 @@
     "messagePattern": "[$J] $M",
     "jiraTicketPattern": "(CU-[a-z0-9]+)",
     "ignoreBranchesMissingTickets": true
+  },
+  "dockerfile": {
+    "secrets": [
+      "HUGEICONS_TOKEN"
+    ]
   }
 }

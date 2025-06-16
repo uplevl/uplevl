@@ -1,0 +1,83 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1750081015319,
+      "tag": "0000_nostalgic_lethal_legion",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1750087247136,
+      "tag": "0001_slimy_the_fallen",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1750087795743,
+      "tag": "0002_demonic_the_phantom",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1750087918413,
+      "tag": "0003_daily_blonde_phantom",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1750087944655,
+      "tag": "0004_dusty_venus",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1750087984062,
+      "tag": "0005_old_wrecker",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1750088146009,
+      "tag": "0006_petite_susan_delgado",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1750088208786,
+      "tag": "0007_chunky_doorman",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1750088364652,
+      "tag": "0008_safe_blacklash",
+      "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1750088720144,
+      "tag": "0009_nebulous_freak",
+      "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1750090920821,
+      "tag": "0010_aromatic_warhawk",
+      "breakpoints": true
+    }
+  ]
+}

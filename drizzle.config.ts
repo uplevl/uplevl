@@ -1,17 +1,16 @@
-import "dotenv/config";
 import { type Config } from "drizzle-kit";
 
-const DATABASE_URL = process.env.DATABASE_URL;
+import { env } from "@/env";
 
-if (!DATABASE_URL) {
+if (!env.DATABASE_URL) {
   throw new Error("DATABASE_URL env variable is required for Drizzle migrations.");
 }
 
 export default {
-  schema: "./app/database/schema.ts",
+  schema: "./app/database/schema",
   out: "./app/database/migrations",
   dialect: "postgresql",
   dbCredentials: {
-    url: DATABASE_URL,
+    url: env.DATABASE_URL,
   },
 } satisfies Config;

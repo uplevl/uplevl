@@ -24,10 +24,14 @@ jobs:
         uses: oven-sh/setup-bun@v2
         with:
           bun-version: 1.2.15
+      - name: Add NPM credentials
+        uses: ./.github/actions/add-npm-credentials
+        with:
+          hugeicons-token: ${{ secrets.HUGEICONS_TOKEN }}
       - name: Install dependencies
-        env:
-          HUGEICONS_TOKEN: ${{ secrets.HUGEICONS_TOKEN }}
         run: bun install --frozen-lockfile
+      - name: Remove NPM credentials
+        uses: ./.github/actions/remove-npm-credentials
       - name: Copy env example
         shell: bash
         run: find . -type f -name ".env.example" -exec sh -c 'cp "$1" "${1%.*}"' _ {} \;
@@ -44,10 +48,14 @@ jobs:
         uses: oven-sh/setup-bun@v2
         with:
           bun-version: 1.2.15
+      - name: Add NPM credentials
+        uses: ./.github/actions/add-npm-credentials
+        with:
+          hugeicons-token: ${{ secrets.HUGEICONS_TOKEN }}
       - name: Install dependencies
-        env:
-          HUGEICONS_TOKEN: ${{ secrets.HUGEICONS_TOKEN }}
         run: bun install --frozen-lockfile
+      - name: Remove NPM credentials
+        uses: ./.github/actions/remove-npm-credentials
       - name: Copy env example
         shell: bash
         run: find . -type f -name ".env.example" -exec sh -c 'cp "$1" "${1%.*}"' _ {} \;

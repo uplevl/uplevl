@@ -1,0 +1,1 @@
+ALTER TABLE "offerings_prices" DROP CONSTRAINT "offerings_prices_id_unique";

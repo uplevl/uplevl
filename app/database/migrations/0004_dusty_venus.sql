@@ -1,0 +1,1 @@
+DROP INDEX "agents_uuid_idx";

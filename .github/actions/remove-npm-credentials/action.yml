@@ -1,0 +1,11 @@
+name: Remove NPM Credentials
+description: Remove NPM credentials from the repository
+
+runs:
+  using: composite
+
+  steps:
+    - name: Remove NPM credentials
+      shell: bash
+      run: |
+        rm -f .npmrc
