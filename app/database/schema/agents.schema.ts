@@ -34,7 +34,6 @@ export const agents = pgTable(
   (table) => [
     index("agents_user_id_idx").on(table.userId),
     index("agents_deleted_at_idx").on(table.deletedAt),
-    index("agents_uuid_idx").on(table.uuid),
     index("agents_is_active_idx").on(table.isActive),
   ],
 );
