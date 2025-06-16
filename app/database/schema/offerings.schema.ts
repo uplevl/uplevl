@@ -8,7 +8,7 @@ export const offerings = pgTable(
   "offerings",
   {
     // IDs
-    id: serial("id").unique().primaryKey(),
+    id: serial("id").primaryKey(),
     // References
     agentId: uuid("agent_id")
       .references(() => agents.uuid, { onDelete: "cascade", onUpdate: "cascade" })
