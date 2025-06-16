@@ -1,6 +1,11 @@
 name: Add NPM Credentials
 description: Add NPM credentials to the repository
 
+inputs:
+  hugeicons-token:
+    description: The Hugeicons token
+    required: true
+
 runs:
   using: composite
 
@@ -9,4 +14,4 @@ runs:
       shell: bash
       run: |
         echo "@hugeicons-pro:registry=https://npm.hugeicons.com/" > .npmrc
-        echo "//npm.hugeicons.com/:_authToken=${{ secrets.HUGEICONS_TOKEN }}" >> .npmrc
+        echo "//npm.hugeicons.com/:_authToken=${{ inputs.hugeicons-token }}" >> .npmrc
