@@ -19,6 +19,10 @@ FROM base AS build
 RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y build-essential pkg-config python-is-python3
 
+# Add build argument for npm token
+ARG HUGEICONS_TOKEN
+ENV HUGEICONS_TOKEN=${HUGEICONS_TOKEN}
+
 # Install node modules
 COPY bun.lock package.json ./
 RUN bun install --frozen-lockfile
