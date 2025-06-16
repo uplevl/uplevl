@@ -3,7 +3,13 @@ import { serveStatic } from "hono/bun";
 import { readdir } from "node:fs/promises";
 
 export async function serveStaticWebsite(name: string, app: Hono) {
-  const files = await readdir(`./dist/${name}`);
+  let files: string[];
+  try {
+    files = await readdir(`./dist/${name}`);
+  } catch {
+    console.warn(`[serveStaticWebsite] Static site "${name}" not found at ${`./dist/${name}`} – skipping registration`);
+    return;
+  }
 
   files.forEach((file) => {
     if (!file.endsWith(".html")) {
@@ -42,6 +48,4 @@ export async function serveStaticWebsite(name: string, app: Hono) {
       },
     }),
   );
-
-  return app;
 }
