@@ -56,7 +56,7 @@ export const sessions = pgTable(
   "sessions",
   {
     // IDs
-    id: serial("id").unique().primaryKey(),
+    id: serial("id").primaryKey(),
     sessionId: text("session_id").notNull().unique(),
     agentId: uuid("agent_id").references(() => agents.uuid),
     // Info
