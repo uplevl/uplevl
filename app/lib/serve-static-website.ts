@@ -45,7 +45,7 @@ export async function serveStaticWebsite(name: string, app: Hono) {
   );
 
   app.use(
-    `/${name}/*`,
+    `/${name}*`,
     serveStatic({
       path: `./dist/${name}/index.html`,
       precompressed: true,
