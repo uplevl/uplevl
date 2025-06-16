@@ -3,6 +3,8 @@ import { z } from "zod/v4";
 const EnvSchema = z.object({
   BASE_URL: z.string().min(1),
   VITE_CLERK_PUBLISHABLE_KEY: z.string().min(1),
+  VITE_POSTHOG_KEY: z.string().min(1),
+  VITE_POSTHOG_HOST: z.string().url(),
 });
 
 const parsedResult = EnvSchema.safeParse(import.meta.env);
