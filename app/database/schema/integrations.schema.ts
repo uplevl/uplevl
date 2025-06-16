@@ -22,10 +22,10 @@ export const integrations = pgTable(
     // Ids
     id: serial("id").primaryKey(),
     userId: text("user_id")
-      .references(() => users.clerkId)
+      .references(() => users.clerkId, { onDelete: "cascade" })
       .notNull(),
     agentId: uuid("agent_id")
-      .references(() => agents.uuid)
+      .references(() => agents.uuid, { onDelete: "cascade" })
       .notNull(),
     // Data
     name: integrationName("name").notNull(),

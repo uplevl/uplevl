@@ -18,7 +18,7 @@ export const users = pgTable(
   "users",
   {
     // IDs
-    id: serial("id").unique().primaryKey(),
+    id: serial("id").primaryKey(),
     uuid: uuid("uuid")
       .default(sql`gen_random_uuid()`)
       .notNull()
