@@ -75,11 +75,7 @@ export const sessions = pgTable(
       .$onUpdate(() => new Date().toISOString()),
     deletedAt: timestamp("deleted_at", { mode: "string" }),
   },
-  (table) => [
-    index("sessions_session_id_idx").on(table.sessionId),
-    index("sessions_agent_id_idx").on(table.agentId),
-    index("sessions_deleted_at_idx").on(table.deletedAt),
-  ],
+  (table) => [index("sessions_agent_id_idx").on(table.agentId), index("sessions_deleted_at_idx").on(table.deletedAt)],
 );
 
 export const sessionsRelations = relations(sessions, ({ one, many }) => ({

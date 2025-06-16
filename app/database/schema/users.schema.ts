@@ -43,12 +43,7 @@ export const users = pgTable(
       .$onUpdate(() => new Date().toISOString()),
     deletedAt: timestamp("deleted_at", { mode: "string" }),
   },
-  (table) => [
-    index("users_deleted_at_idx").on(table.deletedAt),
-    index("users_clerk_id_idx").on(table.clerkId),
-    index("users_stripe_id_idx").on(table.stripeId),
-    index("users_is_active_idx").on(table.isActive),
-  ],
+  (table) => [index("users_deleted_at_idx").on(table.deletedAt), index("users_is_active_idx").on(table.isActive)],
 );
 
 export const userRelations = relations(users, ({ one }) => ({

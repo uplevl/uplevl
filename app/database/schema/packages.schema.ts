@@ -6,7 +6,7 @@ import { users } from "./users.schema";
 
 export const packages = pgTable("packages", {
   // IDs
-  id: serial("id").unique().primaryKey(),
+  id: serial("id").primaryKey(),
   // Data
   title: text("title").notNull().unique(),
   price: integer("price").notNull(),

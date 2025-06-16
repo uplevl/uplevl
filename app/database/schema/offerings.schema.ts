@@ -17,7 +17,7 @@ export const offerings = pgTable(
     title: text("title").notNull(),
     description: text("description").notNull(),
     category: text("category"),
-    order: integer("order").notNull().default(0),
+    sortOrder: integer("sort_order").notNull().default(0),
     // Timestamps
     createdAt: timestamp("created_at", { mode: "string" }).defaultNow().notNull(),
     updatedAt: timestamp("updated_at", { mode: "string" })

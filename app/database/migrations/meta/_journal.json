@@ -71,6 +71,13 @@
       "when": 1750088720144,
       "tag": "0009_nebulous_freak",
       "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1750090920821,
+      "tag": "0010_aromatic_warhawk",
+      "breakpoints": true
     }
   ]
 }

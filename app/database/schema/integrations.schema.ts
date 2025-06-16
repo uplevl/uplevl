@@ -45,7 +45,6 @@ export const integrations = pgTable(
     index("integrations_user_id_idx").on(table.userId),
     index("integrations_agent_id_idx").on(table.agentId),
     index("integrations_deleted_at_idx").on(table.deletedAt),
-    index("integrations_entity_id_idx").on(table.entityId),
   ],
 );
 
