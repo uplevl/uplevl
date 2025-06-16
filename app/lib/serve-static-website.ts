@@ -16,7 +16,7 @@ export async function serveStaticWebsite(name: string, app: Hono) {
   entries
     .filter((entry) => entry.isFile())
     .forEach((entry) => {
-      if (!entry.name.endsWith(".html")) {
+      if (entry.name.endsWith(".html")) {
         return;
       }
 
