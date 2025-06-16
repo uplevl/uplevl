@@ -5,7 +5,7 @@ import { offerings } from "./offerings.schema";
 
 export const offeringsPrices = pgTable("offerings_prices", {
   // IDs
-  id: serial("id").unique().primaryKey(),
+  id: serial("id").primaryKey(),
   // References
   offeringId: integer("offering_id")
     .references(() => offerings.id, { onDelete: "cascade" })
