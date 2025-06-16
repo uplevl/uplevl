@@ -1,6 +1,6 @@
 import { createApp } from "@/lib/create-app";
 
-import { serveDashboard } from "./lib/serve-dashboard";
+import { serveStaticWebsite } from "./lib/serve-static-website";
 
 const app = createApp();
 
@@ -11,6 +11,6 @@ const apiRoutes = app.basePath("/api").get("/", async (c) => {
 
 export type ApiRoutes = typeof apiRoutes;
 
-serveDashboard(app);
+await serveStaticWebsite("dashboard", app);
 
 export default app;
