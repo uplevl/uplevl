@@ -95,7 +95,7 @@
     "**/*.{ts,tsx}": [
       "prettier --write",
       "eslint --fix",
-      "tsc"
+      "tsc --noEmit"
     ]
   },
   "prepare-commit-msg": {
