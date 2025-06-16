@@ -11,8 +11,8 @@ export const packages = pgTable("packages", {
   title: text("title").notNull().unique(),
   price: integer("price").notNull(),
   specialPrice: integer("special_price"),
-  stripePriceId: text("stripe_price_id").notNull(),
-  order: integer("order").notNull().default(0),
+  stripePriceId: text("stripe_price_id").notNull().unique(),
+  sortOrder: integer("sort_order").notNull().default(0),
   // Flags
   isPopular: boolean("is_popular").notNull().default(false),
   isActive: boolean("is_active").notNull().default(true),
