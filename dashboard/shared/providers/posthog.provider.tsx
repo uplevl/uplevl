@@ -36,6 +36,7 @@ function PostHogProvider({ children }: { children: React.ReactNode }) {
 function PostHogPageView() {
   const { pathname } = useLocation();
   const [searchParams] = useSearchParams();
+  const query = searchParams.toString();
   const posthog = usePostHog();
 
   // Track pageviews
@@ -45,12 +46,12 @@ function PostHogPageView() {
     }
 
     let url = window.location.origin + pathname;
-    if (searchParams.toString()) {
-      url = url + `?${searchParams.toString()}`;
+    if (query) {
+      url = url + `?${query}`;
     }
 
     posthog.capture("$pageview", { $current_url: url });
-  }, [pathname, searchParams, posthog]);
+  }, [pathname, query, posthog]);
 
   return null;
 }
