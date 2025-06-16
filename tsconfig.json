@@ -28,6 +28,9 @@
     "paths": {
       "@/*": ["./app/*"],
       "@@/*": ["./dashboard/*"]
-    }
+    },
+
+    // Bun types
+    "types": ["bun-types"]
   }
 }
