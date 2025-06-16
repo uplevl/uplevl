@@ -1,14 +1,52 @@
-import { Outlet } from "react-router";
+import { UserButton } from "@clerk/react-router";
+import { Link, Outlet } from "react-router";
 
-import { Sidebar } from "./sidebar";
+import Logo from "@@/shared/components/logo";
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarFooter,
+  SidebarHeader,
+  SidebarInset,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+  SidebarProvider,
+} from "@@/shared/components/ui/sidebar";
+
+import { Navigation } from "./navigation";
 
 export function Layout() {
   return (
-    <>
-      <Sidebar />
-      <main className="flex-1">
-        <Outlet />
-      </main>
-    </>
+    <SidebarProvider>
+      <Sidebar variant="floating">
+        <SidebarHeader>
+          <SidebarMenu>
+            <SidebarMenuItem className="flex items-center justify-start">
+              <SidebarMenuButton asChild size="lg">
+                <Link to="/dashboard" className="py-4">
+                  <Logo />
+                </Link>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          </SidebarMenu>
+        </SidebarHeader>
+        <SidebarContent>
+          <Navigation />
+        </SidebarContent>
+        <SidebarFooter>
+          <SidebarMenu>
+            <SidebarMenuItem>
+              <UserButton showName />
+            </SidebarMenuItem>
+          </SidebarMenu>
+        </SidebarFooter>
+      </Sidebar>
+      <SidebarInset>
+        <main className="container mx-auto flex-1 p-2 pl-0">
+          <Outlet />
+        </main>
+      </SidebarInset>
+    </SidebarProvider>
   );
 }

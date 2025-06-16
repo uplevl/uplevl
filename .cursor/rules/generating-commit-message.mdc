@@ -5,7 +5,7 @@ alwaysApply: false
 ---
 When generating commit messages, follow these guidelines:
 
-1. Keep all messages in lower case
+1. Keep all messages in lower case. That is very important as this is our commit ruleset.
 2. Prefix each message with one of the following types:
    - `feat`: a new feature
    - `fix`: a bug fix
@@ -18,7 +18,7 @@ When generating commit messages, follow these guidelines:
    - `ci`: changes to CI configuration files and scripts
 
 3. Write messages in present tense
-4. Keep the subject line under 50 characters
+4. Keep the subject line under 50 characters! Shorter is better!
 5. Use the imperative mood ("add" not "added" or "adds")
 
 Examples:

@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
+import { Page, PageHeader } from "@@/shared/components/page";
 import { api } from "@@/shared/lib/api";
 
 export default function DashboardPage() {
@@ -9,10 +10,10 @@ export default function DashboardPage() {
   });
 
   return (
-    <div className="space-y-4">
-      <h1 className="text-2xl font-semibold">DashboardPage</h1>
+    <Page>
+      <PageHeader title="Dashboard" />
       {isPending && <div>Loading...</div>}
       {data && <div>{data.message}</div>}
-    </div>
+    </Page>
   );
 }
