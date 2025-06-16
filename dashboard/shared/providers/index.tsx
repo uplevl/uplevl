@@ -17,16 +17,16 @@ export function Providers({ children }: ProvidersProps) {
   const [queryClient] = useState(() => new QueryClient());
 
   return (
-    <PostHogProvider>
+    <ClerkProvider publishableKey={env.VITE_CLERK_PUBLISHABLE_KEY}>
       <BrowserRouter basename={env.BASE_URL}>
-        <QueryClientProvider client={queryClient}>
-          <ClerkProvider publishableKey={env.VITE_CLERK_PUBLISHABLE_KEY}>
+        <PostHogProvider>
+          <QueryClientProvider client={queryClient}>
             <HelmetProvider>
               <ToastProvider>{children}</ToastProvider>
             </HelmetProvider>
-          </ClerkProvider>
-        </QueryClientProvider>
+          </QueryClientProvider>
+        </PostHogProvider>
       </BrowserRouter>
-    </PostHogProvider>
+    </ClerkProvider>
   );
 }

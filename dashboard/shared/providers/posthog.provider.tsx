@@ -35,7 +35,7 @@ function PostHogProvider({ children }: { children: React.ReactNode }) {
 
 function PostHogPageView() {
   const { pathname } = useLocation();
-  const searchParams = useSearchParams();
+  const [searchParams] = useSearchParams();
   const posthog = usePostHog();
 
   // Track pageviews
