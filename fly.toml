@@ -7,6 +7,12 @@ app = 'uplevl'
 primary_region = 'dfw'
 
 [build]
+  dockerfile = "Dockerfile"
+  [build.args]
+    HUGEICONS_TOKEN = ""
+
+[env]
+  HUGEICONS_TOKEN = ""
 
 [http_service]
   internal_port = 3000

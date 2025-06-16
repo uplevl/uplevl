@@ -29,3 +29,4 @@ dist-ssr
 # Project
 .env*
 !.env.example
+.npmrc

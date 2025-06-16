@@ -19,12 +19,8 @@ FROM base AS build
 RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y build-essential pkg-config python-is-python3
 
-# Add build argument for npm token
-ARG HUGEICONS_TOKEN
-ENV HUGEICONS_TOKEN=${HUGEICONS_TOKEN}
-
 # Install node modules
-COPY bun.lock package.json ./
+COPY --link .npmrc bun.lock package.json ./
 RUN bun install --frozen-lockfile
 
 # Copy application code
@@ -32,11 +28,6 @@ COPY . .
 
 # Final stage for app image
 FROM base
-
-# Install packages needed for deployment
-RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y chromium chromium-sandbox && \
-    rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 # Copy built application
 COPY --from=build /app /app
