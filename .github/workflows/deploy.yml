@@ -57,7 +57,13 @@ jobs:
         uses: ./.github/actions/remove-npm-credentials
       - name: Migrate Database
         env:
+          INTERNAL_DOMAINS: ${{ vars.INTERNAL_DOMAINS }}
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          SEED_CLERK_USER_ID: ${{ secrets.SEED_CLERK_USER_ID }}
+          SEED_STRIPE_ID: ${{ secrets.SEED_STRIPE_ID }}
+          SEED_USER_EMAIL: ${{ secrets.SEED_USER_EMAIL }}
+          SEED_INTEGRATION_INSTAGRAM_ENTITY_ID: ${{ secrets.SEED_INTEGRATION_INSTAGRAM_ENTITY_ID }}
+          SEED_INTEGRATION_INSTAGRAM_TOKEN: ${{ secrets.SEED_INTEGRATION_INSTAGRAM_TOKEN }}
         run: bun run db:migrate
 
   deploy:
