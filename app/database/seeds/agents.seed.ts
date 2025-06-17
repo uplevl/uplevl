@@ -21,7 +21,7 @@ export async function agentsSeed() {
         })
         .returning({ id: schema.agents.id, uuid: schema.agents.uuid });
 
-      if (!insertedAgent) {
+      if (insertedAgent.length === 0) {
         throw new Error(`Agent could not be created`);
       }
 
