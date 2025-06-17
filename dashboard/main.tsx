@@ -4,7 +4,7 @@ import { createRoot } from "react-dom/client";
 import { env } from "@@/env";
 
 import { App } from "@@/app";
-import { Providers } from "@@/shared/providers/index";
+import { Providers } from "@@/providers/index";
 
 import "./index.css";
 

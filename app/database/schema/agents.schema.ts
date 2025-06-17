@@ -1,5 +1,7 @@
 import { relations, sql } from "drizzle-orm";
 import { boolean, index, pgTable, serial, text, timestamp, uuid } from "drizzle-orm/pg-core";
+import { createInsertSchema } from "drizzle-zod";
+import { type z } from "zod/v4";
 
 import { integrations } from "./integrations.schema";
 import { offerings } from "./offerings.schema";
@@ -13,7 +15,8 @@ export const agents = pgTable(
     id: serial("id").primaryKey(),
     uuid: uuid("uuid")
       .default(sql`gen_random_uuid()`)
-      .unique(),
+      .unique()
+      .notNull(),
     userId: text("user_id")
       .references(() => users.clerkId, { onDelete: "cascade" })
       .notNull(),
@@ -47,3 +50,16 @@ export const agentsRelations = relations(agents, ({ one, many }) => ({
   integrations: many(integrations),
   sessions: many(sessions),
 }));
+
+export const AgentInsertSchema = createInsertSchema(agents).omit({
+  id: true,
+  uuid: true,
+  createdAt: true,
+  updatedAt: true,
+  deletedAt: true,
+});
+
+export const AgentUpdateSchema = AgentInsertSchema.partial();
+
+export type AgentInsert = z.infer<typeof AgentInsertSchema>;
+export type AgentUpdate = z.infer<typeof AgentUpdateSchema>;

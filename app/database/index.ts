@@ -13,5 +13,5 @@ export const connection = postgres(env.DATABASE_URL, {
 
 export const db = drizzle(connection, {
   schema,
-  logger: env.NODE_ENV === "development",
+  logger: env.NODE_ENV === "development" && !env.DB_SEEDING,
 });

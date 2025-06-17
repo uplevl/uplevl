@@ -1,5 +1,7 @@
 import { relations } from "drizzle-orm";
 import { index, integer, pgTable, serial, text, timestamp, uuid } from "drizzle-orm/pg-core";
+import { createInsertSchema } from "drizzle-zod";
+import { type z } from "zod/v4";
 
 import { agents } from "./agents.schema";
 import { offeringsPrices } from "./offerings-prices.schema";
@@ -36,3 +38,15 @@ export const offeringsRelations = relations(offerings, ({ one, many }) => ({
   }),
   prices: many(offeringsPrices),
 }));
+
+export const OfferingInsertSchema = createInsertSchema(offerings).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+  deletedAt: true,
+});
+
+export const OfferingUpdateSchema = OfferingInsertSchema.partial();
+
+export type OfferingInsert = z.infer<typeof OfferingInsertSchema>;
+export type OfferingUpdate = z.infer<typeof OfferingUpdateSchema>;

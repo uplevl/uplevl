@@ -1,5 +1,7 @@
 import { relations } from "drizzle-orm";
 import { boolean, integer, pgTable, serial, text, timestamp } from "drizzle-orm/pg-core";
+import { createInsertSchema } from "drizzle-zod";
+import { type z } from "zod/v4";
 
 import { packagesFeatures } from "./packages-features.schema";
 import { users } from "./users.schema";
@@ -30,3 +32,15 @@ export const packagesRelations = relations(packages, ({ many }) => ({
   features: many(packagesFeatures),
   users: many(users),
 }));
+
+export const PackageInsertSchema = createInsertSchema(packages).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+  deletedAt: true,
+});
+
+export const PackageUpdateSchema = PackageInsertSchema.partial();
+
+export type PackageInsert = z.infer<typeof PackageInsertSchema>;
+export type PackageUpdate = z.infer<typeof PackageUpdateSchema>;

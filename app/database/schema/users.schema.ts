@@ -1,5 +1,7 @@
 import { relations, sql } from "drizzle-orm";
 import { boolean, index, integer, pgEnum, pgTable, serial, text, timestamp, uuid } from "drizzle-orm/pg-core";
+import { createInsertSchema } from "drizzle-zod";
+import { type z } from "zod/v4";
 
 import { agents } from "./agents.schema";
 import { packages } from "./packages.schema";
@@ -25,9 +27,7 @@ export const users = pgTable(
       .unique(),
     clerkId: text("clerk_id").unique(),
     stripeId: text("stripe_id").unique(),
-    packageId: integer("package_id")
-      .references(() => packages.id)
-      .notNull(),
+    packageId: integer("package_id").references(() => packages.id),
     // User data
     email: text("email").notNull().unique(),
     firstName: text("first_name"),
@@ -56,3 +56,16 @@ export const userRelations = relations(users, ({ one }) => ({
     references: [agents.userId],
   }),
 }));
+
+export const UserInsertSchema = createInsertSchema(users).omit({
+  id: true,
+  uuid: true,
+  createdAt: true,
+  updatedAt: true,
+  deletedAt: true,
+});
+
+export const UserUpdateSchema = UserInsertSchema.partial();
+
+export type UserInsert = z.infer<typeof UserInsertSchema>;
+export type UserUpdate = z.infer<typeof UserUpdateSchema>;

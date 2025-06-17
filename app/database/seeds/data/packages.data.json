@@ -1,0 +1,266 @@
+[
+  {
+    "title": "Founding Member",
+    "slug": "founding-member",
+    "price": 4900,
+    "sortOrder": 0,
+    "isPopular": false,
+    "isActive": true,
+    "isPreLaunch": true,
+    "stripePriceId": "price_1RRzzr2QOoMEmPoybQdTW0vG",
+    "features": [
+      {
+        "separatorAfter": false,
+        "flagKey": "done-for-you-onboarding",
+        "title": "Done-for-you onboarding — we set it all up",
+        "icon": "double-check",
+        "isHighlighted": false,
+        "sortOrder": 1
+      },
+      {
+        "separatorAfter": false,
+        "flagKey": "ai-assistant",
+        "title": "AI assistant for bookings & inquiries",
+        "icon": "ai",
+        "isHighlighted": false,
+        "sortOrder": 2
+      },
+      {
+        "separatorAfter": false,
+        "flagKey": "lead-capture-automation",
+        "title": "24/7 automation to capture leads",
+        "icon": "stopwatch",
+        "isHighlighted": false,
+        "sortOrder": 3
+      },
+      {
+        "separatorAfter": false,
+        "flagKey": "local-seo",
+        "title": "Local SEO setup & optimization",
+        "icon": "seo-outlined",
+        "isHighlighted": false,
+        "sortOrder": 4
+      },
+      {
+        "separatorAfter": false,
+        "flagKey": "mobile-uploader",
+        "title": "Mobile uploader app for service photos",
+        "icon": "smartphone",
+        "isHighlighted": false,
+        "sortOrder": 5
+      },
+      {
+        "separatorAfter": false,
+        "flagKey": "ai-social-marketing",
+        "title": "AI-optimized social marketing",
+        "icon": "ai-optimized",
+        "isHighlighted": false,
+        "sortOrder": 6
+      },
+      {
+        "separatorAfter": false,
+        "flagKey": "branded-templates",
+        "title": "Branded post templates",
+        "icon": "brush",
+        "isHighlighted": false,
+        "sortOrder": 7
+      },
+      {
+        "separatorAfter": false,
+        "flagKey": "analytics-dashboard",
+        "title": "Performance analytics dashboard",
+        "icon": "analytics",
+        "isHighlighted": false,
+        "sortOrder": 8
+      },
+      {
+        "separatorAfter": true,
+        "flagKey": "separator",
+        "title": "",
+        "icon": "separator",
+        "isHighlighted": false,
+        "sortOrder": 9
+      },
+      {
+        "separatorAfter": false,
+        "flagKey": "founder-support",
+        "title": "+ Founder support & check-ins",
+        "icon": "direct-support",
+        "isHighlighted": true,
+        "sortOrder": 10
+      },
+      {
+        "separatorAfter": false,
+        "flagKey": "lifetime-access",
+        "title": "+ Lifetime access",
+        "icon": "access",
+        "isHighlighted": true,
+        "sortOrder": 11
+      },
+      {
+        "separatorAfter": false,
+        "flagKey": "early-adopter",
+        "title": "+ Early adopter perks",
+        "icon": "champion",
+        "isHighlighted": true,
+        "sortOrder": 12
+      }
+    ]
+  },
+  {
+    "title": "Starter",
+    "slug": "starter",
+    "price": 4900,
+    "sortOrder": 1,
+    "isPopular": false,
+    "isActive": true,
+    "isPreLaunch": false,
+    "stripePriceId": "price_1RSiuq2QOoMEmPoyFjdjE78N",
+    "features": [
+      {
+        "separatorAfter": false,
+        "flagKey": "ai-assistant",
+        "title": "AI assistant for bookings & inquiries",
+        "icon": "ai",
+        "isHighlighted": false,
+        "sortOrder": 1
+      },
+      {
+        "separatorAfter": false,
+        "flagKey": "lead-capture-automation",
+        "title": "24/7 automation to capture leads",
+        "icon": "stopwatch",
+        "isHighlighted": false,
+        "sortOrder": 2
+      },
+      {
+        "separatorAfter": false,
+        "flagKey": "analytics-dashboard",
+        "title": "Performance analytics dashboard",
+        "icon": "analytics",
+        "isHighlighted": false,
+        "sortOrder": 3
+      }
+    ]
+  },
+  {
+    "title": "Professional",
+    "slug": "professional",
+    "price": 9900,
+    "sortOrder": 2,
+    "isPopular": true,
+    "isActive": true,
+    "isPreLaunch": false,
+    "stripePriceId": "price_1RSivH2QOoMEmPoyZ6HKgAGY",
+    "features": [
+      {
+        "separatorAfter": false,
+        "flagKey": "ai-assistant",
+        "title": "AI assistant for bookings & inquiries",
+        "icon": "ai",
+        "isHighlighted": false,
+        "sortOrder": 1
+      },
+      {
+        "separatorAfter": false,
+        "flagKey": "lead-capture-automation",
+        "title": "24/7 automation to capture leads",
+        "icon": "stopwatch",
+        "isHighlighted": false,
+        "sortOrder": 2
+      },
+      {
+        "separatorAfter": false,
+        "flagKey": "analytics-dashboard",
+        "title": "Performance analytics dashboard",
+        "icon": "analytics",
+        "isHighlighted": false,
+        "sortOrder": 3
+      },
+      {
+        "separatorAfter": false,
+        "flagKey": "mobile-app",
+        "title": "+ Mobile App for social posts",
+        "icon": "smartphone",
+        "isHighlighted": true,
+        "sortOrder": 4
+      },
+      {
+        "separatorAfter": false,
+        "flagKey": "ai-social-marketing",
+        "title": "+ AI-optimized social marketing",
+        "icon": "ai-optimized",
+        "isHighlighted": true,
+        "sortOrder": 5
+      }
+    ]
+  },
+  {
+    "title": "Enterprise",
+    "slug": "enterprise",
+    "price": 29900,
+    "sortOrder": 3,
+    "isPopular": false,
+    "isActive": true,
+    "isPreLaunch": false,
+    "stripePriceId": "price_1RSivl2QOoMEmPoyWmS8mUqu",
+    "features": [
+      {
+        "separatorAfter": false,
+        "flagKey": "ai-assistant",
+        "title": "AI assistant for bookings & inquiries",
+        "icon": "ai",
+        "isHighlighted": false,
+        "sortOrder": 1
+      },
+      {
+        "separatorAfter": false,
+        "flagKey": "lead-capture-automation",
+        "title": "24/7 automation to capture leads",
+        "icon": "stopwatch",
+        "isHighlighted": false,
+        "sortOrder": 2
+      },
+      {
+        "separatorAfter": false,
+        "flagKey": "analytics-dashboard",
+        "title": "Performance analytics dashboard",
+        "icon": "analytics",
+        "isHighlighted": false,
+        "sortOrder": 3
+      },
+      {
+        "separatorAfter": false,
+        "flagKey": "mobile-app",
+        "title": "Mobile App for social posts",
+        "icon": "smartphone",
+        "isHighlighted": false,
+        "sortOrder": 4
+      },
+      {
+        "separatorAfter": false,
+        "flagKey": "ai-social-marketing",
+        "title": "AI-optimized social marketing",
+        "icon": "ai-optimized",
+        "isHighlighted": false,
+        "sortOrder": 5
+      },
+      {
+        "separatorAfter": false,
+        "flagKey": "done-for-you-setup",
+        "title": "+ Done-for-you setup",
+        "icon": "double-check",
+        "isHighlighted": true,
+        "sortOrder": 6
+      },
+      {
+        "separatorAfter": false,
+        "flagKey": "local-seo",
+        "title": "+ Local SEO & optimization",
+        "icon": "seo-outlined",
+        "isHighlighted": true,
+        "sortOrder": 7
+      }
+    ]
+  }
+]
