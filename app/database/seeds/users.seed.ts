@@ -6,6 +6,21 @@ import * as schema from "@/database/schema";
 import users from "./data/user.data.json";
 
 export async function seedUsers() {
+  // Validate and cache required environment variables
+  const { SEED_CLERK_USER_ID, SEED_STRIPE_ID, SEED_USER_EMAIL } = env;
+
+  if (!SEED_CLERK_USER_ID || !SEED_STRIPE_ID || !SEED_USER_EMAIL) {
+    throw new Error(
+      `Missing required environment variables for seeding: ${[
+        !SEED_CLERK_USER_ID && "SEED_CLERK_USER_ID",
+        !SEED_STRIPE_ID && "SEED_STRIPE_ID",
+        !SEED_USER_EMAIL && "SEED_USER_EMAIL",
+      ]
+        .filter(Boolean)
+        .join(", ")}`,
+    );
+  }
+
   await db.transaction(async (tx) => {
     console.log("Seeding users...");
 
@@ -26,9 +41,9 @@ export async function seedUsers() {
       }
       return {
         ...user,
-        clerkId: env.SEED_CLERK_USER_ID,
-        stripeId: env.SEED_STRIPE_ID,
-        email: env.SEED_USER_EMAIL,
+        clerkId: SEED_CLERK_USER_ID,
+        stripeId: SEED_STRIPE_ID,
+        email: SEED_USER_EMAIL,
         role: user.role as "admin" | "user",
         packageId,
       };

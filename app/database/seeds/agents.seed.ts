@@ -6,6 +6,21 @@ import * as schema from "@/database/schema";
 import agents from "./data/agents.data.json";
 
 export async function agentsSeed() {
+  // Validate and cache required environment variables
+  const { SEED_CLERK_USER_ID, SEED_INTEGRATION_INSTAGRAM_TOKEN, SEED_INTEGRATION_INSTAGRAM_ENTITY_ID } = env;
+
+  if (!SEED_CLERK_USER_ID || !SEED_INTEGRATION_INSTAGRAM_TOKEN || !SEED_INTEGRATION_INSTAGRAM_ENTITY_ID) {
+    throw new Error(
+      `Missing required environment variables for seeding: ${[
+        !SEED_CLERK_USER_ID && "SEED_CLERK_USER_ID",
+        !SEED_INTEGRATION_INSTAGRAM_TOKEN && "SEED_INTEGRATION_INSTAGRAM_TOKEN",
+        !SEED_INTEGRATION_INSTAGRAM_ENTITY_ID && "SEED_INTEGRATION_INSTAGRAM_ENTITY_ID",
+      ]
+        .filter(Boolean)
+        .join(", ")}`,
+    );
+  }
+
   await db.transaction(async (tx) => {
     console.log("Seeding agents...");
 
@@ -17,7 +32,7 @@ export async function agentsSeed() {
         .insert(schema.agents)
         .values({
           ...agent,
-          userId: env.SEED_CLERK_USER_ID,
+          userId: SEED_CLERK_USER_ID,
         })
         .returning({ id: schema.agents.id, uuid: schema.agents.uuid });
 
@@ -70,11 +85,11 @@ export async function agentsSeed() {
       const insertedIntegration = await tx
         .insert(schema.integrations)
         .values({
-          userId: env.SEED_CLERK_USER_ID,
+          userId: SEED_CLERK_USER_ID,
           agentId: insertedAgent[0].uuid,
           name: schema.INTEGRATION_STRATEGIES.INSTAGRAM,
-          token: env.SEED_INTEGRATION_INSTAGRAM_TOKEN,
-          entityId: env.SEED_INTEGRATION_INSTAGRAM_ENTITY_ID,
+          token: SEED_INTEGRATION_INSTAGRAM_TOKEN,
+          entityId: SEED_INTEGRATION_INSTAGRAM_ENTITY_ID,
         })
         .returning({ id: schema.integrations.id });
 
