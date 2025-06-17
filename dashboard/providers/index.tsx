@@ -19,8 +19,8 @@ export function Providers({ children }: ProvidersProps) {
   return (
     <ClerkProvider
       publishableKey={env.VITE_CLERK_PUBLISHABLE_KEY}
-      signInUrl="/"
-      signUpUrl="/"
+      signInUrl="/sign-in"
+      signUpUrl="/sign-up"
       signInForceRedirectUrl="/"
       signInFallbackRedirectUrl="/"
       signUpForceRedirectUrl="/onboarding"
