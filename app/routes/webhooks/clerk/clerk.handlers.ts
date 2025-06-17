@@ -31,15 +31,26 @@ export async function create(data: UserJSON): Promise<WebhookResponse> {
       packageId: 0,
     };
 
-    const [result] = await db.insert(users).values(userData).returning();
+    const [result] = await db
+      .insert(users)
+      .values(userData)
+      .onConflictDoUpdate({
+        target: users.clerkId,
+        set: userData,
+      })
+      .returning();
 
     if (!result) {
-      return { status: 400, message: "Error creating user" };
+      return { status: 409, message: "User already exists" };
     }
 
-    return { status: 200, message: "User created successfully" };
+    return { status: 200, message: "User created or updated successfully" };
   } catch (error) {
     if (error instanceof Error) {
+      // Check if it's a unique violation error
+      if (error.message.includes("unique_violation")) {
+        return { status: 409, message: "User already exists" };
+      }
       return { status: 400, message: error.message };
     }
 
