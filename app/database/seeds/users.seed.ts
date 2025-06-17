@@ -26,9 +26,9 @@ export async function seedUsers() {
       }
       return {
         ...user,
-        clerkId: env.SEED_CLERK_USER_ID,
-        stripeId: env.SEED_STRIPE_ID,
-        email: env.SEED_USER_EMAIL,
+        clerkId: env.SEED_CLERK_USER_ID!,
+        stripeId: env.SEED_STRIPE_ID!,
+        email: env.SEED_USER_EMAIL!,
         role: user.role as "admin" | "user",
         packageId,
       };

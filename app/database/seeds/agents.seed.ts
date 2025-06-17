@@ -17,7 +17,7 @@ export async function agentsSeed() {
         .insert(schema.agents)
         .values({
           ...agent,
-          userId: env.SEED_CLERK_USER_ID,
+          userId: env.SEED_CLERK_USER_ID!,
         })
         .returning({ id: schema.agents.id, uuid: schema.agents.uuid });
 
@@ -70,11 +70,11 @@ export async function agentsSeed() {
       const insertedIntegration = await tx
         .insert(schema.integrations)
         .values({
-          userId: env.SEED_CLERK_USER_ID,
+          userId: env.SEED_CLERK_USER_ID!,
           agentId: insertedAgent[0].uuid,
           name: schema.INTEGRATION_STRATEGIES.INSTAGRAM,
-          token: env.SEED_INTEGRATION_INSTAGRAM_TOKEN,
-          entityId: env.SEED_INTEGRATION_INSTAGRAM_ENTITY_ID,
+          token: env.SEED_INTEGRATION_INSTAGRAM_TOKEN!,
+          entityId: env.SEED_INTEGRATION_INSTAGRAM_ENTITY_ID!,
         })
         .returning({ id: schema.integrations.id });
 
