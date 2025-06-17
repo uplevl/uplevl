@@ -16,7 +16,9 @@ const eventHandlers = {
 
 const router = createRouter().post("/", async (c) => {
   try {
-    const evt = await verifyWebhook(c.req.raw);
+    const evt = await verifyWebhook(c.req.raw, {
+      signingSecret: env.CLERK_WEBHOOK_SIGNING_SECRET,
+    });
     const data = evt.data as UserJSON;
     const eventType = evt.type;
 
