@@ -28,7 +28,6 @@ export async function create(data: UserJSON): Promise<WebhookResponse> {
       lastName: last_name,
       email,
       role: isInternal ? "admin" : "user",
-      packageId: 0,
     };
 
     const [result] = await db

@@ -27,9 +27,7 @@ export const users = pgTable(
       .unique(),
     clerkId: text("clerk_id").unique(),
     stripeId: text("stripe_id").unique(),
-    packageId: integer("package_id")
-      .references(() => packages.id)
-      .notNull(),
+    packageId: integer("package_id").references(() => packages.id),
     // User data
     email: text("email").notNull().unique(),
     firstName: text("first_name"),
