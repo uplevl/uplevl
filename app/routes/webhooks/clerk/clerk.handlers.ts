@@ -30,18 +30,10 @@ export async function create(data: UserJSON): Promise<WebhookResponse> {
       role: isInternal ? "admin" : "user",
     };
 
-    const [result] = await db
-      .insert(users)
-      .values(userData)
-      .onConflictDoUpdate({
-        target: users.clerkId,
-        set: userData,
-      })
-      .returning();
-
-    if (!result) {
-      return { status: 409, message: "User already exists" };
-    }
+    await db.insert(users).values(userData).onConflictDoUpdate({
+      target: users.clerkId,
+      set: userData,
+    });
 
     return { status: 200, message: "User created or updated successfully" };
   } catch (error) {
