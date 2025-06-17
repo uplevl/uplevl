@@ -64,6 +64,8 @@ jobs:
           SEED_USER_EMAIL: ${{ secrets.SEED_USER_EMAIL }}
           SEED_INTEGRATION_INSTAGRAM_ENTITY_ID: ${{ secrets.SEED_INTEGRATION_INSTAGRAM_ENTITY_ID }}
           SEED_INTEGRATION_INSTAGRAM_TOKEN: ${{ secrets.SEED_INTEGRATION_INSTAGRAM_TOKEN }}
+          CLERK_SECRET_KEY: ${{ secrets.CLERK_SECRET_KEY }}
+          CLERK_WEBHOOK_SIGNING_SECRET: ${{ secrets.CLERK_WEBHOOK_SIGNING_SECRET }}
         run: bun run db:migrate
 
   deploy:
