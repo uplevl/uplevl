@@ -26,16 +26,20 @@ interface WebhookResponse {
 export async function create(data: UserJSON): Promise<WebhookResponse> {
   try {
     // Extract required fields from webhook payload
-    const { id: clerkId, email_addresses, first_name, last_name } = data;
+    const { id: clerkId, email_addresses, first_name, last_name, primary_email_address_id } = data;
 
     // Validate required fields are present
     if (!clerkId || !email_addresses?.length) {
       return { status: 400, message: "Missing required user data" };
     }
 
-    // Get primary email and determine if user is internal
-    const email = email_addresses[0].email_address;
-    const isInternal = env.INTERNAL_DOMAINS.some((domain) => email.endsWith(`@${domain}`));
+    // Find primary email or default to first email
+    const primaryEmail =
+      email_addresses.find((email) => email.id === primary_email_address_id)?.email_address ??
+      email_addresses[0].email_address;
+    const isInternal = env.INTERNAL_DOMAINS.some((domain) =>
+      primaryEmail.toLowerCase().endsWith(`@${domain.toLowerCase()}`),
+    );
     const role = isInternal ? "admin" : "user";
 
     // Prepare user data for database insertion
@@ -43,7 +47,7 @@ export async function create(data: UserJSON): Promise<WebhookResponse> {
       clerkId: clerkId,
       firstName: first_name,
       lastName: last_name,
-      email,
+      email: primaryEmail,
       role,
     };
 
