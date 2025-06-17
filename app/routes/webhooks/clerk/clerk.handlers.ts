@@ -65,7 +65,7 @@ export async function update(data: UserJSON): Promise<WebhookResponse> {
     const [result] = await db.update(users).set(userData).where(eq(users.clerkId, clerkId)).returning();
 
     if (!result) {
-      return { status: 400, message: "Error updating user" };
+      return { status: 404, message: "User not found" };
     }
 
     return { status: 200, message: "User updated successfully" };
@@ -93,7 +93,7 @@ export async function remove(data: UserJSON): Promise<WebhookResponse> {
       .returning();
 
     if (!result) {
-      return { status: 400, message: "Error deleting user" };
+      return { status: 404, message: "User not found" };
     }
 
     return { status: 200, message: "User deleted successfully" };
