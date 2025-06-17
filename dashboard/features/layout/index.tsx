@@ -1,7 +1,7 @@
-import { UserButton } from "@clerk/react-router";
+import { UserButton } from "@clerk/clerk-react";
 import { Link, Outlet } from "react-router";
 
-import Logo from "@@/shared/components/logo";
+import Logo from "@@/components/logo";
 import {
   Sidebar,
   SidebarContent,
@@ -12,7 +12,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarProvider,
-} from "@@/shared/components/ui/sidebar";
+} from "@@/components/ui/sidebar";
 
 import { Navigation } from "./navigation";
 
@@ -37,7 +37,9 @@ export function Layout() {
         <SidebarFooter>
           <SidebarMenu>
             <SidebarMenuItem>
-              <UserButton showName />
+              <SidebarMenuButton>
+                <UserButton showName />
+              </SidebarMenuButton>
             </SidebarMenuItem>
           </SidebarMenu>
         </SidebarFooter>

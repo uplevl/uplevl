@@ -1,0 +1,12 @@
+[
+  {
+    "firstName": "Uplevl",
+    "lastName": "Admin",
+    "role": "admin",
+    "isActive": true,
+    "isBanned": false,
+    "isSuspended": false,
+    "isEarlyAdopter": false,
+    "packageName": "Professional"
+  }
+]

@@ -1,19 +1,27 @@
 import { Suspense, lazy } from "react";
 import { Route, Routes } from "react-router";
 
-import { Layout } from "./features/layout";
+import { PageLoading } from "@@/components/page-loading";
+import { AuthProvider } from "@@/features/auth/providers/auth.provider";
+import { Layout } from "@@/features/layout";
 
-const DashboardPage = lazy(() => import("./pages/dashboard"));
-const SettingsPage = lazy(() => import("./pages/settings"));
+const DashboardPage = lazy(() => import("./pages/dashboard.page"));
+const SignInPage = lazy(() => import("./pages/sign-in.page"));
 
 export function App() {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<PageLoading />}>
       <Routes>
-        <Route element={<Layout />}>
+        <Route
+          element={
+            <AuthProvider>
+              <Layout />
+            </AuthProvider>
+          }
+        >
           <Route index element={<DashboardPage />} />
-          <Route path="settings" element={<SettingsPage />} />
         </Route>
+        <Route path="/sign-in" element={<SignInPage />} />
       </Routes>
     </Suspense>
   );

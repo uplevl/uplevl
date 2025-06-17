@@ -1,5 +1,7 @@
 import { relations } from "drizzle-orm";
 import { index, pgEnum, pgTable, serial, text, timestamp, uuid } from "drizzle-orm/pg-core";
+import { createInsertSchema } from "drizzle-zod";
+import { type z } from "zod/v4";
 
 import { agents } from "./agents.schema";
 import { users } from "./users.schema";
@@ -58,3 +60,15 @@ export const integrationsRelations = relations(integrations, ({ one }) => ({
     references: [users.clerkId],
   }),
 }));
+
+export const IntegrationInsertSchema = createInsertSchema(integrations).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+  deletedAt: true,
+});
+
+export const IntegrationUpdateSchema = IntegrationInsertSchema.partial();
+
+export type IntegrationInsert = z.infer<typeof IntegrationInsertSchema>;
+export type IntegrationUpdate = z.infer<typeof IntegrationUpdateSchema>;

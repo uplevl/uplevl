@@ -1,5 +1,7 @@
 import { relations } from "drizzle-orm";
 import { index, pgEnum, pgTable, serial, text, timestamp, uuid } from "drizzle-orm/pg-core";
+import { createInsertSchema } from "drizzle-zod";
+import { type z } from "zod/v4";
 
 import { agents } from "./agents.schema";
 import { sessionsSummaries } from "./sessions-summaries";
@@ -85,3 +87,15 @@ export const sessionsRelations = relations(sessions, ({ one, many }) => ({
   }),
   sessionSummaries: many(sessionsSummaries),
 }));
+
+export const SessionInsertSchema = createInsertSchema(sessions).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+  deletedAt: true,
+});
+
+export const SessionUpdateSchema = SessionInsertSchema.partial();
+
+export type SessionInsert = z.infer<typeof SessionInsertSchema>;
+export type SessionUpdate = z.infer<typeof SessionUpdateSchema>;

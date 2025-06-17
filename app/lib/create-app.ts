@@ -1,16 +1,23 @@
 import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { HTTPException } from "hono/http-exception";
-import { logger } from "hono/logger";
+
+import type { AppBindings } from "@/lib/types";
+import { pinoLogger } from "@/middlewares/pino-logger";
 
 export function createApp() {
-  const app = new Hono();
+  const app = new Hono<AppBindings>();
 
-  app.use("*", logger());
-  app.use("*", cors());
+  app.use(pinoLogger());
+  app.use(cors());
 
   app.get("/healthcheck", (c) => {
     return c.json({ status: "ok" });
+  });
+
+  app.notFound((c) => {
+    c.var.logger.error(c.req, "Not Found");
+    return c.json({ error: "Not Found" }, 404);
   });
 
   app.onError((error, c) => {

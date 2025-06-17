@@ -1,0 +1,43 @@
+[
+  {
+    "isActive": true,
+    "businessName": "MUELLER Solutions",
+    "businessDescription": "Offering professional high-performance web design & development for small businesses.",
+    "businessUrl": "https://mueller-solutions.dev",
+    "offerings": [
+      {
+        "title": "Website Design",
+        "description": "Professional high-performance web design & development for small businesses.",
+        "category": "Web Development",
+        "order": 1,
+        "prices": [
+          { "price": 1000, "tier": "Basic", "unit": "per Project" },
+          { "price": 1500, "tier": "Pro", "unit": "per Project" },
+          { "price": 2000, "tier": "Enterprise", "unit": "per Project" }
+        ]
+      },
+      {
+        "title": "SEO Management",
+        "description": "Professional SEO management for small businesses.",
+        "category": "SEO",
+        "order": 2,
+        "prices": [
+          { "price": 599, "tier": "Basic", "unit": "per Month" },
+          { "price": 1099, "tier": "Pro", "unit": "per Month" },
+          { "price": 1999, "tier": "Enterprise", "unit": "per Month" }
+        ]
+      },
+      {
+        "title": "Social Media Management",
+        "description": "Professional social media management for small businesses.",
+        "category": "Social Media",
+        "order": 3,
+        "prices": [
+          { "price": 199, "tier": "Basic", "unit": "per Month" },
+          { "price": 299, "tier": "Pro", "unit": "per Month" },
+          { "price": 399, "tier": "Enterprise", "unit": "per Month" }
+        ]
+      }
+    ]
+  }
+]

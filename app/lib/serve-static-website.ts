@@ -3,7 +3,9 @@ import { serveStatic } from "hono/bun";
 import type { Dirent } from "node:fs";
 import { readdir } from "node:fs/promises";
 
-export async function serveStaticWebsite(name: string, app: Hono) {
+import type { AppBindings } from "./types";
+
+export async function serveStaticWebsite(name: string, app: Hono<AppBindings>) {
   let entries: Dirent<string>[];
 
   try {

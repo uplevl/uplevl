@@ -1,8 +1,8 @@
 import { BotIcon, CircleGaugeIcon, CreditCardIcon, HeadsetIcon, WebhookIcon } from "lucide-react";
 import { Link, useLocation } from "react-router";
 
-import { AdminIcon } from "@@/shared/components/icons";
-import { SidebarGroup, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "@@/shared/components/ui/sidebar";
+import { AdminIcon } from "@@/components/icons";
+import { SidebarGroup, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "@@/components/ui/sidebar";
 
 interface Route {
   label: string;
