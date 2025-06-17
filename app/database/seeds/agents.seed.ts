@@ -78,7 +78,7 @@ export async function agentsSeed() {
         })
         .returning({ id: schema.integrations.id });
 
-      if (!insertedIntegration) {
+      if (insertedIntegration.length === 0) {
         throw new Error(`Integration could not be created`);
       }
 
