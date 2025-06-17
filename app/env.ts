@@ -22,7 +22,7 @@ const EnvSchema = z.object({
   DB_SEEDING: z.coerce.boolean().optional().default(false),
   SEED_CLERK_USER_ID: z.string().min(1),
   SEED_STRIPE_ID: z.string().min(1),
-  SEED_USER_EMAIL: z.email(),
+  SEED_USER_EMAIL: z.string().email(),
   SEED_INTEGRATION_INSTAGRAM_ENTITY_ID: z.string().min(1),
   SEED_INTEGRATION_INSTAGRAM_TOKEN: z.string().min(1),
 });
