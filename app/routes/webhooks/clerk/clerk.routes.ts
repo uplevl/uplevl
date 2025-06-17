@@ -37,6 +37,23 @@ const router = createRouter().post("/", async (c) => {
     return c.body(message, { status: status as ContentfulStatusCode });
   } catch (error) {
     console.error("Error processing webhook:", error);
+
+    // Handle signature verification errors
+    if (
+      error instanceof Error &&
+      (error.message.includes("signature") ||
+        error.message.includes("webhook") ||
+        error.message.includes("verification"))
+    ) {
+      return c.body("Invalid webhook signature", { status: 401 });
+    }
+
+    // Handle other client-side errors
+    if (error instanceof Error && error.message.includes("Invalid")) {
+      return c.body("Invalid request", { status: 400 });
+    }
+
+    // Handle all other errors as server errors
     return c.body("Error processing webhook", { status: 500 });
   }
 });
