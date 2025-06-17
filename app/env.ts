@@ -28,20 +28,29 @@ const EnvSchema = z
     SEED_INTEGRATION_INSTAGRAM_TOKEN: z.string().min(1).optional(),
   })
   // If DB_SEEDING is false, all the seeding variables are optional
-  .refine((input) => {
-    if (input.DB_SEEDING === true) {
-      if (
-        !input.SEED_CLERK_USER_ID ||
-        !input.SEED_STRIPE_ID ||
-        !input.SEED_USER_EMAIL ||
-        !input.SEED_INTEGRATION_INSTAGRAM_ENTITY_ID ||
-        !input.SEED_INTEGRATION_INSTAGRAM_TOKEN
-      ) {
-        return false;
+  .refine(
+    (input) => {
+      if (input.DB_SEEDING === true) {
+        const missingVars = [];
+        if (!input.SEED_CLERK_USER_ID) missingVars.push("SEED_CLERK_USER_ID");
+        if (!input.SEED_STRIPE_ID) missingVars.push("SEED_STRIPE_ID");
+        if (!input.SEED_USER_EMAIL) missingVars.push("SEED_USER_EMAIL");
+        if (!input.SEED_INTEGRATION_INSTAGRAM_ENTITY_ID) missingVars.push("SEED_INTEGRATION_INSTAGRAM_ENTITY_ID");
+        if (!input.SEED_INTEGRATION_INSTAGRAM_TOKEN) missingVars.push("SEED_INTEGRATION_INSTAGRAM_TOKEN");
+
+        if (missingVars.length > 0) {
+          throw new Error(
+            `When DB_SEEDING is true, the following required variables are missing: ${missingVars.join(", ")}`,
+          );
+        }
       }
-    }
-    return true;
-  });
+      return true;
+    },
+    {
+      message:
+        "Invalid environment configuration: When DB_SEEDING is true, all seeding variables (SEED_CLERK_USER_ID, SEED_STRIPE_ID, SEED_USER_EMAIL, SEED_INTEGRATION_INSTAGRAM_ENTITY_ID, SEED_INTEGRATION_INSTAGRAM_TOKEN) are required",
+    },
+  );
 
 const parsedResult = EnvSchema.safeParse(process.env);
 
