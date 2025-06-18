@@ -1,0 +1,23 @@
+{
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "always"
+  },
+  "typescript.tsdk": "./node_modules/typescript/lib",
+  "cSpell.words": [
+    "autoincrement",
+    "dbgenerated",
+    "JPCM",
+    "nextjs",
+    "NGROK",
+    "posthog",
+    "reposted",
+    "sonner",
+    "superadmin",
+    "svix",
+    "tiktok",
+    "treeify",
+    "waitlist"
+  ]
+}

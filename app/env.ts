@@ -8,6 +8,7 @@ const EnvSchema = z
   .object({
     NODE_ENV: z.enum(["development", "production"]).default("development"),
     LOG_LEVEL: z.enum(["debug", "info", "warn", "error", "fatal", "silent"]).optional().default("info"),
+    APP_PORT: z.coerce.number().optional().default(3000),
     INTERNAL_DOMAINS: z
       .string()
       .min(1)
@@ -15,9 +16,6 @@ const EnvSchema = z
       .refine((arr) => arr.every((d) => /^[a-z0-9.-]+$/i.test(d)), {
         message: "Each domain must be a valid hostname",
       }),
-    CLERK_SECRET_KEY: z.string().min(1),
-    CLERK_WEBHOOK_SIGNING_SECRET: z.string().min(1),
-    APP_PORT: z.coerce.number().optional().default(3000),
     DATABASE_URL: z.string().url(),
     DB_MIGRATING: z.coerce.boolean().optional().default(false),
     DB_SEEDING: z.coerce.boolean().optional().default(false),
@@ -26,6 +24,16 @@ const EnvSchema = z
     SEED_USER_EMAIL: z.string().email().optional(),
     SEED_INTEGRATION_INSTAGRAM_ENTITY_ID: z.string().min(1).optional(),
     SEED_INTEGRATION_INSTAGRAM_TOKEN: z.string().min(1).optional(),
+    POSTHOG_KEY: z.string().min(1),
+    POSTHOG_HOST: z.string().url(),
+    CLERK_SECRET_KEY: z.string().min(1),
+    CLERK_WEBHOOK_SIGNING_SECRET: z.string().min(1),
+    UPSTASH_REDIS_URL: z.string().url(),
+    UPSTASH_REDIS_TOKEN: z.string().min(1),
+    OPENAI_API_KEY: z.string().min(1),
+    META_INSTAGRAM_WEBHOOK_VERIFY_TOKEN: z.string().min(1),
+    META_INSTAGRAM_EMBEDDED_OAUTH_URL: z.url(),
+    META_INSTAGRAM_BASE_URL: z.url(),
   })
   // If DB_SEEDING is false, all the seeding variables are optional
   .refine(

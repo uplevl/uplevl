@@ -1,17 +1,18 @@
-import { pinoLogger as logger } from "hono-pino";
+import { pinoLogger as basePinoLogger } from "hono-pino";
+import { logger } from "hono/logger";
 import { pino } from "pino";
-import pretty from "pino-pretty";
 
 import { env } from "@/env";
 
 export function pinoLogger() {
-  return logger({
-    pino: pino(
-      {
-        level: env.LOG_LEVEL,
-      },
-      env.NODE_ENV === "production" ? undefined : pretty(),
-    ),
+  if (env.NODE_ENV !== "production") {
+    return logger();
+  }
+
+  return basePinoLogger({
+    pino: pino({
+      level: env.LOG_LEVEL,
+    }),
     http: {
       reqId: () => crypto.randomUUID(),
     },

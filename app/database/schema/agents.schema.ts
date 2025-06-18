@@ -24,6 +24,8 @@ export const agents = pgTable(
     businessName: text("business_name"),
     businessDescription: text("business_description"),
     businessUrl: text("business_url"),
+    businessSocialGoals: text("business_social_goals"),
+    businessContext: text("business_context"),
     // Flags
     isActive: boolean("is_active").notNull().default(true),
     // Timestamps
