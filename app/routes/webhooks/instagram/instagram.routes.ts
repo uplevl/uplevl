@@ -11,17 +11,29 @@ const router = createRouter()
   })
 
   .post("/", async (c) => {
-    const payload = await c.req.json();
-    const entry = payload.entry[0];
+    try {
+      const payload = await c.req.json();
 
-    if ("messaging" in entry) {
-      const response = await handlers.message(entry);
-      return c.body(response?.message, { status: response.status });
-    }
+      if (!payload || !Array.isArray(payload.entry) || payload.entry.length === 0) {
+        return c.body("Invalid payload structure", { status: 400 });
+      }
 
-    if ("changes" in entry) {
-      const response = await handlers.comment(entry);
-      return c.body(response.message, { status: response.status });
+      const entry = payload.entry[0];
+
+      if ("messaging" in entry) {
+        const response = await handlers.message(entry);
+        return c.body(response?.message, { status: response?.status || 500 });
+      }
+
+      if ("changes" in entry) {
+        const response = await handlers.comment(entry);
+        return c.body(response?.message, { status: response?.status || 500 });
+      }
+
+      return c.body("Unhandled entry type", { status: 400 });
+    } catch (error) {
+      console.error("Error processing Instagram webhook:", error);
+      return c.body("Internal server error", { status: 500 });
     }
   });
 
