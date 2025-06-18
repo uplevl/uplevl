@@ -21,16 +21,21 @@ interface RunLLMProps {
 export async function runLLM(props: RunLLMProps) {
   const { systemPrompt, messages, temperature = 0.1 } = props;
 
-  const response = await generateText({
-    model: openai("gpt-4o-mini"),
-    system: systemPrompt,
-    temperature: temperature,
-    messages: messages,
-  });
+  try {
+    const response = await generateText({
+      model: openai("gpt-4o-mini"),
+      system: systemPrompt,
+      temperature: temperature,
+      messages: messages,
+    });
 
-  console.log("Response: ", response.text);
+    console.log("Response: ", response.text);
 
-  return response.text;
+    return response.text;
+  } catch (error) {
+    console.error("Error generating LLM response:", error);
+    throw new Error("Failed to generate LLM response");
+  }
 }
 
 /**
