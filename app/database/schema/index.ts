@@ -41,6 +41,7 @@ export {
   integrationsRelations,
   IntegrationInsertSchema,
   IntegrationUpdateSchema,
+  type Integration,
   type IntegrationInsert,
   type IntegrationUpdate,
 } from "./integrations.schema";

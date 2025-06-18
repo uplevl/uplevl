@@ -20,9 +20,6 @@ try {
       authtoken: env.NGROK_AUTH_TOKEN,
       // If you haven't reserved a domain, omit this
       domain: "dev.uplevl.ai",
-      // Secure your endpoint with a traffic policy.
-      // This could also be a path to a traffic policy file.
-      traffic_policy: '{"on_http_request": [{"actions": [{"type": "oauth","config": {"provider": "google"}}]}]}',
     });
 
     // Output ngrok url to console
