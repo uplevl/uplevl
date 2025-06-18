@@ -3,7 +3,10 @@ import * as handlers from "@/routes/webhooks/instagram/instagram.handlers";
 
 const router = createRouter()
   .get("/", (c) => {
-    const hub = c.req.query("hub.challenge") as string;
+    const hub = c.req.query("hub.challenge");
+    if (!hub || typeof hub !== "string") {
+      return c.body("Invalid challenge", { status: 400 });
+    }
     return c.body(hub, { status: 200 });
   })
 
