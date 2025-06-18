@@ -1,12 +1,18 @@
 import { getTableName, sql } from "drizzle-orm";
-
-import { env } from "@/env";
+import { z } from "zod/v4";
 
 import { connection, db } from "@/database";
 import * as schema from "@/database/schema";
 import * as seeds from "@/database/seeds";
 
+const EnvSchema = z.object({
+  DB_SEEDING: z.coerce.boolean().default(false),
+  DATABASE_URL: z.string().url(),
+});
+
 try {
+  const env = EnvSchema.parse(process.env);
+
   if (!env.DB_SEEDING) {
     throw new Error("You must set DB_SEEDING to true when running seeding");
   }
