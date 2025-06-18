@@ -17,7 +17,7 @@ async function getIntegrationByEntityIdAndStrategy(entityId: string, strategy: s
     },
   });
 
-  // Throw an error if no integration is found
+  // Return null if no integration is found
   if (!integration) {
     console.log("Integration not found for integration entity ID: ", entityId);
     return null;
