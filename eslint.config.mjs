@@ -15,7 +15,7 @@ import globals from "globals";
 import * as tseslint from "typescript-eslint";
 
 export default tseslint.config(
-  { ignores: ["**/dist/", "**/public/widget/"] },
+  { ignores: ["**/dist/", "**/public/widget/", "**/*.astro"] },
   js.configs.recommended,
   tseslint.configs.recommended,
   tseslint.configs.stylistic,

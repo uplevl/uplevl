@@ -24,6 +24,7 @@ dist-ssr
 *.tsbuildinfo
 
 # Project
+.astro
 .env*
 !.env.example
 .npmrc

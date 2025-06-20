@@ -1,0 +1,23 @@
+---
+import { SignedIn, SignedOut, UserButton, SignInButton } from '@clerk/astro/components'
+
+import LinkButton from '../../link-button.astro';
+import { PlayIcon } from '@@/components/icons';
+---
+
+<SignedIn>
+  <LinkButton href="/dashboard">
+    <span>Dashboard</span>
+    <PlayIcon />
+  </LinkButton>
+</SignedIn>
+<SignedOut>
+  <LinkButton href="/sign-in">
+      <span>Sign In</span>
+    </LinkButton>
+  <LinkButton href="/sign-up">
+      <span>Get Started</span>
+      <PlayIcon />
+    </LinkButton>
+</SignedOut>
+
