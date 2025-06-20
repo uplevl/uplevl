@@ -1,0 +1,32 @@
+---
+
+---
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Navigation
+    const navLinks = document.querySelectorAll('[data-nav-link]');
+    navLinks.forEach((navLink) => {
+      navLink.addEventListener('click', (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        const href = navLink.getAttribute('href');
+
+        // If the user is not on the home page, don't scroll to the content
+        // but navigate to the href.
+        if (window.location.pathname !== '/' || !href.startsWith('#')) {
+          return;
+        }
+
+        // If the link points to the home page, scroll to the top of the page.
+        if (href === '/') {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+          return;
+        }
+
+        // Scroll to the element with the id of the href.
+        const element = document.querySelector(href);
+        element?.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+  });
+</script>

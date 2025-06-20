@@ -10,6 +10,8 @@ const apiRoutes = app.basePath("/api").route("/", routes);
 
 export type ApiRoutes = typeof apiRoutes;
 
-await serveStaticWebsite("dashboard", app);
+// !! THE ORDER OF THESE MATTERS !!
+await serveStaticWebsite("/dashboard", "./dist/dashboard", app);
+await serveStaticWebsite("", "./dist/website", app);
 
 export default app;

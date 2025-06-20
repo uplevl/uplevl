@@ -8,8 +8,8 @@ import { pinoLogger } from "@/middlewares/pino-logger";
 export function createApp() {
   const app = new Hono<AppBindings>();
 
-  app.use(pinoLogger());
   app.use(cors());
+  app.use(pinoLogger());
 
   app.get("/healthcheck", (c) => {
     return c.json({ status: "ok" });

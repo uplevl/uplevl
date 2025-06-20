@@ -140,12 +140,8 @@
           "name": "agents_user_id_users_clerk_id_fk",
           "tableFrom": "agents",
           "tableTo": "users",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "clerk_id"
-          ],
+          "columnsFrom": ["user_id"],
+          "columnsTo": ["clerk_id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -155,9 +151,7 @@
         "agents_uuid_unique": {
           "name": "agents_uuid_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "uuid"
-          ]
+          "columns": ["uuid"]
         }
       },
       "policies": {},
@@ -299,12 +293,8 @@
           "name": "integrations_user_id_users_clerk_id_fk",
           "tableFrom": "integrations",
           "tableTo": "users",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "clerk_id"
-          ],
+          "columnsFrom": ["user_id"],
+          "columnsTo": ["clerk_id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -312,12 +302,8 @@
           "name": "integrations_agent_id_agents_uuid_fk",
           "tableFrom": "integrations",
           "tableTo": "agents",
-          "columnsFrom": [
-            "agent_id"
-          ],
-          "columnsTo": [
-            "uuid"
-          ],
+          "columnsFrom": ["agent_id"],
+          "columnsTo": ["uuid"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -327,23 +313,17 @@
         "integrations_id_unique": {
           "name": "integrations_id_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "id"
-          ]
+          "columns": ["id"]
         },
         "integrations_token_unique": {
           "name": "integrations_token_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "token"
-          ]
+          "columns": ["token"]
         },
         "integrations_entity_id_unique": {
           "name": "integrations_entity_id_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "entity_id"
-          ]
+          "columns": ["entity_id"]
         }
       },
       "policies": {},
@@ -449,12 +429,8 @@
           "name": "offerings_agent_id_agents_uuid_fk",
           "tableFrom": "offerings",
           "tableTo": "agents",
-          "columnsFrom": [
-            "agent_id"
-          ],
-          "columnsTo": [
-            "uuid"
-          ],
+          "columnsFrom": ["agent_id"],
+          "columnsTo": ["uuid"],
           "onDelete": "cascade",
           "onUpdate": "cascade"
         }
@@ -464,9 +440,7 @@
         "offerings_id_unique": {
           "name": "offerings_id_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "id"
-          ]
+          "columns": ["id"]
         }
       },
       "policies": {},
@@ -534,12 +508,8 @@
           "name": "offerings_prices_offering_id_offerings_id_fk",
           "tableFrom": "offerings_prices",
           "tableTo": "offerings",
-          "columnsFrom": [
-            "offering_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["offering_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -640,23 +610,17 @@
         "packages_id_unique": {
           "name": "packages_id_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "id"
-          ]
+          "columns": ["id"]
         },
         "packages_title_unique": {
           "name": "packages_title_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "title"
-          ]
+          "columns": ["title"]
         },
         "packages_stripe_price_id_unique": {
           "name": "packages_stripe_price_id_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "stripe_price_id"
-          ]
+          "columns": ["stripe_price_id"]
         }
       },
       "policies": {},
@@ -767,12 +731,8 @@
           "name": "packages_features_package_id_packages_id_fk",
           "tableFrom": "packages_features",
           "tableTo": "packages",
-          "columnsFrom": [
-            "package_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["package_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -782,9 +742,7 @@
         "packages_features_id_unique": {
           "name": "packages_features_id_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "id"
-          ]
+          "columns": ["id"]
         }
       },
       "policies": {},
@@ -926,12 +884,8 @@
           "name": "sessions_agent_id_agents_uuid_fk",
           "tableFrom": "sessions",
           "tableTo": "agents",
-          "columnsFrom": [
-            "agent_id"
-          ],
-          "columnsTo": [
-            "uuid"
-          ],
+          "columnsFrom": ["agent_id"],
+          "columnsTo": ["uuid"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -941,16 +895,12 @@
         "sessions_id_unique": {
           "name": "sessions_id_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "id"
-          ]
+          "columns": ["id"]
         },
         "sessions_session_id_unique": {
           "name": "sessions_session_id_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "session_id"
-          ]
+          "columns": ["session_id"]
         }
       },
       "policies": {},
@@ -1028,12 +978,8 @@
           "name": "sessions_summaries_session_id_sessions_id_fk",
           "tableFrom": "sessions_summaries",
           "tableTo": "sessions",
-          "columnsFrom": [
-            "session_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["session_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -1043,9 +989,7 @@
         "sessions_summaries_id_unique": {
           "name": "sessions_summaries_id_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "id"
-          ]
+          "columns": ["id"]
         }
       },
       "policies": {},
@@ -1208,12 +1152,8 @@
           "name": "users_package_id_packages_id_fk",
           "tableFrom": "users",
           "tableTo": "packages",
-          "columnsFrom": [
-            "package_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["package_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -1223,37 +1163,27 @@
         "users_id_unique": {
           "name": "users_id_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "id"
-          ]
+          "columns": ["id"]
         },
         "users_uuid_unique": {
           "name": "users_uuid_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "uuid"
-          ]
+          "columns": ["uuid"]
         },
         "users_clerk_id_unique": {
           "name": "users_clerk_id_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "clerk_id"
-          ]
+          "columns": ["clerk_id"]
         },
         "users_stripe_id_unique": {
           "name": "users_stripe_id_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "stripe_id"
-          ]
+          "columns": ["stripe_id"]
         },
         "users_email_unique": {
           "name": "users_email_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "email"
-          ]
+          "columns": ["email"]
         }
       },
       "policies": {},
@@ -1265,49 +1195,27 @@
     "public.integration_name": {
       "name": "integration_name",
       "schema": "public",
-      "values": [
-        "instagram",
-        "facebook"
-      ]
+      "values": ["instagram", "facebook"]
     },
     "public.session_intent": {
       "name": "session_intent",
       "schema": "public",
-      "values": [
-        "booking",
-        "inquiry",
-        "support",
-        "other"
-      ]
+      "values": ["booking", "inquiry", "support", "other"]
     },
     "public.session_source": {
       "name": "session_source",
       "schema": "public",
-      "values": [
-        "website",
-        "facebook",
-        "instagram"
-      ]
+      "values": ["website", "facebook", "instagram"]
     },
     "public.session_status": {
       "name": "session_status",
       "schema": "public",
-      "values": [
-        "open",
-        "engaged",
-        "converted",
-        "abandoned",
-        "spam"
-      ]
+      "values": ["open", "engaged", "converted", "abandoned", "spam"]
     },
     "public.user_roles": {
       "name": "user_roles",
       "schema": "public",
-      "values": [
-        "admin",
-        "user",
-        "superadmin"
-      ]
+      "values": ["admin", "user", "superadmin"]
     }
   },
   "schemas": {},

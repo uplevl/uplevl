@@ -5,6 +5,7 @@ try {
   const EnvSchema = z.object({
     NGROK_AUTH_TOKEN: z.string().min(1),
     DASHBOARD_PORT: z.coerce.number().default(4000),
+    APP_PORT: z.coerce.number().default(3000),
   });
 
   const env = EnvSchema.parse(process.env);
@@ -12,7 +13,7 @@ try {
   (async function () {
     const listener = await ngrok.forward({
       // The port your app is running on.
-      addr: env.DASHBOARD_PORT,
+      addr: env.APP_PORT,
       authtoken: env.NGROK_AUTH_TOKEN,
       // If you haven't reserved a domain, omit this
       domain: "dev.uplevl.ai",

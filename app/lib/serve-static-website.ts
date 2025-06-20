@@ -5,13 +5,13 @@ import { readdir } from "node:fs/promises";
 
 import type { AppBindings } from "./types";
 
-export async function serveStaticWebsite(name: string, app: Hono<AppBindings>) {
+export async function serveStaticWebsite(route: string, folder: string, app: Hono<AppBindings>) {
   let entries: Dirent<string>[];
 
   try {
-    entries = await readdir(`./dist/${name}`, { withFileTypes: true });
+    entries = await readdir(folder, { withFileTypes: true });
   } catch {
-    console.warn(`[serveStaticWebsite] Static site "${name}" not found at ${`./dist/${name}`} – skipping registration`);
+    console.warn(`[serveStaticWebsite] Static site "${route}" not found at ${folder} - skipping registration`);
     return;
   }
 
@@ -23,9 +23,9 @@ export async function serveStaticWebsite(name: string, app: Hono<AppBindings>) {
       }
 
       app.use(
-        `/${name}/${entry.name}`,
+        `${route}/${entry.name}`,
         serveStatic({
-          path: `./dist/${name}/${entry.name}`,
+          path: `${folder}/${entry.name}`,
           precompressed: true,
           onFound: (_path, c) => {
             c.header("Cache-Control", "public, max-age=31536000, immutable");
@@ -35,10 +35,10 @@ export async function serveStaticWebsite(name: string, app: Hono<AppBindings>) {
     });
 
   app.use(
-    `/${name}/assets/*`,
+    `${route}/assets/*`,
     serveStatic({
-      root: `./dist/${name}`,
-      rewriteRequestPath: (path) => path.replace(`/${name}`, ""),
+      root: `${folder}`,
+      rewriteRequestPath: (path) => path.replace(`${route}`, ""),
       precompressed: true,
       onFound: (_path, c) => {
         c.header("Cache-Control", "public, max-age=31536000, immutable");
@@ -47,9 +47,21 @@ export async function serveStaticWebsite(name: string, app: Hono<AppBindings>) {
   );
 
   app.use(
-    `/${name}*`,
+    `${route}/_astro/*`,
     serveStatic({
-      path: `./dist/${name}/index.html`,
+      root: `${folder}`,
+      rewriteRequestPath: (path) => path.replace(`${route}`, ""),
+      precompressed: true,
+      onFound: (_path, c) => {
+        c.header("Cache-Control", "public, max-age=31536000, immutable");
+      },
+    }),
+  );
+
+  app.use(
+    `${route}*`,
+    serveStatic({
+      path: `${folder}/index.html`,
       precompressed: true,
       onFound: (_path, c) => {
         c.header("Cache-Control", "no-cache");
