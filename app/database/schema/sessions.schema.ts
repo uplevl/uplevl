@@ -1,10 +1,10 @@
 import { relations } from "drizzle-orm";
-import { index, pgEnum, pgTable, serial, text, timestamp, uuid } from "drizzle-orm/pg-core";
+import { index, pgEnum, pgTable, serial, timestamp, uuid, varchar } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { type z } from "zod/v4";
 
-import { agents } from "./agents.schema";
-import { sessionsSummaries } from "./sessions-summaries";
+import { AgentTable } from "./agents.schema";
+import { SessionSummaryTable } from "./sessions-summaries";
 
 export const SESSION_SOURCES = {
   WEBSITE: "website",
@@ -54,21 +54,21 @@ export const sessionIntent = pgEnum("session_intent", [
   SESSION_INTENTS.OTHER,
 ]);
 
-export const sessions = pgTable(
+export const SessionTable = pgTable(
   "sessions",
   {
     // IDs
     id: serial("id").primaryKey(),
-    sessionId: text("session_id").notNull().unique(),
-    agentId: uuid("agent_id").references(() => agents.uuid),
+    sessionId: varchar("session_id").notNull().unique(),
+    agentId: uuid("agent_id").references(() => AgentTable.uuid),
     // Info
     source: sessionSource("source").notNull(),
     status: sessionStatus("status").notNull().default(SESSION_STATUSES.OPEN),
     intent: sessionIntent("intent"),
     // User info
-    userName: text("user_name"),
-    userEmail: text("user_email"),
-    userPhone: text("user_phone"),
+    userName: varchar("user_name"),
+    userEmail: varchar("user_email"),
+    userPhone: varchar("user_phone"),
     // Timestamps
     createdAt: timestamp("created_at", { mode: "string" }).defaultNow().notNull(),
     updatedAt: timestamp("updated_at", { mode: "string" })
@@ -80,15 +80,15 @@ export const sessions = pgTable(
   (table) => [index("sessions_agent_id_idx").on(table.agentId), index("sessions_deleted_at_idx").on(table.deletedAt)],
 );
 
-export const sessionsRelations = relations(sessions, ({ one, many }) => ({
-  agent: one(agents, {
-    fields: [sessions.agentId],
-    references: [agents.uuid],
+export const sessionRelations = relations(SessionTable, ({ one, many }) => ({
+  agent: one(AgentTable, {
+    fields: [SessionTable.agentId],
+    references: [AgentTable.uuid],
   }),
-  sessionSummaries: many(sessionsSummaries),
+  sessionSummaries: many(SessionSummaryTable),
 }));
 
-export const SessionInsertSchema = createInsertSchema(sessions).omit({
+export const SessionInsertSchema = createInsertSchema(SessionTable).omit({
   id: true,
   createdAt: true,
   updatedAt: true,

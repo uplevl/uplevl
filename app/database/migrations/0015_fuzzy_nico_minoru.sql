@@ -1,0 +1,25 @@
+ALTER TABLE "agents" ALTER COLUMN "user_id" SET DATA TYPE varchar;--> statement-breakpoint
+ALTER TABLE "agents" ALTER COLUMN "business_name" SET DATA TYPE varchar;--> statement-breakpoint
+ALTER TABLE "agents" ALTER COLUMN "business_url" SET DATA TYPE varchar;--> statement-breakpoint
+ALTER TABLE "integrations" ALTER COLUMN "user_id" SET DATA TYPE varchar;--> statement-breakpoint
+ALTER TABLE "offerings" ALTER COLUMN "sort_order" SET DATA TYPE smallint;--> statement-breakpoint
+ALTER TABLE "offerings_prices" ALTER COLUMN "tier" SET DATA TYPE varchar(128);--> statement-breakpoint
+ALTER TABLE "offerings_prices" ALTER COLUMN "unit" SET DATA TYPE varchar(128);--> statement-breakpoint
+ALTER TABLE "packages" ALTER COLUMN "title" SET DATA TYPE varchar(128);--> statement-breakpoint
+ALTER TABLE "packages" ALTER COLUMN "stripe_price_id" SET DATA TYPE varchar(128);--> statement-breakpoint
+ALTER TABLE "packages" ALTER COLUMN "sort_order" SET DATA TYPE smallint;--> statement-breakpoint
+ALTER TABLE "packages_features" ALTER COLUMN "title" SET DATA TYPE varchar;--> statement-breakpoint
+ALTER TABLE "packages_features" ALTER COLUMN "description" SET DATA TYPE varchar;--> statement-breakpoint
+ALTER TABLE "packages_features" ALTER COLUMN "icon" SET DATA TYPE varchar;--> statement-breakpoint
+ALTER TABLE "packages_features" ALTER COLUMN "sort_order" SET DATA TYPE smallint;--> statement-breakpoint
+ALTER TABLE "packages_features" ALTER COLUMN "flag_key" SET DATA TYPE varchar;--> statement-breakpoint
+ALTER TABLE "sessions" ALTER COLUMN "session_id" SET DATA TYPE varchar;--> statement-breakpoint
+ALTER TABLE "sessions" ALTER COLUMN "user_name" SET DATA TYPE varchar;--> statement-breakpoint
+ALTER TABLE "sessions" ALTER COLUMN "user_email" SET DATA TYPE varchar;--> statement-breakpoint
+ALTER TABLE "sessions" ALTER COLUMN "user_phone" SET DATA TYPE varchar;--> statement-breakpoint
+ALTER TABLE "sessions_summaries" ALTER COLUMN "conversation_type" SET DATA TYPE varchar(128);--> statement-breakpoint
+ALTER TABLE "users" ALTER COLUMN "clerk_id" SET DATA TYPE varchar(128);--> statement-breakpoint
+ALTER TABLE "users" ALTER COLUMN "stripe_id" SET DATA TYPE varchar(128);--> statement-breakpoint
+ALTER TABLE "users" ALTER COLUMN "email" SET DATA TYPE varchar;--> statement-breakpoint
+ALTER TABLE "users" ALTER COLUMN "first_name" SET DATA TYPE varchar;--> statement-breakpoint
+ALTER TABLE "users" ALTER COLUMN "last_name" SET DATA TYPE varchar;

@@ -1,25 +1,25 @@
 import { relations } from "drizzle-orm";
-import { index, integer, pgTable, serial, text, timestamp, uuid } from "drizzle-orm/pg-core";
+import { index, pgTable, serial, smallint, text, timestamp, uuid } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { type z } from "zod/v4";
 
-import { agents } from "./agents.schema";
-import { offeringsPrices } from "./offerings-prices.schema";
+import { AgentTable } from "./agents.schema";
+import { OfferingPriceTable } from "./offerings-prices.schema";
 
-export const offerings = pgTable(
+export const OfferingTable = pgTable(
   "offerings",
   {
     // IDs
     id: serial("id").primaryKey(),
     // References
     agentId: uuid("agent_id")
-      .references(() => agents.uuid, { onDelete: "cascade", onUpdate: "cascade" })
+      .references(() => AgentTable.uuid, { onDelete: "cascade", onUpdate: "cascade" })
       .notNull(),
     // Offerings
     title: text("title").notNull(),
     description: text("description").notNull(),
     category: text("category"),
-    sortOrder: integer("sort_order").notNull().default(0),
+    sortOrder: smallint("sort_order").notNull().default(0),
     // Timestamps
     createdAt: timestamp("created_at", { mode: "string" }).defaultNow().notNull(),
     updatedAt: timestamp("updated_at", { mode: "string" })
@@ -31,15 +31,15 @@ export const offerings = pgTable(
   (table) => [index("offerings_deleted_at_idx").on(table.deletedAt), index("offerings_agent_id_idx").on(table.agentId)],
 );
 
-export const offeringsRelations = relations(offerings, ({ one, many }) => ({
-  agent: one(agents, {
-    fields: [offerings.agentId],
-    references: [agents.uuid],
+export const offeringRelations = relations(OfferingTable, ({ one, many }) => ({
+  agent: one(AgentTable, {
+    fields: [OfferingTable.agentId],
+    references: [AgentTable.uuid],
   }),
-  prices: many(offeringsPrices),
+  prices: many(OfferingPriceTable),
 }));
 
-export const OfferingInsertSchema = createInsertSchema(offerings).omit({
+export const OfferingInsertSchema = createInsertSchema(OfferingTable).omit({
   id: true,
   createdAt: true,
   updatedAt: true,

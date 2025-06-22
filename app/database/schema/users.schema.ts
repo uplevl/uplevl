@@ -1,10 +1,10 @@
 import { relations, sql } from "drizzle-orm";
-import { boolean, index, integer, pgEnum, pgTable, serial, text, timestamp, uuid } from "drizzle-orm/pg-core";
+import { boolean, index, integer, pgEnum, pgTable, serial, timestamp, uuid, varchar } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { type z } from "zod/v4";
 
-import { agents } from "./agents.schema";
-import { packages } from "./packages.schema";
+import { AgentTable } from "./agents.schema";
+import { PackageTable } from "./packages.schema";
 
 export const USER_ROLES = {
   ADMIN: "admin",
@@ -16,7 +16,7 @@ export type UserRole = (typeof USER_ROLES)[keyof typeof USER_ROLES];
 
 export const userRolesEnum = pgEnum("user_roles", [USER_ROLES.ADMIN, USER_ROLES.USER, USER_ROLES.SUPERADMIN]);
 
-export const users = pgTable(
+export const UserTable = pgTable(
   "users",
   {
     // IDs
@@ -25,13 +25,13 @@ export const users = pgTable(
       .default(sql`gen_random_uuid()`)
       .notNull()
       .unique(),
-    clerkId: text("clerk_id").unique(),
-    stripeId: text("stripe_id").unique(),
-    packageId: integer("package_id").references(() => packages.id),
+    clerkId: varchar("clerk_id", { length: 128 }).unique(),
+    stripeId: varchar("stripe_id", { length: 128 }).unique(),
+    packageId: integer("package_id").references(() => PackageTable.id),
     // User data
-    email: text("email").notNull().unique(),
-    firstName: text("first_name"),
-    lastName: text("last_name"),
+    email: varchar("email").notNull().unique(),
+    firstName: varchar("first_name"),
+    lastName: varchar("last_name"),
     role: userRolesEnum("role").notNull().default(USER_ROLES.USER),
     // Flags
     isActive: boolean("is_active").notNull().default(true),
@@ -46,18 +46,18 @@ export const users = pgTable(
   (table) => [index("users_deleted_at_idx").on(table.deletedAt), index("users_is_active_idx").on(table.isActive)],
 );
 
-export const userRelations = relations(users, ({ one }) => ({
-  package: one(packages, {
-    fields: [users.packageId],
-    references: [packages.id],
+export const userRelations = relations(UserTable, ({ one }) => ({
+  package: one(PackageTable, {
+    fields: [UserTable.packageId],
+    references: [PackageTable.id],
   }),
-  agent: one(agents, {
-    fields: [users.clerkId],
-    references: [agents.userId],
+  agent: one(AgentTable, {
+    fields: [UserTable.clerkId],
+    references: [AgentTable.userId],
   }),
 }));
 
-export const UserInsertSchema = createInsertSchema(users).omit({
+export const UserInsertSchema = createInsertSchema(UserTable).omit({
   id: true,
   uuid: true,
   createdAt: true,

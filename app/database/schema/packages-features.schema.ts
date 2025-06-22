@@ -1,25 +1,25 @@
 import { relations } from "drizzle-orm";
-import { boolean, index, integer, pgTable, serial, text, timestamp } from "drizzle-orm/pg-core";
+import { boolean, index, integer, pgTable, serial, smallint, timestamp, varchar } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { type z } from "zod/v4";
 
-import { packages } from "./packages.schema";
+import { PackageTable } from "./packages.schema";
 
-export const packagesFeatures = pgTable(
+export const PackageFeatureTable = pgTable(
   "packages_features",
   {
     // IDs
     id: serial("id").unique().primaryKey(),
     // References
     packageId: integer("package_id")
-      .references(() => packages.id, { onDelete: "cascade" })
+      .references(() => PackageTable.id, { onDelete: "cascade" })
       .notNull(),
     // Data
-    title: text("title").notNull(),
-    description: text("description").notNull(),
-    icon: text("icon").notNull(),
-    sortOrder: integer("sort_order").notNull().default(0),
-    flagKey: text("flag_key").notNull(),
+    title: varchar("title").notNull(),
+    description: varchar("description").notNull(),
+    icon: varchar("icon").notNull(),
+    sortOrder: smallint("sort_order").notNull().default(0),
+    flagKey: varchar("flag_key").notNull(),
     // Flags
     separatorAfter: boolean("separator_after").notNull().default(false),
     isHighlighted: boolean("is_highlighted").notNull().default(false),
@@ -37,14 +37,14 @@ export const packagesFeatures = pgTable(
   ],
 );
 
-export const packagesFeaturesRelations = relations(packagesFeatures, ({ one }) => ({
-  package: one(packages, {
-    fields: [packagesFeatures.packageId],
-    references: [packages.id],
+export const packageFeatureRelations = relations(PackageFeatureTable, ({ one }) => ({
+  package: one(PackageTable, {
+    fields: [PackageFeatureTable.packageId],
+    references: [PackageTable.id],
   }),
 }));
 
-export const PackageFeatureInsertSchema = createInsertSchema(packagesFeatures).omit({
+export const PackageFeatureInsertSchema = createInsertSchema(PackageFeatureTable).omit({
   id: true,
   createdAt: true,
   updatedAt: true,

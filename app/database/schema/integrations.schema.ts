@@ -1,10 +1,10 @@
 import { relations } from "drizzle-orm";
-import { index, pgEnum, pgTable, serial, text, timestamp, uuid } from "drizzle-orm/pg-core";
+import { index, pgEnum, pgTable, serial, text, timestamp, uuid, varchar } from "drizzle-orm/pg-core";
 import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 import { type z } from "zod/v4";
 
-import { agents } from "./agents.schema";
-import { users } from "./users.schema";
+import { AgentTable } from "./agents.schema";
+import { UserTable } from "./users.schema";
 
 export const INTEGRATION_STRATEGIES = {
   INSTAGRAM: "instagram",
@@ -18,16 +18,16 @@ export const integrationName = pgEnum("integration_name", [
   INTEGRATION_STRATEGIES.FACEBOOK,
 ]);
 
-export const integrations = pgTable(
+export const IntegrationTable = pgTable(
   "integrations",
   {
     // Ids
     id: serial("id").primaryKey(),
-    userId: text("user_id")
-      .references(() => users.clerkId, { onDelete: "cascade" })
+    userId: varchar("user_id")
+      .references(() => UserTable.clerkId, { onDelete: "cascade" })
       .notNull(),
     agentId: uuid("agent_id")
-      .references(() => agents.uuid, { onDelete: "cascade" })
+      .references(() => AgentTable.uuid, { onDelete: "cascade" })
       .notNull(),
     // Data
     name: integrationName("name").notNull(),
@@ -50,24 +50,24 @@ export const integrations = pgTable(
   ],
 );
 
-export const integrationsRelations = relations(integrations, ({ one }) => ({
-  agent: one(agents, {
-    fields: [integrations.agentId],
-    references: [agents.uuid],
+export const integrationRelations = relations(IntegrationTable, ({ one }) => ({
+  agent: one(AgentTable, {
+    fields: [IntegrationTable.agentId],
+    references: [AgentTable.uuid],
   }),
-  user: one(users, {
-    fields: [integrations.userId],
-    references: [users.clerkId],
+  user: one(UserTable, {
+    fields: [IntegrationTable.userId],
+    references: [UserTable.clerkId],
   }),
 }));
 
-export const IntegrationSelectSchema = createSelectSchema(integrations).omit({
+export const IntegrationSelectSchema = createSelectSchema(IntegrationTable).omit({
   createdAt: true,
   updatedAt: true,
   deletedAt: true,
 });
 
-export const IntegrationInsertSchema = createInsertSchema(integrations).omit({
+export const IntegrationInsertSchema = createInsertSchema(IntegrationTable).omit({
   id: true,
   createdAt: true,
   updatedAt: true,

@@ -1,14 +1,14 @@
 import { relations, sql } from "drizzle-orm";
-import { boolean, index, pgTable, serial, text, timestamp, uuid } from "drizzle-orm/pg-core";
+import { boolean, index, pgTable, serial, text, timestamp, uuid, varchar } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { type z } from "zod/v4";
 
-import { integrations } from "./integrations.schema";
-import { offerings } from "./offerings.schema";
-import { sessions } from "./sessions.schema";
-import { users } from "./users.schema";
+import { IntegrationTable } from "./integrations.schema";
+import { OfferingTable } from "./offerings.schema";
+import { SessionTable } from "./sessions.schema";
+import { UserTable } from "./users.schema";
 
-export const agents = pgTable(
+export const AgentTable = pgTable(
   "agents",
   {
     // IDs
@@ -17,13 +17,13 @@ export const agents = pgTable(
       .default(sql`gen_random_uuid()`)
       .unique()
       .notNull(),
-    userId: text("user_id")
-      .references(() => users.clerkId, { onDelete: "cascade" })
+    userId: varchar("user_id")
+      .references(() => UserTable.clerkId, { onDelete: "cascade" })
       .notNull(),
     // Business data
-    businessName: text("business_name"),
+    businessName: varchar("business_name"),
     businessDescription: text("business_description"),
-    businessUrl: text("business_url"),
+    businessUrl: varchar("business_url"),
     businessSocialGoals: text("business_social_goals"),
     businessContext: text("business_context"),
     // Flags
@@ -43,17 +43,17 @@ export const agents = pgTable(
   ],
 );
 
-export const agentsRelations = relations(agents, ({ one, many }) => ({
-  user: one(users, {
-    fields: [agents.userId],
-    references: [users.clerkId],
+export const agentRelations = relations(AgentTable, ({ one, many }) => ({
+  user: one(UserTable, {
+    fields: [AgentTable.userId],
+    references: [UserTable.clerkId],
   }),
-  offerings: many(offerings),
-  integrations: many(integrations),
-  sessions: many(sessions),
+  offerings: many(OfferingTable),
+  integrations: many(IntegrationTable),
+  sessions: many(SessionTable),
 }));
 
-export const AgentInsertSchema = createInsertSchema(agents).omit({
+export const AgentInsertSchema = createInsertSchema(AgentTable).omit({
   id: true,
   uuid: true,
   createdAt: true,
