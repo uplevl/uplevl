@@ -1,7 +1,14 @@
 import { env } from "@/env";
 
 import { db } from "@/database";
-import * as schema from "@/database/schema";
+import {
+  AgentTable,
+  INTEGRATION_STRATEGIES,
+  IntegrationTable,
+  type OfferingPriceInsert,
+  OfferingPriceTable,
+  OfferingTable,
+} from "@/database/schema";
 
 import agents from "./data/agents.data.json";
 
@@ -29,12 +36,12 @@ export async function agentsSeed() {
     for (const { offerings, ...agent } of agents) {
       // Insert Agent
       const insertedAgent = await tx
-        .insert(schema.agents)
+        .insert(AgentTable)
         .values({
           ...agent,
           userId: SEED_CLERK_USER_ID,
         })
-        .returning({ id: schema.agents.id, uuid: schema.agents.uuid });
+        .returning({ id: AgentTable.id, uuid: AgentTable.uuid });
 
       if (insertedAgent.length === 0) {
         throw new Error(`Agent could not be created`);
@@ -48,12 +55,12 @@ export async function agentsSeed() {
       // Insert Offerings
       for (const { prices, ...offering } of offerings) {
         const insertedOfferings = await tx
-          .insert(schema.offerings)
+          .insert(OfferingTable)
           .values({
             ...offering,
             agentId: insertedAgent[0].uuid,
           })
-          .returning({ id: schema.offerings.id });
+          .returning({ id: OfferingTable.id });
 
         if (insertedOfferings.length === 0) {
           throw new Error(`Offerings could not be created`);
@@ -62,15 +69,15 @@ export async function agentsSeed() {
         numberOfOfferings++;
 
         // Insert Offerings Prices
-        const pricesData: schema.OfferingPriceInsert[] = prices.map((price) => ({
+        const pricesData: OfferingPriceInsert[] = prices.map((price) => ({
           ...price,
           offeringId: insertedOfferings[0].id,
         }));
 
         const insertedOfferingsPrices = await tx
-          .insert(schema.offeringsPrices)
+          .insert(OfferingPriceTable)
           .values(pricesData)
-          .returning({ id: schema.offeringsPrices.id });
+          .returning({ id: OfferingPriceTable.id });
 
         if (insertedOfferingsPrices.length === 0) {
           throw new Error(`Offerings prices could not be created`);
@@ -83,15 +90,15 @@ export async function agentsSeed() {
 
       // Insert Instagram Integration
       const insertedIntegration = await tx
-        .insert(schema.integrations)
+        .insert(IntegrationTable)
         .values({
           userId: SEED_CLERK_USER_ID,
           agentId: insertedAgent[0].uuid,
-          name: schema.INTEGRATION_STRATEGIES.INSTAGRAM,
+          name: INTEGRATION_STRATEGIES.INSTAGRAM,
           token: SEED_INTEGRATION_INSTAGRAM_TOKEN,
           entityId: SEED_INTEGRATION_INSTAGRAM_ENTITY_ID,
         })
-        .returning({ id: schema.integrations.id });
+        .returning({ id: IntegrationTable.id });
 
       if (insertedIntegration.length === 0) {
         throw new Error(`Integration could not be created`);

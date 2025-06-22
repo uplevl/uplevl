@@ -1,5 +1,5 @@
 import { db } from "@/database";
-import * as schema from "@/database/schema";
+import { PackageFeatureTable, PackageTable } from "@/database/schema";
 
 import packages from "./data/packages.data.json";
 
@@ -11,7 +11,7 @@ export async function seedPackages() {
 
     for (const { features, ...pck } of packages) {
       // Insert package and verify result
-      const packageResult = await tx.insert(schema.packages).values(pck).returning({ id: schema.packages.id });
+      const packageResult = await tx.insert(PackageTable).values(pck).returning({ id: PackageTable.id });
 
       if (packageResult.length === 0) {
         throw new Error(`Failed to create package: ${JSON.stringify(pck)}`);
@@ -30,9 +30,9 @@ export async function seedPackages() {
 
       // Insert features and verify result
       const featureResult = await tx
-        .insert(schema.packagesFeatures)
+        .insert(PackageFeatureTable)
         .values(featureData)
-        .returning({ id: schema.packagesFeatures.id });
+        .returning({ id: PackageFeatureTable.id });
 
       if (featureResult.length === 0) {
         throw new Error(`Failed to create features for package ${insertedPackage.id}`);
