@@ -1,7 +1,7 @@
 import { env } from "@/env";
 
 import { db } from "@/database";
-import * as schema from "@/database/schema";
+import { UserTable } from "@/database/schema";
 
 import users from "./data/user.data.json";
 
@@ -24,7 +24,7 @@ export async function seedUsers() {
   await db.transaction(async (tx) => {
     console.log("Seeding users...");
 
-    const packages = await tx.query.packages.findMany({
+    const packages = await tx.query.PackageTable.findMany({
       columns: {
         id: true,
         title: true,
@@ -49,7 +49,7 @@ export async function seedUsers() {
       };
     });
 
-    const insertResult = await tx.insert(schema.users).values(userData).returning({ id: schema.users.id });
+    const insertResult = await tx.insert(UserTable).values(userData).returning({ id: UserTable.id });
 
     if (insertResult.length === 0) {
       throw new Error(`Users could not be created`);

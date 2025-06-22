@@ -5,7 +5,7 @@ import { eq } from "drizzle-orm";
 import { env } from "@/env";
 
 import { db } from "@/database";
-import { type UserInsert, type UserUpdate, users } from "@/database/schema";
+import { type UserInsert, UserTable, type UserUpdate } from "@/database/schema";
 
 // Initialize Clerk client
 const clerk = createClerkClient({ secretKey: env.CLERK_SECRET_KEY });
@@ -52,8 +52,8 @@ export async function create(data: UserJSON): Promise<WebhookResponse> {
     };
 
     // Insert or update user using upsert operation
-    await db.insert(users).values(userData).onConflictDoUpdate({
-      target: users.clerkId,
+    await db.insert(UserTable).values(userData).onConflictDoUpdate({
+      target: UserTable.clerkId,
       set: userData,
     });
 
@@ -103,7 +103,7 @@ export async function update(data: UserJSON): Promise<WebhookResponse> {
     };
 
     // Update user and return updated record
-    const [result] = await db.update(users).set(userData).where(eq(users.clerkId, clerkId)).returning();
+    const [result] = await db.update(UserTable).set(userData).where(eq(UserTable.clerkId, clerkId)).returning();
 
     // Check if user exists
     if (!result) {
@@ -142,9 +142,9 @@ export async function remove(data: UserJSON): Promise<WebhookResponse> {
 
     // Perform soft delete by setting deletedAt timestamp
     const [result] = await db
-      .update(users)
+      .update(UserTable)
       .set({ deletedAt: new Date().toISOString() })
-      .where(eq(users.clerkId, clerkId))
+      .where(eq(UserTable.clerkId, clerkId))
       .returning();
 
     // Check if user exists

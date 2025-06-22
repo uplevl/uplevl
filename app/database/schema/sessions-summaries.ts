@@ -1,22 +1,22 @@
 import { relations } from "drizzle-orm";
-import { boolean, index, integer, pgTable, serial, text, timestamp } from "drizzle-orm/pg-core";
+import { boolean, index, integer, pgTable, serial, timestamp, varchar } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { type z } from "zod/v4";
 
-import { sessions } from "./sessions.schema";
+import { SessionTable } from "./sessions.schema";
 
-export const sessionsSummaries = pgTable(
+export const SessionSummaryTable = pgTable(
   "sessions_summaries",
   {
     // IDs
     id: serial("id").unique().primaryKey(),
     // References
     sessionId: integer("session_id")
-      .references(() => sessions.id, { onDelete: "cascade" })
+      .references(() => SessionTable.id, { onDelete: "cascade" })
       .notNull(),
     // Data
     converted: boolean("converted").notNull().default(false),
-    conversationType: text("conversation_type"),
+    conversationType: varchar("conversation_type", { length: 128 }),
     messagesCount: integer("messages_count"),
     durationSeconds: integer("duration_seconds"),
     // Timestamps
@@ -25,14 +25,14 @@ export const sessionsSummaries = pgTable(
   (table) => [index("sessions_summaries_session_id_idx").on(table.sessionId)],
 );
 
-export const sessionsSummariesRelations = relations(sessionsSummaries, ({ one }) => ({
-  session: one(sessions, {
-    fields: [sessionsSummaries.sessionId],
-    references: [sessions.id],
+export const sessionSummaryRelations = relations(SessionSummaryTable, ({ one }) => ({
+  session: one(SessionTable, {
+    fields: [SessionSummaryTable.sessionId],
+    references: [SessionTable.id],
   }),
 }));
 
-export const SessionSummaryInsertSchema = createInsertSchema(sessionsSummaries).omit({
+export const SessionSummaryInsertSchema = createInsertSchema(SessionSummaryTable).omit({
   id: true,
   createdAt: true,
 });

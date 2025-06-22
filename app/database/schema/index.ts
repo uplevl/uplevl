@@ -1,5 +1,5 @@
 export {
-  users,
+  UserTable,
   userRelations,
   USER_ROLES,
   type UserRole,
@@ -10,35 +10,35 @@ export {
   type UserUpdate,
 } from "./users.schema";
 export {
-  agents,
-  agentsRelations,
+  AgentTable,
+  agentRelations,
   AgentInsertSchema,
   AgentUpdateSchema,
   type AgentInsert,
   type AgentUpdate,
 } from "./agents.schema";
 export {
-  offerings,
-  offeringsRelations,
+  OfferingTable,
+  offeringRelations,
   OfferingInsertSchema,
   OfferingUpdateSchema,
   type OfferingInsert,
   type OfferingUpdate,
 } from "./offerings.schema";
 export {
-  offeringsPrices,
-  offeringsPricesRelations,
+  OfferingPriceTable,
+  offeringPriceRelations,
   OfferingPriceInsertSchema,
   OfferingPriceUpdateSchema,
   type OfferingPriceInsert,
   type OfferingPriceUpdate,
 } from "./offerings-prices.schema";
 export {
-  integrations,
+  IntegrationTable,
   INTEGRATION_STRATEGIES,
   type IntegrationStrategy,
   integrationName,
-  integrationsRelations,
+  integrationRelations,
   IntegrationInsertSchema,
   IntegrationUpdateSchema,
   type Integration,
@@ -46,8 +46,8 @@ export {
   type IntegrationUpdate,
 } from "./integrations.schema";
 export {
-  sessions,
-  sessionsRelations,
+  SessionTable,
+  sessionRelations,
   SESSION_SOURCES,
   type SessionSource,
   sessionSource,
@@ -63,24 +63,24 @@ export {
   type SessionUpdate,
 } from "./sessions.schema";
 export {
-  sessionsSummaries,
-  sessionsSummariesRelations,
+  SessionSummaryTable,
+  sessionSummaryRelations,
   SessionSummaryInsertSchema,
   SessionSummaryUpdateSchema,
   type SessionSummaryInsert,
   type SessionSummaryUpdate,
 } from "./sessions-summaries";
 export {
-  packages,
-  packagesRelations,
+  PackageTable,
+  packageRelations,
   PackageInsertSchema,
   PackageUpdateSchema,
   type PackageInsert,
   type PackageUpdate,
 } from "./packages.schema";
 export {
-  packagesFeatures,
-  packagesFeaturesRelations,
+  PackageFeatureTable,
+  packageFeatureRelations,
   PackageFeatureInsertSchema,
   PackageFeatureUpdateSchema,
   type PackageFeatureInsert,

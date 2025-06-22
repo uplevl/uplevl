@@ -1,20 +1,20 @@
 import { relations } from "drizzle-orm";
-import { boolean, integer, pgTable, serial, text, timestamp } from "drizzle-orm/pg-core";
+import { boolean, integer, pgTable, serial, smallint, timestamp, varchar } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { type z } from "zod/v4";
 
-import { packagesFeatures } from "./packages-features.schema";
-import { users } from "./users.schema";
+import { PackageFeatureTable } from "./packages-features.schema";
+import { UserTable } from "./users.schema";
 
-export const packages = pgTable("packages", {
+export const PackageTable = pgTable("packages", {
   // IDs
   id: serial("id").primaryKey(),
   // Data
-  title: text("title").notNull().unique(),
+  title: varchar("title", { length: 128 }).notNull().unique(),
   price: integer("price").notNull(),
   specialPrice: integer("special_price"),
-  stripePriceId: text("stripe_price_id").notNull().unique(),
-  sortOrder: integer("sort_order").notNull().default(0),
+  stripePriceId: varchar("stripe_price_id", { length: 128 }).notNull().unique(),
+  sortOrder: smallint("sort_order").notNull().default(0),
   // Flags
   isPopular: boolean("is_popular").notNull().default(false),
   isActive: boolean("is_active").notNull().default(true),
@@ -28,12 +28,12 @@ export const packages = pgTable("packages", {
   deletedAt: timestamp("deleted_at", { mode: "string" }),
 });
 
-export const packagesRelations = relations(packages, ({ many }) => ({
-  features: many(packagesFeatures),
-  users: many(users),
+export const packageRelations = relations(PackageTable, ({ many }) => ({
+  features: many(PackageFeatureTable),
+  users: many(UserTable),
 }));
 
-export const PackageInsertSchema = createInsertSchema(packages).omit({
+export const PackageInsertSchema = createInsertSchema(PackageTable).omit({
   id: true,
   createdAt: true,
   updatedAt: true,

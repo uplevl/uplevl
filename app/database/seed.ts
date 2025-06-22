@@ -20,15 +20,15 @@ try {
   console.time("Seeding Duration");
 
   const tables = [
-    schema.packagesFeatures,
-    schema.packages,
-    schema.users,
-    schema.offerings,
-    schema.offeringsPrices,
-    schema.agents,
-    schema.sessions,
-    schema.sessionsSummaries,
-    schema.integrations,
+    schema.PackageFeatureTable,
+    schema.PackageTable,
+    schema.UserTable,
+    schema.OfferingTable,
+    schema.OfferingPriceTable,
+    schema.AgentTable,
+    schema.SessionTable,
+    schema.SessionSummaryTable,
+    schema.IntegrationTable,
   ];
 
   console.log("Truncating tables");

@@ -5,7 +5,7 @@ const EnvSchema = z.object({
   DATABASE_URL: z.string().url(),
 });
 
-const { success, data: env, error } = await EnvSchema.safeParse(process.env);
+const { success, data: env, error } = EnvSchema.safeParse(process.env);
 
 if (!success && error) {
   console.error("❌ Invalid env:");
