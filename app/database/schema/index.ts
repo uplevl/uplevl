@@ -27,7 +27,7 @@ export {
 } from "./offerings.schema";
 export {
   OfferingPriceTable,
-  offeringsPricesRelations,
+  offeringPriceRelations,
   OfferingPriceInsertSchema,
   OfferingPriceUpdateSchema,
   type OfferingPriceInsert,

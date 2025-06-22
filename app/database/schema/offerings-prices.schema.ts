@@ -25,7 +25,7 @@ export const OfferingPriceTable = pgTable("offerings_prices", {
   deletedAt: timestamp("deleted_at", { mode: "string" }),
 });
 
-export const offeringsPricesRelations = relations(OfferingPriceTable, ({ one }) => ({
+export const offeringPriceRelations = relations(OfferingPriceTable, ({ one }) => ({
   offering: one(OfferingTable, {
     fields: [OfferingPriceTable.offeringId],
     references: [OfferingTable.id],
