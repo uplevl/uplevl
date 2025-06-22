@@ -1,5 +1,5 @@
 import { relations } from "drizzle-orm";
-import { index, pgEnum, pgTable, serial, text, timestamp, uuid, varchar } from "drizzle-orm/pg-core";
+import { index, pgEnum, pgTable, serial, timestamp, uuid, varchar } from "drizzle-orm/pg-core";
 import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 import { type z } from "zod/v4";
 
@@ -31,9 +31,9 @@ export const IntegrationTable = pgTable(
       .notNull(),
     // Data
     name: integrationName("name").notNull(),
-    token: text("token").notNull().unique(),
+    token: varchar("token").notNull().unique(),
     expiresAt: timestamp("expires_at"),
-    entityId: text("entity_id").notNull().unique(),
+    entityId: varchar("entity_id", { length: 128 }).notNull().unique(),
 
     // Timestamps
     createdAt: timestamp("created_at", { mode: "string" }).defaultNow().notNull(),
