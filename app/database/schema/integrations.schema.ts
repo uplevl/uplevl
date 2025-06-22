@@ -31,7 +31,7 @@ export const IntegrationTable = pgTable(
       .notNull(),
     // Data
     name: integrationName("name").notNull(),
-    token: varchar("token").notNull().unique(),
+    token: varchar("token", { length: 512 }).notNull().unique(),
     expiresAt: timestamp("expires_at"),
     entityId: varchar("entity_id", { length: 128 }).notNull().unique(),
 
