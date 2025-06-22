@@ -10,8 +10,9 @@ import { addEntry, createCacheKey, getEntry } from "./memory";
  */
 async function getIntegrationByEntityIdAndStrategy(entityId: string, strategy: schema.IntegrationStrategy) {
   // Query the database for the first matching integration record
-  const integration = await db.query.integrations.findFirst({
-    where: (integrations, { and, eq }) => and(eq(integrations.entityId, entityId), eq(integrations.name, strategy)),
+  const integration = await db.query.IntegrationTable.findFirst({
+    where: (IntegrationTable, { and, eq }) =>
+      and(eq(IntegrationTable.entityId, entityId), eq(IntegrationTable.name, strategy)),
     with: {
       agent: true, // Include the associated agent data in the result
     },
