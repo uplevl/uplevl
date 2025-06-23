@@ -1,7 +1,11 @@
 import { createRouter } from "@/lib/create-router";
 
-import webhooksRouter from "./webhooks/webhooks.index";
+import systemRouter from "./system";
+import webhooksRouter from "./webhooks";
 
-const router = createRouter().route("/webhooks", webhooksRouter);
+const router = createRouter()
+  // Routes
+  .route("/webhooks", webhooksRouter)
+  .route("/system", systemRouter);
 
 export default router;

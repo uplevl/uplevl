@@ -2,9 +2,9 @@
 @import "tw-animate-css";
 
 :root {
-  --background: var(--color-neutral-50);
+  --background: var(--color-neutral-100);
   --foreground: oklch(26.9% 0 0);
-  --card: oklch(1 0 0);
+  --card: var(--color-neutral-50);
   --card-foreground: oklch(26.9% 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(26.9% 0 0);
