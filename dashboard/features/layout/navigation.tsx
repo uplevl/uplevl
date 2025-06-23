@@ -34,8 +34,8 @@ export function Navigation() {
     {
       label: "Agent",
       icon: BotIcon,
-      href: "/agent-settings",
-      active: pathname === "/agent-settings",
+      href: "/agent",
+      active: pathname === "/agent",
     },
     {
       label: "Integrations",

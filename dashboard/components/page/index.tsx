@@ -1,22 +1,26 @@
-import { Helmet } from "react-helmet-async";
-
 import { cn } from "@@/lib/utils";
+
+const defaultTitle = "Uplevl | Small Business Growth Engine";
+const defaultDescription =
+  "Uplevl is the all-in-one AI-powered marketing system that helps small businesses book more clients, save hours on admin, and grow faster—without lifting a finger.";
+const defaultKeywords =
+  "AI marketing for small business, small business automation, local SEO software, AI assistant for businesses, AI chatbot for website, automated social media marketing, appointment booking software, small business growth tools, digital marketing automation, business growth engine, AI-powered customer engagement, smart website assistant, AI marketing platform, Uplevl, small business AI system";
 
 interface PageProps {
   htmlTitle?: string;
   htmlDescription?: string;
+  htmlKeywords?: string;
   children: React.ReactNode;
 }
 
-export function Page({ htmlTitle, htmlDescription, children }: PageProps) {
+export function Page({ htmlTitle, htmlDescription, htmlKeywords, children }: PageProps) {
   return (
-    <article className="container mx-auto space-y-3 px-4">
-      <Helmet>
-        {htmlTitle && <title>{htmlTitle}</title>}
-        {htmlDescription && <meta name="description" content={htmlDescription} />}
-      </Helmet>
-      {children}
-    </article>
+    <>
+      <title>{htmlTitle ? `${htmlTitle} - ${defaultTitle}` : defaultTitle}</title>
+      <meta name="description" content={htmlDescription ?? defaultDescription} />
+      <meta name="keywords" content={htmlKeywords ?? defaultKeywords} />
+      <article className="container mx-auto min-h-screen space-y-3 px-4">{children}</article>
+    </>
   );
 }
 

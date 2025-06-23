@@ -27,7 +27,8 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./app/*"],
-      "@@/*": ["./dashboard/*"]
+      "@@/*": ["./dashboard/*"],
+      "@hookform/resolvers/zod": ["./dashboard/lib/forms/zod-resolver.ts"]
     }
   }
 }

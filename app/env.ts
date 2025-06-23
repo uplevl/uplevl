@@ -23,6 +23,8 @@ const EnvSchema = z
     POSTHOG_KEY: z.string().min(1),
     POSTHOG_HOST: z.string().url(),
     CLERK_SECRET_KEY: z.string().min(1),
+    CLERK_PUBLISHABLE_KEY: z.string().min(1),
+    CLERK_JWT_KEY: z.string().min(1),
     CLERK_WEBHOOK_SIGNING_SECRET: z.string().min(1),
     UPSTASH_REDIS_URL: z.string().url(),
     UPSTASH_REDIS_TOKEN: z.string().min(1),

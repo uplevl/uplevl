@@ -33,7 +33,7 @@ export const buttonVariants = cva(
   },
 );
 
-interface ButtonProps extends React.ComponentProps<"button">, VariantProps<typeof buttonVariants> {
+export interface ButtonProps extends React.ComponentProps<"button">, VariantProps<typeof buttonVariants> {
   asChild?: boolean;
 }
 
@@ -43,7 +43,6 @@ export function Button({ className, variant, size, asChild = false, disabled, ..
   return (
     <Comp
       data-slot="button"
-      disabled={disabled}
       aria-disabled={disabled}
       className={cn(buttonVariants({ variant, size, className }))}
       {...props}
