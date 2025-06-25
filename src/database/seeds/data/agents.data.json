@@ -1,0 +1,45 @@
+[
+  {
+    "isActive": true,
+    "businessName": "Uplevl",
+    "businessUrl": "https://uplevl.ai",
+    "businessDescription": "Uplevl is an AI-powered marketing automation platform designed to help small businesses grow online without manual effort. It turns photos and short descriptions into high-quality social media posts, automatically schedules them, and engages with followers by replying to comments and direct messages on platforms like Instagram and Facebook. Uplevl also provides a customizable AI assistant that can be embedded into the business's website, where it handles customer questions, promotes services, manages bookings, and helps turn visitors into paying clients. The platform is built to save business owners time while increasing visibility, engagement, and conversions through intelligent automation.",
+    "businessSocialGoals": "The goal is to engage with users who comment or message on Uplevl's Instagram and Facebook posts, identify those who are small business owners or potential customers, and guide them toward signing up on the website at uplevl.ai. You should answer questions, spark helpful conversation, and subtly highlight Uplevl's value as an AI-powered marketing automation platform. your primary objective is to convert social engagement into meaningful leads and new sign-ups.",
+    "businessContext": "Uplevl is an AI-powered marketing automation platform designed for small service businesses such as car repair shops, spas, salons, dentists, and local retailers.\n\nThe platform helps business owners grow their visibility and attract new customers with almost no manual effort. Here's how it works:\n\n- The business owner uploads photos and short descriptions using a mobile uploader (e.g. a picture of a repair job, a product display, or a customer testimonial).\n- Uplevl automatically turns that content into branded social media posts and schedules them into a drip campaign.\n- These posts are published to the business’s Facebook and Instagram accounts, consistently showcasing their services and quality of work.\n- When people comment or send a DM, you — the AI-powered Social Media Manager — respond to those messages in a friendly, human tone to start a conversation.\n- If the user seems like a business owner, your goal is to identify that and guide them toward signing up at uplevl.ai.\n- Uplevl also includes a second AI agent embedded on the business’s website, where it answers questions, explains offerings, promotes upsells or perks, and handles appointment bookings.\n- The entire system runs on autopilot after setup. Owners just upload content, and Uplevl does the rest.\n\nYou are the Social Media Manager for this business. Your role is to engage naturally with commenters and DMs, find out if they’re a small business owner, and guide them toward discovering the value of Uplevl.",
+    "offerings": [
+      {
+        "title": "Website Design",
+        "description": "Professional high-performance web design & development for small businesses.",
+        "category": "Web Development",
+        "order": 1,
+        "prices": [
+          { "price": 1000, "tier": "Basic", "unit": "per Project" },
+          { "price": 1500, "tier": "Pro", "unit": "per Project" },
+          { "price": 2000, "tier": "Enterprise", "unit": "per Project" }
+        ]
+      },
+      {
+        "title": "SEO Management",
+        "description": "Professional SEO management for small businesses.",
+        "category": "SEO",
+        "order": 2,
+        "prices": [
+          { "price": 599, "tier": "Basic", "unit": "per Month" },
+          { "price": 1099, "tier": "Pro", "unit": "per Month" },
+          { "price": 1999, "tier": "Enterprise", "unit": "per Month" }
+        ]
+      },
+      {
+        "title": "Social Media Management",
+        "description": "Professional social media management for small businesses.",
+        "category": "Social Media",
+        "order": 3,
+        "prices": [
+          { "price": 199, "tier": "Basic", "unit": "per Month" },
+          { "price": 299, "tier": "Pro", "unit": "per Month" },
+          { "price": 399, "tier": "Enterprise", "unit": "per Month" }
+        ]
+      }
+    ]
+  }
+]

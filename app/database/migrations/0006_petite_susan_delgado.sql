@@ -1,1 +1,0 @@
-ALTER TABLE "integrations" DROP CONSTRAINT "integrations_id_unique";
