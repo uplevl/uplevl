@@ -1,8 +1,9 @@
 import { headers } from "next/headers";
 import { type NextRequest, NextResponse } from "next/server";
-import Stripe from "stripe";
+import type Stripe from "stripe";
 
 import { env } from "@/lib/env/server";
+import { stripe } from "@/lib/stripe";
 
 interface StripeWebhookResponse {
   error: string | null;
@@ -57,17 +58,13 @@ async function validateCheckoutSession(event: Stripe.Event): Promise<Stripe.Chec
   return session;
 }
 
-const stripeClient = new Stripe(env.STRIPE_SECRET_KEY, {
-  typescript: true,
-});
-
 async function validateStripeSignature(body: string, signature: string | null): Promise<Stripe.Event> {
   if (!signature) {
     throw new Error("No stripe signature found");
   }
 
   try {
-    return stripeClient.webhooks.constructEvent(body, signature, env.STRIPE_WEBHOOK_CHECKOUT_SIGNING_SECRET);
+    return stripe.webhooks.constructEvent(body, signature, env.STRIPE_WEBHOOK_CHECKOUT_SIGNING_SECRET);
   } catch (error) {
     if (error instanceof Error) {
       throw new Error(`Failed to validate Stripe webhook signature: ${error.message}`);

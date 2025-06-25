@@ -14,9 +14,20 @@ function useShowcaseMessages(chatMessages: ChatMessage[]) {
 
   function handleSendMessage(message: ChatMessage) {
     setMessages((prev) => {
-      const messagesSet = new Set(prev);
-      messagesSet.add(message);
-      return Array.from(messagesSet);
+      // Create a unique identifier for the message using role and content
+      const messageKey = `${message.role}:${message.content}`;
+
+      // Check if a message with the same role and content already exists
+      const isDuplicate = prev.some(
+        (existingMessage) => `${existingMessage.role}:${existingMessage.content}` === messageKey,
+      );
+
+      // Only add the message if it's not a duplicate
+      if (!isDuplicate) {
+        return [...prev, message];
+      }
+
+      return prev;
     });
   }
 
@@ -31,13 +42,17 @@ function useShowcaseMessages(chatMessages: ChatMessage[]) {
 
   useEffect(() => {
     async function addMessagesWithDelay() {
-      for (const message of chatMessages) {
-        handleSendMessage(message);
-        await wait(message.delay);
-      }
+      try {
+        for (const message of chatMessages) {
+          handleSendMessage(message);
+          await wait(message.delay);
+        }
 
-      await wait(3000);
-      switchShowcase();
+        await wait(3000);
+        switchShowcase();
+      } catch (error) {
+        console.error("Error processing showcase messages:", error);
+      }
     }
 
     if (messages.length === 0) {
