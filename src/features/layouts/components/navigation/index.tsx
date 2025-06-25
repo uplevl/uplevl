@@ -1,11 +1,23 @@
 "use client";
 
-import { BotIcon, CircleGaugeIcon, CreditCardIcon, HeadsetIcon, WebhookIcon } from "lucide-react";
+import { BotIcon, CircleGaugeIcon, CreditCardIcon, FileTextIcon, HeadsetIcon, WebhookIcon } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import { AdminIcon } from "@/components/icons";
-import { SidebarGroup, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "@/components/ui/sidebar";
+import {
+  SidebarGroup,
+  SidebarGroupLabel,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+} from "@/components/ui/sidebar";
+
+interface RouteGroup {
+  key: string;
+  label: string | null;
+  routes: Route[];
+}
 
 interface Route {
   label: string;
@@ -27,24 +39,42 @@ export function Navigation() {
     },
   ];
 
-  const primaryRoutes: Route[] = [
+  const primaryRoutes: RouteGroup[] = [
     {
-      label: "Dashboard",
-      icon: CircleGaugeIcon,
-      href: "/dashboard",
-      active: pathname === "/dashboard",
+      key: "main-group",
+      label: null,
+      routes: [
+        {
+          label: "Dashboard",
+          icon: CircleGaugeIcon,
+          href: "/dashboard",
+          active: pathname === "/dashboard",
+        },
+        {
+          label: "Posts",
+          icon: FileTextIcon,
+          href: "/dashboard/posts",
+          active: pathname === "/dashboard/posts",
+        },
+      ],
     },
     {
-      label: "Agent",
-      icon: BotIcon,
-      href: "/dashboard/agent",
-      active: pathname === "/dashboard/agent",
-    },
-    {
-      label: "Integrations",
-      icon: WebhookIcon,
-      href: "/dashboard/integrations",
-      active: pathname === "/dashboard/integrations",
+      key: "system-group",
+      label: "System",
+      routes: [
+        {
+          label: "Agent",
+          icon: BotIcon,
+          href: "/dashboard/agent",
+          active: pathname === "/dashboard/agent",
+        },
+        {
+          label: "Integrations",
+          icon: WebhookIcon,
+          href: "/dashboard/integrations",
+          active: pathname === "/dashboard/integrations",
+        },
+      ],
     },
   ];
 
@@ -84,21 +114,25 @@ export function Navigation() {
 
   return (
     <>
-      <SidebarGroup>
-        <SidebarMenu>
-          {primaryRoutes.map((route) => (
-            <SidebarMenuItem key={route.href}>
-              <SidebarMenuButton asChild tooltip={route.label} isActive={route.active}>
-                <Link href={route.href}>
-                  <route.icon className="size-4" />
-                  <span className="font-manrope text-sm font-medium">{route.label}</span>
-                </Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-          ))}
-        </SidebarMenu>
-      </SidebarGroup>
+      {primaryRoutes.map((group) => (
+        <SidebarGroup key={group.key}>
+          {group.label && <SidebarGroupLabel>{group.label}</SidebarGroupLabel>}
+          <SidebarMenu>
+            {group.routes.map((route) => (
+              <SidebarMenuItem key={route.href}>
+                <SidebarMenuButton asChild tooltip={route.label} isActive={route.active}>
+                  <Link href={route.href}>
+                    <route.icon className="size-4" />
+                    <span className="font-manrope text-sm font-medium">{route.label}</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            ))}
+          </SidebarMenu>
+        </SidebarGroup>
+      ))}
       <SidebarGroup className="mt-auto">
+        <SidebarGroupLabel>Settings</SidebarGroupLabel>
         <SidebarMenu>
           {secondaryRoutes.map((route) => (
             <SidebarMenuItem key={route.href}>
