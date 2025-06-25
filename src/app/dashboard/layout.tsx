@@ -1,6 +1,6 @@
+import Image from "next/image";
 import Link from "next/link";
 
-import Logo from "@/components/logo";
 import {
   Sidebar,
   SidebarContent,
@@ -16,6 +16,7 @@ import {
 import SidebarUserButton from "@/features/auth/components/sidebar-user-button";
 import { Navigation } from "@/features/layouts/components/navigation";
 
+import logo from "@/assets/logo.svg";
 import { ToastProvider } from "@/providers/toast.provider";
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
@@ -28,7 +29,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
               <SidebarMenuItem className="flex items-center justify-start">
                 <SidebarMenuButton asChild size="lg">
                   <Link href="/dashboard" className="py-4">
-                    <Logo />
+                    <Image src={logo} alt="Uplevl Logo" className="max-h-8 w-auto" priority />
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
