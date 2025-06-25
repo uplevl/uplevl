@@ -1,1 +1,0 @@
-ALTER TABLE "offerings" DROP CONSTRAINT "offerings_id_unique" CASCADE;

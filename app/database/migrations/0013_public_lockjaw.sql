@@ -1,1 +1,0 @@
-ALTER TABLE "agents" ADD COLUMN "business_social_goals" text;

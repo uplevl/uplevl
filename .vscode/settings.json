@@ -6,7 +6,9 @@
   },
   "typescript.tsdk": "./node_modules/typescript/lib",
   "cSpell.words": [
+    "authtoken",
     "autoincrement",
+    "automations",
     "dbgenerated",
     "JPCM",
     "nextjs",

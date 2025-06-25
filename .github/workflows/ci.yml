@@ -33,8 +33,7 @@ jobs:
       - name: Remove NPM credentials
         uses: ./.github/actions/remove-npm-credentials
       - name: Copy env example
-        shell: bash
-        run: find . -type f -name ".env.example" -exec sh -c 'cp "$1" "${1%.*}"' _ {} \;
+        uses: ./.github/actions/copy-env-example
       - name: Type check
         run: bun run typecheck
 
@@ -57,7 +56,6 @@ jobs:
       - name: Remove NPM credentials
         uses: ./.github/actions/remove-npm-credentials
       - name: Copy env example
-        shell: bash
-        run: find . -type f -name ".env.example" -exec sh -c 'cp "$1" "${1%.*}"' _ {} \;
+        uses: ./.github/actions/copy-env-example
       - name: Lint
         run: bun run lint
