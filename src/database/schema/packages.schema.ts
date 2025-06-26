@@ -1,10 +1,6 @@
-import { relations } from "drizzle-orm";
 import { boolean, integer, pgTable, serial, smallint, timestamp, varchar } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { type z } from "zod";
-
-import { PackageFeatureTable } from "./packages-features.schema";
-import { UserTable } from "./users.schema";
 
 export const PackageTable = pgTable("packages", {
   // IDs
@@ -27,11 +23,6 @@ export const PackageTable = pgTable("packages", {
     .$onUpdate(() => new Date().toISOString()),
   deletedAt: timestamp("deleted_at", { mode: "string" }),
 });
-
-export const packageRelations = relations(PackageTable, ({ many }) => ({
-  features: many(PackageFeatureTable),
-  users: many(UserTable),
-}));
 
 export const PackageInsertSchema = createInsertSchema(PackageTable).omit({
   id: true,

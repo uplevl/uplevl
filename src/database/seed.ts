@@ -22,6 +22,8 @@ const tables = [
   schema.SessionTable,
   schema.SessionSummaryTable,
   schema.IntegrationTable,
+  schema.PostTable,
+  schema.PostMetaTable,
 ];
 
 console.log("Truncating tables");

@@ -1,10 +1,8 @@
-import { relations } from "drizzle-orm";
 import { index, pgEnum, pgTable, serial, timestamp, uuid, varchar } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { type z } from "zod";
 
 import { AgentTable } from "./agents.schema";
-import { SessionSummaryTable } from "./sessions-summaries";
 
 export const SESSION_SOURCES = {
   WEBSITE: "website",
@@ -59,16 +57,16 @@ export const SessionTable = pgTable(
   {
     // IDs
     id: serial("id").primaryKey(),
-    sessionId: varchar("session_id").notNull().unique(),
+    sessionId: varchar("session_id", { length: 128 }).notNull().unique(),
     agentId: uuid("agent_id").references(() => AgentTable.id),
     // Info
     source: sessionSource("source").notNull(),
     status: sessionStatus("status").notNull().default(SESSION_STATUSES.OPEN),
     intent: sessionIntent("intent"),
     // User info
-    userName: varchar("user_name"),
-    userEmail: varchar("user_email"),
-    userPhone: varchar("user_phone"),
+    userName: varchar("user_name", { length: 100 }),
+    userEmail: varchar("user_email", { length: 255 }),
+    userPhone: varchar("user_phone", { length: 100 }),
     // Timestamps
     createdAt: timestamp("created_at", { mode: "string" }).defaultNow().notNull(),
     updatedAt: timestamp("updated_at", { mode: "string" })
@@ -79,14 +77,6 @@ export const SessionTable = pgTable(
   },
   (table) => [index("sessions_agent_id_idx").on(table.agentId), index("sessions_deleted_at_idx").on(table.deletedAt)],
 );
-
-export const sessionRelations = relations(SessionTable, ({ one, many }) => ({
-  agent: one(AgentTable, {
-    fields: [SessionTable.agentId],
-    references: [AgentTable.id],
-  }),
-  sessionSummaries: many(SessionSummaryTable),
-}));
 
 export const SessionInsertSchema = createInsertSchema(SessionTable).omit({
   id: true,

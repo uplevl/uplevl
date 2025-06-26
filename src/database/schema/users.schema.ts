@@ -1,9 +1,7 @@
-import { relations } from "drizzle-orm";
 import { boolean, index, pgEnum, pgTable, serial, timestamp, varchar } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { type z } from "zod";
 
-import { AgentTable } from "./agents.schema";
 import { PackageTable } from "./packages.schema";
 
 export const USER_ROLES = {
@@ -24,10 +22,10 @@ export const UserTable = pgTable(
     stripeId: varchar("stripe_id", { length: 128 }).unique(),
     packageId: serial("package_id").references(() => PackageTable.id),
     // User data
-    email: varchar("email").notNull().unique(),
-    firstName: varchar("first_name"),
-    lastName: varchar("last_name"),
-    imageUrl: varchar("image_url").notNull().default(""),
+    email: varchar("email", { length: 255 }).notNull().unique(),
+    firstName: varchar("first_name", { length: 100 }),
+    lastName: varchar("last_name", { length: 100 }),
+    imageUrl: varchar("image_url", { length: 500 }).notNull().default(""),
     role: userRolesEnum("role").notNull().default(USER_ROLES.USER),
     // Flags
     isActive: boolean("is_active").notNull().default(true),
@@ -41,17 +39,6 @@ export const UserTable = pgTable(
   },
   (table) => [index("users_deleted_at_idx").on(table.deletedAt), index("users_is_active_idx").on(table.isActive)],
 );
-
-export const userRelations = relations(UserTable, ({ one }) => ({
-  package: one(PackageTable, {
-    fields: [UserTable.packageId],
-    references: [PackageTable.id],
-  }),
-  agent: one(AgentTable, {
-    fields: [UserTable.id],
-    references: [AgentTable.userId],
-  }),
-}));
 
 export const UserInsertSchema = createInsertSchema(UserTable);
 
