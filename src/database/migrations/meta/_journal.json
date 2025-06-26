@@ -22,6 +22,13 @@
       "when": 1750926403960,
       "tag": "0002_shiny_hydra",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1750928421248,
+      "tag": "0003_ancient_siren",
+      "breakpoints": true
     }
   ]
 }

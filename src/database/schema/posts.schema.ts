@@ -41,7 +41,7 @@ export const PostTable = pgTable(
     agentId: uuid("agent_id")
       .references(() => AgentTable.id, { onDelete: "cascade" })
       .notNull(),
-    userId: varchar("user_id")
+    userId: varchar("user_id", { length: 128 })
       .references(() => UserTable.id, { onDelete: "cascade" })
       .notNull(),
     // Data
