@@ -62,9 +62,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       >
         <body className="bg-background text-foreground flex min-h-screen min-w-screen flex-col font-sans">
           {children}
+          <SpeedInsights />
         </body>
       </html>
-      <SpeedInsights />
     </ClerkProvider>
   );
 }
