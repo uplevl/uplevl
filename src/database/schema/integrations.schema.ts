@@ -23,7 +23,7 @@ export const IntegrationTable = pgTable(
   {
     // Ids
     id: serial("id").primaryKey(),
-    userId: varchar("user_id")
+    userId: varchar("user_id", { length: 128 })
       .references(() => UserTable.id, { onDelete: "cascade" })
       .notNull(),
     agentId: uuid("agent_id")

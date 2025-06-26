@@ -13,13 +13,13 @@ export const AgentTable = pgTable(
   {
     // IDs
     id: uuid("id").primaryKey().defaultRandom(),
-    userId: varchar("user_id")
+    userId: varchar("user_id", { length: 128 })
       .references(() => UserTable.id, { onDelete: "cascade" })
       .notNull(),
     // Business data
-    businessName: varchar("business_name"),
+    businessName: varchar("business_name", { length: 200 }),
     businessDescription: text("business_description"),
-    businessUrl: varchar("business_url"),
+    businessUrl: varchar("business_url", { length: 2083 }),
     businessSocialGoals: text("business_social_goals"),
     businessContext: text("business_context"),
     // Flags

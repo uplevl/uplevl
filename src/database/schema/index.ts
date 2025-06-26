@@ -87,3 +87,27 @@ export {
   type PackageFeatureInsert,
   type PackageFeatureUpdate,
 } from "./packages-features.schema";
+export {
+  PostTable,
+  postRelations,
+  postStatusEnum,
+  POST_STATUSES,
+  postReviewStatusEnum,
+  POST_REVIEW_STATUSES,
+  PostInsertSchema,
+  PostUpdateSchema,
+  type PostStatus,
+  type PostReviewStatus,
+  type Post,
+  type PostInsert,
+  type PostUpdate,
+} from "./posts.schema";
+export {
+  PostMetaTable,
+  postMetaRelations,
+  PostMetaInsertSchema,
+  PostMetaUpdateSchema,
+  type PostMeta,
+  type PostMetaInsert,
+  type PostMetaUpdate,
+} from "./post-meta.schema";

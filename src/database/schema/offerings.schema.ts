@@ -1,5 +1,5 @@
 import { relations } from "drizzle-orm";
-import { index, pgTable, serial, smallint, text, timestamp, uuid } from "drizzle-orm/pg-core";
+import { index, pgTable, serial, smallint, text, timestamp, uuid, varchar } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { type z } from "zod";
 
@@ -16,9 +16,9 @@ export const OfferingTable = pgTable(
       .references(() => AgentTable.id, { onDelete: "cascade", onUpdate: "cascade" })
       .notNull(),
     // Offerings
-    title: text("title").notNull(),
+    title: varchar("title", { length: 200 }).notNull(),
     description: text("description").notNull(),
-    category: text("category"),
+    category: varchar("category", { length: 128 }),
     sortOrder: smallint("sort_order").notNull().default(0),
     // Timestamps
     createdAt: timestamp("created_at", { mode: "string" }).defaultNow().notNull(),

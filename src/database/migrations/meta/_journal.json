@@ -15,6 +15,13 @@
       "when": 1750709852485,
       "tag": "0001_misty_pandemic",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1750926403960,
+      "tag": "0002_shiny_hydra",
+      "breakpoints": true
     }
   ]
 }

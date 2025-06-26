@@ -15,11 +15,11 @@ export const PackageFeatureTable = pgTable(
       .references(() => PackageTable.id, { onDelete: "cascade" })
       .notNull(),
     // Data
-    title: varchar("title").notNull(),
-    description: varchar("description").notNull(),
-    icon: varchar("icon").notNull(),
+    title: varchar("title", { length: 200 }).notNull(),
+    description: varchar("description", { length: 255 }).notNull(),
+    icon: varchar("icon", { length: 200 }).notNull(),
     sortOrder: smallint("sort_order").notNull().default(0),
-    flagKey: varchar("flag_key").notNull(),
+    flagKey: varchar("flag_key", { length: 100 }).notNull(),
     // Flags
     separatorAfter: boolean("separator_after").notNull().default(false),
     isHighlighted: boolean("is_highlighted").notNull().default(false),

@@ -24,10 +24,10 @@ export const UserTable = pgTable(
     stripeId: varchar("stripe_id", { length: 128 }).unique(),
     packageId: serial("package_id").references(() => PackageTable.id),
     // User data
-    email: varchar("email").notNull().unique(),
-    firstName: varchar("first_name"),
-    lastName: varchar("last_name"),
-    imageUrl: varchar("image_url").notNull().default(""),
+    email: varchar("email", { length: 255 }).notNull().unique(),
+    firstName: varchar("first_name", { length: 100 }),
+    lastName: varchar("last_name", { length: 100 }),
+    imageUrl: varchar("image_url", { length: 500 }).notNull().default(""),
     role: userRolesEnum("role").notNull().default(USER_ROLES.USER),
     // Flags
     isActive: boolean("is_active").notNull().default(true),

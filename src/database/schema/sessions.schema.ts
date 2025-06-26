@@ -59,16 +59,16 @@ export const SessionTable = pgTable(
   {
     // IDs
     id: serial("id").primaryKey(),
-    sessionId: varchar("session_id").notNull().unique(),
+    sessionId: varchar("session_id", { length: 128 }).notNull().unique(),
     agentId: uuid("agent_id").references(() => AgentTable.id),
     // Info
     source: sessionSource("source").notNull(),
     status: sessionStatus("status").notNull().default(SESSION_STATUSES.OPEN),
     intent: sessionIntent("intent"),
     // User info
-    userName: varchar("user_name"),
-    userEmail: varchar("user_email"),
-    userPhone: varchar("user_phone"),
+    userName: varchar("user_name", { length: 100 }),
+    userEmail: varchar("user_email", { length: 255 }),
+    userPhone: varchar("user_phone", { length: 100 }),
     // Timestamps
     createdAt: timestamp("created_at", { mode: "string" }).defaultNow().notNull(),
     updatedAt: timestamp("updated_at", { mode: "string" })
