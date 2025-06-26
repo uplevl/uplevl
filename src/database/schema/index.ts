@@ -92,14 +92,6 @@ export {
   type PostInsert,
   type PostUpdate,
 } from "./posts.schema";
-export {
-  PostMetaTable,
-  PostMetaInsertSchema,
-  PostMetaUpdateSchema,
-  type PostMeta,
-  type PostMetaInsert,
-  type PostMetaUpdate,
-} from "./post-meta.schema";
 
 // Relations
 
@@ -114,5 +106,4 @@ export {
   packageRelations,
   packageFeatureRelations,
   postRelations,
-  postMetaRelations,
 } from "./relations";

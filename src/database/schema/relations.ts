@@ -6,7 +6,6 @@ import { OfferingPriceTable } from "./offerings-prices.schema";
 import { OfferingTable } from "./offerings.schema";
 import { PackageFeatureTable } from "./packages-features.schema";
 import { PackageTable } from "./packages.schema";
-import { PostMetaTable } from "./post-meta.schema";
 import { PostTable } from "./posts.schema";
 import { SessionSummaryTable } from "./sessions-summaries";
 import { SessionTable } from "./sessions.schema";
@@ -61,7 +60,7 @@ export const packageFeatureRelations = relations(PackageFeatureTable, ({ one }) 
   }),
 }));
 
-export const postRelations = relations(PostTable, ({ one, many }) => ({
+export const postRelations = relations(PostTable, ({ one }) => ({
   agent: one(AgentTable, {
     fields: [PostTable.agentId],
     references: [AgentTable.id],
@@ -69,14 +68,6 @@ export const postRelations = relations(PostTable, ({ one, many }) => ({
   user: one(UserTable, {
     fields: [PostTable.userId],
     references: [UserTable.id],
-  }),
-  meta: many(PostMetaTable),
-}));
-
-export const postMetaRelations = relations(PostMetaTable, ({ one }) => ({
-  post: one(PostTable, {
-    fields: [PostMetaTable.postId],
-    references: [PostTable.id],
   }),
 }));
 

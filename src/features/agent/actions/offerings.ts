@@ -101,7 +101,7 @@ export async function updateOffering(
 }
 
 export async function deleteOffering(agentId: string, offeringId: number) {
-  await db.delete(OfferingTable).where(eq(OfferingTable.id, offeringId));
+  await db.update(OfferingTable).set({ deletedAt: new Date().toISOString() }).where(eq(OfferingTable.id, offeringId));
 
   revalidatePath("/dashboard/agent");
 }

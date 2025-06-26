@@ -13,14 +13,15 @@ import {
 
 export async function getIntegrationsByUserId(userId: string) {
   return db.query.IntegrationTable.findMany({
-    where: (IntegrationTable, { eq }) => eq(IntegrationTable.userId, userId),
+    where: (IntegrationTable, { eq, and, isNull }) =>
+      and(eq(IntegrationTable.userId, userId), isNull(IntegrationTable.deletedAt)),
   });
 }
 
 export async function getIntegrationByUserIdAndStrategy(userId: string, strategy: IntegrationStrategy) {
   return db.query.IntegrationTable.findFirst({
-    where: (IntegrationTable, { eq, and }) =>
-      and(eq(IntegrationTable.userId, userId), eq(IntegrationTable.name, strategy)),
+    where: (IntegrationTable, { eq, and, isNull }) =>
+      and(eq(IntegrationTable.userId, userId), eq(IntegrationTable.name, strategy), isNull(IntegrationTable.deletedAt)),
   });
 }
 
@@ -34,6 +35,6 @@ export async function updateIntegration(id: number, data: IntegrationUpdate) {
 }
 
 export async function deleteIntegration(id: number) {
-  await db.delete(IntegrationTable).where(eq(IntegrationTable.id, id));
+  await db.update(IntegrationTable).set({ deletedAt: new Date().toISOString() }).where(eq(IntegrationTable.id, id));
   revalidatePath("/dashboard/integrations");
 }

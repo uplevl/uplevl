@@ -1,5 +1,8 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@import "uploadthing/tw/v4";
+
+@source "../node_modules/@uploadthing/react/dist";
 
 :root {
   --background: oklch(97.5% 0 0);
@@ -14,9 +17,9 @@
   --primary-light: oklch(0.91 0.1653 84.429);
   --primary-lighter: oklch(0.99 0.0337 84.429);
   --primary-foreground: oklch(26.9% 0 0);
-  --secondary: oklch(51.1% 0.262 276.966);
-  --secondary-dark: oklch(0.35 0.262 276.966);
-  --secondary-foreground: oklch(0.205 0 0);
+  --secondary: var(--color-neutral-300);
+  --secondary-dark: var(--color-neutral-500);
+  --secondary-foreground: var(--color-neutral-800);
   --muted: oklch(0.97 0 0);
   --muted-foreground: oklch(0.556 0 0);
   --accent: oklch(0.94 0 0);

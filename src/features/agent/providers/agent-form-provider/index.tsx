@@ -1,33 +1,59 @@
-import { RedirectToSignIn } from "@clerk/nextjs";
-import { Suspense } from "react";
+"use client";
 
-import { PageLoading } from "@/components/page-loading";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
+import { type z } from "zod";
 
-import { getAgentByClerkId } from "@/features/agent/actions/agent";
-import { getCurrentUser } from "@/features/auth/actions/user";
+import { AgentUpdateSchema } from "@/database/schema";
 
-import { AgentProvider } from "../agent-provider";
-import AgentFormProviderClient from "./agent-form-provider-client";
+import FormActions from "@/components/form-actions";
+import { Form } from "@/components/ui/form";
 
-export default function AgentFormProvider({ children }: { children: React.ReactNode }) {
-  return (
-    <Suspense fallback={<PageLoading />}>
-      <SuspendedAgentFormProvider>{children}</SuspendedAgentFormProvider>
-    </Suspense>
-  );
+import { updateAgent } from "../../actions/agent";
+import { useAgent } from "../agent-provider";
+
+const FormSchema = AgentUpdateSchema.omit({
+  isActive: true,
+  userId: true,
+});
+
+export type FormValues = z.infer<typeof FormSchema>;
+
+interface AgentFormProviderProps {
+  children: React.ReactNode;
 }
 
-async function SuspendedAgentFormProvider({ children }: { children: React.ReactNode }) {
-  const { userId } = await getCurrentUser();
-  if (!userId) return <RedirectToSignIn />;
+export function AgentFormProvider({ children }: AgentFormProviderProps) {
+  const agent = useAgent();
 
-  const agent = await getAgentByClerkId(userId);
-  // TODO: Handle non existing agent (redirect to onboarding)
-  if (!agent) return null;
+  const form = useForm<FormValues>({
+    resolver: zodResolver(FormSchema),
+    defaultValues: {
+      businessName: agent.businessName,
+      businessDescription: agent.businessDescription,
+      businessSocialGoals: agent.businessSocialGoals,
+      businessContext: agent.businessContext,
+      businessUrl: agent.businessUrl,
+    },
+  });
+
+  async function handleSubmit(data: FormValues) {
+    try {
+      await updateAgent(agent.id, data);
+      toast.success("Agent updated successfully");
+    } catch (error) {
+      console.error(error);
+      toast.error("Failed to update agent");
+    }
+  }
 
   return (
-    <AgentProvider agent={agent}>
-      <AgentFormProviderClient>{children}</AgentFormProviderClient>
-    </AgentProvider>
+    <Form {...form}>
+      <form>
+        {children}
+        <FormActions onSubmit={handleSubmit} />
+      </form>
+    </Form>
   );
 }
