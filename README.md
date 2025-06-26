@@ -1,6 +1,6 @@
 <p align="center">
    <a href="https://uplevl.ai?utem_source=github" target="_blank" rel="noopener noreferrer">
-      <img src="https://raw.githubusercontent.com/uplevl/uplevl/refs/heads/main/dashboard/assets/logo.svg" alt="Uplevl Logo" height="46">
+      <img src="https://raw.githubusercontent.com/uplevl/uplevl/refs/heads/main/src/assets/logo.svg" alt="Uplevl Logo" height="46">
    </a>
 </p>
 <div align="center">
@@ -26,7 +26,7 @@ Ultimately, Uplevl oversees the entire marketing journey, from the initial conte
 ## 🚀 How It Works
 
 1. **📱 Content Upload**  
-   Business owners upload images and descriptions via Uplevl’s uploader. Files are securely handled via UploadThing.
+   Business owners upload images and descriptions via Uplevl's uploader. Files are securely handled via UploadThing.
 
 2. **🤖 AI Post Generation**  
    Uplevl converts uploads into branded, engaging social media posts and schedules them across platforms using a drip campaign model.
@@ -35,7 +35,7 @@ Ultimately, Uplevl oversees the entire marketing journey, from the initial conte
    The platform monitors comments and direct messages (DMs) on platforms like Instagram, automatically replying to increase engagement and drive interest.
 
 4. **🌐 Website Handoff**  
-   Engaged users are directed to the business’s website, where an embedded AI assistant interacts with them, handles bookings, and promotes offers.
+   Engaged users are directed to the business's website, where an embedded AI assistant interacts with them, handles bookings, and promotes offers.
 
 5. **📊 Tracking & Analytics**  
    Uplevl tracks all touchpoints and outcomes, giving business owners clear insights into engagement and performance.
@@ -56,8 +56,7 @@ Uplevl is ideal for service-based small business owners — such as med spas, ba
 
 ## 🧑‍💻 Tech Stack
 
-- **Backend**: Bun + Hono
-- **Frontend Dashboard**: Vite + React
+- **Full-Stack Framework**: Next.js 15
 - **Authentication**: Clerk
 - **Database**: Neon with Drizzle ORM
 - **AI Integration**: OpenAI (LLM-based)
