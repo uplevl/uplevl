@@ -1,11 +1,7 @@
-import { relations } from "drizzle-orm";
 import { boolean, index, pgTable, text, timestamp, uuid, varchar } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { type z } from "zod";
 
-import { IntegrationTable } from "./integrations.schema";
-import { OfferingTable } from "./offerings.schema";
-import { SessionTable } from "./sessions.schema";
 import { UserTable } from "./users.schema";
 
 export const AgentTable = pgTable(
@@ -38,16 +34,6 @@ export const AgentTable = pgTable(
     index("agents_is_active_idx").on(table.isActive),
   ],
 );
-
-export const agentRelations = relations(AgentTable, ({ one, many }) => ({
-  user: one(UserTable, {
-    fields: [AgentTable.userId],
-    references: [UserTable.id],
-  }),
-  offerings: many(OfferingTable),
-  integrations: many(IntegrationTable),
-  sessions: many(SessionTable),
-}));
 
 export const AgentInsertSchema = createInsertSchema(AgentTable).omit({
   id: true,

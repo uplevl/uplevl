@@ -1,4 +1,3 @@
-import { relations } from "drizzle-orm";
 import { index, pgTable, serial, text, timestamp, uuid, varchar } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { type z } from "zod";
@@ -31,13 +30,6 @@ export const PostMetaTable = pgTable(
     index("post_meta_key_idx").on(table.key),
   ],
 );
-
-export const postMetaRelations = relations(PostMetaTable, ({ one }) => ({
-  post: one(PostTable, {
-    fields: [PostMetaTable.postId],
-    references: [PostTable.id],
-  }),
-}));
 
 export const PostMetaInsertSchema = createInsertSchema(PostMetaTable).omit({
   id: true,

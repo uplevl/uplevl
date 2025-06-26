@@ -1,4 +1,3 @@
-import { relations } from "drizzle-orm";
 import { integer, pgTable, serial, timestamp, varchar } from "drizzle-orm/pg-core";
 import { createInsertSchema, createUpdateSchema } from "drizzle-zod";
 import { type z } from "zod";
@@ -24,13 +23,6 @@ export const OfferingPriceTable = pgTable("offerings_prices", {
     .$onUpdate(() => new Date().toISOString()),
   deletedAt: timestamp("deleted_at", { mode: "string" }),
 });
-
-export const offeringPriceRelations = relations(OfferingPriceTable, ({ one }) => ({
-  offering: one(OfferingTable, {
-    fields: [OfferingPriceTable.offeringId],
-    references: [OfferingTable.id],
-  }),
-}));
 
 export const OfferingPriceInsertSchema = createInsertSchema(OfferingPriceTable).omit({
   id: true,

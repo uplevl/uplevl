@@ -1,4 +1,3 @@
-import { relations } from "drizzle-orm";
 import { index, pgEnum, pgTable, serial, timestamp, uuid, varchar } from "drizzle-orm/pg-core";
 import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 import { type z } from "zod";
@@ -49,17 +48,6 @@ export const IntegrationTable = pgTable(
     index("integrations_deleted_at_idx").on(table.deletedAt),
   ],
 );
-
-export const integrationRelations = relations(IntegrationTable, ({ one }) => ({
-  agent: one(AgentTable, {
-    fields: [IntegrationTable.agentId],
-    references: [AgentTable.id],
-  }),
-  user: one(UserTable, {
-    fields: [IntegrationTable.userId],
-    references: [UserTable.id],
-  }),
-}));
 
 export const IntegrationSelectSchema = createSelectSchema(IntegrationTable).omit({
   createdAt: true,

@@ -1,10 +1,8 @@
-import { relations } from "drizzle-orm";
 import { index, pgEnum, pgTable, text, timestamp, uuid, varchar } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { type z } from "zod";
 
 import { AgentTable } from "./agents.schema";
-import { PostMetaTable } from "./post-meta.schema";
 import { UserTable } from "./users.schema";
 
 export const POST_STATUSES = {
@@ -67,18 +65,6 @@ export const PostTable = pgTable(
     index("posts_review_status_idx").on(table.reviewStatus),
   ],
 );
-
-export const postRelations = relations(PostTable, ({ one, many }) => ({
-  agent: one(AgentTable, {
-    fields: [PostTable.agentId],
-    references: [AgentTable.id],
-  }),
-  user: one(UserTable, {
-    fields: [PostTable.userId],
-    references: [UserTable.id],
-  }),
-  meta: many(PostMetaTable),
-}));
 
 export const PostInsertSchema = createInsertSchema(PostTable).omit({
   id: true,

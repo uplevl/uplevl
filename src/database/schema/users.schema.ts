@@ -1,9 +1,7 @@
-import { relations } from "drizzle-orm";
 import { boolean, index, pgEnum, pgTable, serial, timestamp, varchar } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { type z } from "zod";
 
-import { AgentTable } from "./agents.schema";
 import { PackageTable } from "./packages.schema";
 
 export const USER_ROLES = {
@@ -41,17 +39,6 @@ export const UserTable = pgTable(
   },
   (table) => [index("users_deleted_at_idx").on(table.deletedAt), index("users_is_active_idx").on(table.isActive)],
 );
-
-export const userRelations = relations(UserTable, ({ one }) => ({
-  package: one(PackageTable, {
-    fields: [UserTable.packageId],
-    references: [PackageTable.id],
-  }),
-  agent: one(AgentTable, {
-    fields: [UserTable.id],
-    references: [AgentTable.userId],
-  }),
-}));
 
 export const UserInsertSchema = createInsertSchema(UserTable);
 

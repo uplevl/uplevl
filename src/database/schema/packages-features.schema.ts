@@ -1,4 +1,3 @@
-import { relations } from "drizzle-orm";
 import { boolean, index, integer, pgTable, serial, smallint, timestamp, varchar } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { type z } from "zod";
@@ -36,13 +35,6 @@ export const PackageFeatureTable = pgTable(
     index("packages_features_sort_order_idx").on(table.sortOrder),
   ],
 );
-
-export const packageFeatureRelations = relations(PackageFeatureTable, ({ one }) => ({
-  package: one(PackageTable, {
-    fields: [PackageFeatureTable.packageId],
-    references: [PackageTable.id],
-  }),
-}));
 
 export const PackageFeatureInsertSchema = createInsertSchema(PackageFeatureTable).omit({
   id: true,

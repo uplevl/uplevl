@@ -1,10 +1,8 @@
-import { relations } from "drizzle-orm";
 import { index, pgTable, serial, smallint, text, timestamp, uuid, varchar } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { type z } from "zod";
 
 import { AgentTable } from "./agents.schema";
-import { OfferingPriceTable } from "./offerings-prices.schema";
 
 export const OfferingTable = pgTable(
   "offerings",
@@ -30,14 +28,6 @@ export const OfferingTable = pgTable(
   },
   (table) => [index("offerings_deleted_at_idx").on(table.deletedAt), index("offerings_agent_id_idx").on(table.agentId)],
 );
-
-export const offeringRelations = relations(OfferingTable, ({ one, many }) => ({
-  agent: one(AgentTable, {
-    fields: [OfferingTable.agentId],
-    references: [AgentTable.id],
-  }),
-  prices: many(OfferingPriceTable),
-}));
 
 export const OfferingInsertSchema = createInsertSchema(OfferingTable).omit({
   id: true,

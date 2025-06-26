@@ -1,6 +1,5 @@
 export {
   UserTable,
-  userRelations,
   USER_ROLES,
   type UserRole,
   userRolesEnum,
@@ -11,7 +10,6 @@ export {
 } from "./users.schema";
 export {
   AgentTable,
-  agentRelations,
   AgentInsertSchema,
   AgentUpdateSchema,
   type Agent,
@@ -20,7 +18,6 @@ export {
 } from "./agents.schema";
 export {
   OfferingTable,
-  offeringRelations,
   OfferingInsertSchema,
   OfferingUpdateSchema,
   type OfferingInsert,
@@ -28,7 +25,6 @@ export {
 } from "./offerings.schema";
 export {
   OfferingPriceTable,
-  offeringPriceRelations,
   OfferingPriceInsertSchema,
   OfferingPriceUpdateSchema,
   type OfferingPriceInsert,
@@ -39,7 +35,6 @@ export {
   INTEGRATION_STRATEGIES,
   type IntegrationStrategy,
   integrationName,
-  integrationRelations,
   IntegrationInsertSchema,
   IntegrationUpdateSchema,
   type Integration,
@@ -48,7 +43,6 @@ export {
 } from "./integrations.schema";
 export {
   SessionTable,
-  sessionRelations,
   SESSION_SOURCES,
   type SessionSource,
   sessionSource,
@@ -65,7 +59,6 @@ export {
 } from "./sessions.schema";
 export {
   SessionSummaryTable,
-  sessionSummaryRelations,
   SessionSummaryInsertSchema,
   SessionSummaryUpdateSchema,
   type SessionSummaryInsert,
@@ -73,7 +66,6 @@ export {
 } from "./sessions-summaries";
 export {
   PackageTable,
-  packageRelations,
   PackageInsertSchema,
   PackageUpdateSchema,
   type PackageInsert,
@@ -81,7 +73,6 @@ export {
 } from "./packages.schema";
 export {
   PackageFeatureTable,
-  packageFeatureRelations,
   PackageFeatureInsertSchema,
   PackageFeatureUpdateSchema,
   type PackageFeatureInsert,
@@ -89,7 +80,6 @@ export {
 } from "./packages-features.schema";
 export {
   PostTable,
-  postRelations,
   postStatusEnum,
   POST_STATUSES,
   postReviewStatusEnum,
@@ -104,10 +94,25 @@ export {
 } from "./posts.schema";
 export {
   PostMetaTable,
-  postMetaRelations,
   PostMetaInsertSchema,
   PostMetaUpdateSchema,
   type PostMeta,
   type PostMetaInsert,
   type PostMetaUpdate,
 } from "./post-meta.schema";
+
+// Relations
+
+export {
+  userRelations,
+  agentRelations,
+  integrationRelations,
+  offeringRelations,
+  offeringPriceRelations,
+  sessionRelations,
+  sessionSummaryRelations,
+  packageRelations,
+  packageFeatureRelations,
+  postRelations,
+  postMetaRelations,
+} from "./relations";
