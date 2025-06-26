@@ -79,7 +79,7 @@ interface SystemPromptProps {
   businessSocialGoals: string | null;
 }
 
-export function getSystemPrompt(props: SystemPromptProps) {
+function getSystemPrompt(props: SystemPromptProps) {
   const { type, businessName, businessDescription, businessContext, businessSocialGoals } = props;
 
   const name = businessName ?? "a business";
