@@ -5,11 +5,8 @@
   "type": "module",
   "scripts": {
     "ngrok": "bun scripts/ngrok.ts",
-    "dev:app": "bun run --watch index.ts",
-    "dev:dashboard": "vite",
-    "dev": "next dev --turbopack",
-    "build:dashboard": "tsc -b && NODE_ENV=production vite build",
-    "start": "NODE_ENV=production bun index.ts",
+    "dev": "NODE_ENV=development next dev --turbopack",
+    "build": "NODE_ENV=production next build",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "lint:staged": "lint-staged -q",
