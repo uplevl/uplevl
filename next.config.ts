@@ -15,7 +15,6 @@ const nextConfig: NextConfig = {
   },
   experimental: {
     reactCompiler: true,
-    dynamicIO: true,
   },
   allowedDevOrigins: ["dev.uplevl.ai"],
   devIndicators: false,
