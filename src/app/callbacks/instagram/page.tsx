@@ -4,8 +4,6 @@ import { INTEGRATION_STRATEGIES } from "@/database/schema";
 
 import { addNewIntegration } from "@/features/integrations/actions/social-accounts";
 
-export const dynamic = "force-dynamic";
-
 interface InstagramCallbackProps {
   searchParams: Promise<{
     code: string;
