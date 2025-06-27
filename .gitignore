@@ -26,6 +26,5 @@ dist-ssr
 # Project
 .env*
 !.env.example
-.npmrc
 _old-app/
 .next/
