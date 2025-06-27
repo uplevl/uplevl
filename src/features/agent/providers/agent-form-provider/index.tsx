@@ -50,7 +50,7 @@ export function AgentFormProvider({ children }: AgentFormProviderProps) {
 
   return (
     <Form {...form}>
-      <form>
+      <form onSubmit={form.handleSubmit(handleSubmit)}>
         {children}
         <FormActions onSubmit={handleSubmit} />
       </form>
