@@ -19,8 +19,6 @@ export async function getPostById(postId: string) {
   });
 }
 
-export type PostWithMeta = NonNullable<Awaited<ReturnType<typeof getPostById>>>;
-
 export async function insertPost(post: PostInsert) {
   await db.insert(PostTable).values(post);
   revalidatePath("/dashboard/posts");
