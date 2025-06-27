@@ -2,7 +2,7 @@ import { FormPanel } from "@/components/form-panel";
 import { Page, PageHeader } from "@/components/page";
 import { PageLoading } from "@/components/page-loading";
 
-export default function InteractionsLoading() {
+export default function IntegrationsLoading() {
   return (
     <Page>
       <PageHeader title="Integrations" description="Here you handle your social media connections." />
