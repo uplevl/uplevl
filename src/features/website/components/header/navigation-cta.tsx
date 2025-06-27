@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 
 import { SignedIn, SignedOut } from "@/features/auth/components/sign-in-status";
 
-import { NavigationItem } from "./navigation-item";
+// import { NavigationItem } from "./navigation-item";
 
 export default function NavigationCta() {
   // const dashboardAccessEnabled = useFeatureFlag("dashboard-access");
@@ -27,7 +27,7 @@ export default function NavigationCta() {
         </Button>
       </SignedIn>
       <SignedOut>
-        <NavigationItem href="/sign-in">Sign In</NavigationItem>
+        {/* <NavigationItem href="/sign-in">Sign In</NavigationItem> */}
         <Button asChild>
           <Link href="/sign-up">
             <span>Get Started</span>
