@@ -8,13 +8,14 @@ const nextConfig: NextConfig = {
   images: {
     ...(isProd ? { formats: ["image/webp", "image/avif"] } : {}),
     remotePatterns: [
-      // {
-      //   hostname: "mecthiofcovlcuwhtpsb.supabase.co",
-      // },
+      {
+        hostname: "picsum.photos",
+      },
     ],
   },
   experimental: {
     reactCompiler: true,
+    dynamicIO: true,
   },
   allowedDevOrigins: ["dev.uplevl.ai"],
   devIndicators: false,

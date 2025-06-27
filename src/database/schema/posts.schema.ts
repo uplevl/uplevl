@@ -46,6 +46,7 @@ export const PostTable = pgTable(
       .notNull(),
     // Data
     content: text("content").notNull(),
+    imageUrl: varchar("image_url", { length: 255 }).notNull(),
     status: postStatusEnum("status").notNull().default(POST_STATUSES.DRAFT),
     reviewStatus: postReviewStatusEnum("review_status").notNull().default(POST_REVIEW_STATUSES.PENDING),
     reviewedBy: varchar("reviewed_by", { length: 128 }),

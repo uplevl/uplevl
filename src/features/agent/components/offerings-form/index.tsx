@@ -10,7 +10,7 @@ import { useAgent } from "../../providers/agent-provider";
 import OfferingsProvider from "../../providers/offerings-provider";
 import { OfferingsMenu } from "./offerings-menu";
 
-export default function OfferingsForm() {
+export function OfferingsForm() {
   const agent = useAgent();
 
   return (

@@ -18,7 +18,7 @@ export async function addNewIntegration(strategy: IntegrationStrategy, code: str
     }
 
     const agent = await db.query.AgentTable.findFirst({
-      where: (AgentTable, { eq }) => eq(AgentTable.userId, userId),
+      where: (AgentTable, { eq, and, isNull }) => and(eq(AgentTable.userId, userId), isNull(AgentTable.deletedAt)),
       columns: {
         id: true,
       },

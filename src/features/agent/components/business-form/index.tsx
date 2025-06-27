@@ -7,7 +7,7 @@ import { FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/for
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 
-import type { FormValues } from "@/features/agent/providers/agent-form-provider/agent-form-provider-client";
+import type { FormValues } from "@/features/agent/providers/agent-form-provider";
 
 export function BusinessForm() {
   const form = useFormContext<FormValues>();

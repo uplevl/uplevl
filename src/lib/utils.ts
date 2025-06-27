@@ -23,20 +23,18 @@ export function wait(ms: number) {
  * Formats the current date and time to a human-readable string.
  * @returns A string representing the current date and time in the format "long weekday, month day, year, hour:minute:second AM/PM".
  */
-export function getFormattedDateTime() {
+export function getFormattedDateTime(date?: Date, { omitTime = false }: { omitTime?: boolean } = {}) {
   const options: Intl.DateTimeFormatOptions = {
     weekday: "long",
     year: "numeric",
     month: "long",
     day: "numeric",
-    hour: "2-digit",
-    minute: "2-digit",
-    second: "2-digit",
-    hour12: true, // Adjusts to 12-hour format with AM/PM
+    ...(!omitTime ? { hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: true } : {}),
   };
 
-  const now: Date = new Date();
-  return now.toLocaleString("en-US", options);
+  const formattableDate = date ?? new Date();
+
+  return formattableDate.toLocaleString("en-US", options);
 }
 
 /**
