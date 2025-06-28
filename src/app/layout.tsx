@@ -4,7 +4,6 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { ClerkProvider } from "@/providers/clerk.provider";
 import { PosthogIdentifyProvider } from "@/providers/posthog-identify.provider";
 
-import { PHProvider } from "../providers/posthog.provider";
 import "./styles.css";
 
 const geist = Geist({ subsets: ["latin"], variable: "--font-geist" });
@@ -56,18 +55,16 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <ClerkProvider>
-      <PHProvider>
-        <PosthogIdentifyProvider />
-        <html
-          lang="en"
-          className={`${geist.variable} ${geistMono.variable} bg-background antialiased`}
-          suppressHydrationWarning
-        >
-          <body className="bg-background text-foreground flex min-h-screen min-w-screen flex-col font-sans">
-            {children}
-          </body>
-        </html>
-      </PHProvider>
+      <html
+        lang="en"
+        className={`${geist.variable} ${geistMono.variable} bg-background antialiased`}
+        suppressHydrationWarning
+      >
+        <body className="bg-background text-foreground flex min-h-screen min-w-screen flex-col font-sans">
+          <PosthogIdentifyProvider />
+          {children}
+        </body>
+      </html>
     </ClerkProvider>
   );
 }
