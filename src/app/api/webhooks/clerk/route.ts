@@ -6,6 +6,7 @@ import { type NextRequest } from "next/server";
 import { type UserInsert, type UserUpdate } from "@/database/schema";
 
 import { env } from "@/lib/env/server";
+import { posthogClient } from "@/lib/posthog";
 
 import { deleteUser, insertUser, updateUser } from "@/features/auth/actions/user";
 
@@ -33,6 +34,16 @@ async function handleUserCreated(data: UserJSON): Promise<WebhookResponse> {
     };
 
     await insertUser(userData);
+    posthogClient.capture({
+      distinctId: id,
+      event: "user_signed_up",
+      properties: {
+        email,
+        firstName: first_name,
+        lastName: last_name,
+        role: "user",
+      },
+    });
 
     return { status: 200, message: "User created successfully" };
   } catch (error) {

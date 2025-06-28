@@ -1,8 +1,8 @@
-import { SpeedInsights } from "@vercel/speed-insights/next";
 import { type Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 
 import { ClerkProvider } from "@/providers/clerk.provider";
+import { PosthogIdentifyProvider } from "@/providers/posthog-identify.provider";
 
 import "./styles.css";
 
@@ -61,8 +61,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         suppressHydrationWarning
       >
         <body className="bg-background text-foreground flex min-h-screen min-w-screen flex-col font-sans">
+          <PosthogIdentifyProvider />
           {children}
-          <SpeedInsights />
         </body>
       </html>
     </ClerkProvider>
