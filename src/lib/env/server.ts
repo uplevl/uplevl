@@ -30,6 +30,8 @@ export const env = createEnv({
     STRIPE_PRICE_ID_STARTER: z.string().min(1),
     STRIPE_PRICE_ID_PROFESSIONAL: z.string().min(1),
     STRIPE_PRICE_ID_ENTERPRISE: z.string().min(1),
+    POSTHOG_KEY: z.string().min(1),
+    POSTHOG_HOST: z.string().min(1),
   },
   createFinalSchema: (env) =>
     z.object(env).transform((val) => {

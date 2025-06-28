@@ -7,6 +7,8 @@ export const env = createEnv({
     NEXT_PUBLIC_URL: z.string().min(1),
     NEXT_PUBLIC_META_INSTAGRAM_EMBEDDED_OAUTH_URL: z.string().min(1),
     NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: z.string().min(1),
+    NEXT_PUBLIC_POSTHOG_KEY: z.string().min(1),
+    NEXT_PUBLIC_POSTHOG_HOST: z.string().min(1),
   },
   emptyStringAsUndefined: true,
   experimental__runtimeEnv: {
@@ -14,5 +16,7 @@ export const env = createEnv({
     NEXT_PUBLIC_URL: process.env.NEXT_PUBLIC_URL,
     NEXT_PUBLIC_META_INSTAGRAM_EMBEDDED_OAUTH_URL: process.env.NEXT_PUBLIC_META_INSTAGRAM_EMBEDDED_OAUTH_URL,
     NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY,
+    NEXT_PUBLIC_POSTHOG_KEY: process.env.NEXT_PUBLIC_POSTHOG_KEY,
+    NEXT_PUBLIC_POSTHOG_HOST: process.env.NEXT_PUBLIC_POSTHOG_HOST,
   },
 });
