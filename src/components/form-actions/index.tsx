@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { type FieldValues, type SubmitHandler, useFormContext, useFormState } from "react-hook-form";
 import { toast } from "sonner";
 
+import { ConfirmAlert } from "../confirm-alert";
 import { LoadingButton } from "../loading-button";
 import { Button } from "../ui/button";
 
@@ -46,38 +47,23 @@ function ActionButton({ submitLabel, onSubmit, onDismiss, isSubmitting, isDirty 
   );
 }
 
-interface CancelButtonProps {
-  cancelLabel: string;
-  onDismiss: () => void;
-  onCancel: () => void;
-  isSubmitting: boolean;
-}
-
-/**
- * Cancel button component that receives form state as props
- */
-function CancelButton({ cancelLabel, onDismiss, onCancel, isSubmitting }: CancelButtonProps) {
-  const handleCancel = useCallback(() => {
-    onCancel();
-    onDismiss();
-  }, [onCancel, onDismiss]);
-
-  return (
-    <Button variant="outline" type="button" disabled={isSubmitting} onClick={handleCancel}>
-      {cancelLabel}
-    </Button>
-  );
-}
-
 interface FormActionsProps<T extends FieldValues = FieldValues> {
   submitLabel?: string;
   cancelLabel?: string;
+  confirmTitle?: string;
+  confirmDescription?: string;
+  confirmCancelLabel?: string;
+  confirmConfirmLabel?: string;
   onSubmit: SubmitHandler<T>;
 }
 
 export default function FormActions<T extends FieldValues = FieldValues>({
   submitLabel = "Save",
   cancelLabel = "Cancel",
+  confirmTitle = "Are you sure you want to cancel?",
+  confirmDescription = "This action cannot be undone.",
+  confirmCancelLabel = "No, stop it",
+  confirmConfirmLabel = "Yes, I'm sure",
   onSubmit,
 }: FormActionsProps<T>) {
   const toastId = useRef<string | number | null>(null);
@@ -97,7 +83,8 @@ export default function FormActions<T extends FieldValues = FieldValues>({
 
   const handleCancel = useCallback(() => {
     form.reset();
-  }, [form]);
+    dismissToast();
+  }, [form, dismissToast]);
 
   const showToast = useCallback(() => {
     // Only show toast if one doesn't already exist
@@ -116,15 +103,32 @@ export default function FormActions<T extends FieldValues = FieldValues>({
         />
       ),
       cancel: (
-        <CancelButton
-          cancelLabel={cancelLabel}
-          onDismiss={dismissToast}
-          onCancel={handleCancel}
-          isSubmitting={isSubmitting}
-        />
+        <ConfirmAlert
+          title={confirmTitle}
+          description={confirmDescription}
+          cancelLabel={confirmCancelLabel}
+          confirmLabel={confirmConfirmLabel}
+          onConfirm={handleCancel}
+        >
+          <Button variant="outline" type="button" disabled={isSubmitting}>
+            {cancelLabel}
+          </Button>
+        </ConfirmAlert>
       ),
     });
-  }, [submitLabel, cancelLabel, handleSubmit, handleCancel, dismissToast, isSubmitting, isDirty]);
+  }, [
+    submitLabel,
+    cancelLabel,
+    handleSubmit,
+    handleCancel,
+    dismissToast,
+    isSubmitting,
+    isDirty,
+    confirmTitle,
+    confirmDescription,
+    confirmCancelLabel,
+    confirmConfirmLabel,
+  ]);
 
   useEffect(() => {
     if (isDirty && !isSubmitting) {

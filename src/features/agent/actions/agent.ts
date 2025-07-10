@@ -29,7 +29,7 @@ export async function getCurrentAgentId() {
 }
 
 export async function getAgentByClerkId(clerkId: string) {
-  return db.query.AgentTable.findFirst({
+  const agent = await db.query.AgentTable.findFirst({
     where: (AgentTable, { eq, and }) => and(eq(AgentTable.userId, clerkId), isNull(AgentTable.deletedAt)),
     with: {
       offerings: {
@@ -42,6 +42,12 @@ export async function getAgentByClerkId(clerkId: string) {
       },
     },
   });
+
+  if (!agent) {
+    return redirect("/onboarding");
+  }
+
+  return agent;
 }
 
 export type AgentWithOfferings = NonNullable<Awaited<ReturnType<typeof getAgentByClerkId>>>;

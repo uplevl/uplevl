@@ -1,6 +1,6 @@
 import { boolean, index, integer, pgTable, serial, text, timestamp, varchar } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
-import { type z } from "zod";
+import { type z } from "zod/v4";
 
 import { SessionTable } from "./sessions.schema";
 

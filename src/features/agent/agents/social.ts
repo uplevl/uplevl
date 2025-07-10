@@ -4,7 +4,7 @@ import { type IntegrationStrategy } from "@/database/schema/integrations.schema"
 
 import { baseSystemPrompt } from "../library/base-system-prompt";
 import { getCachedIntegrationByEntityIdAndStrategy } from "../library/integrations";
-import { runLLM } from "../library/llm";
+import { runTextLLM } from "../library/llm";
 import { addMessages, getMessages } from "../library/memory";
 import type { MessageType } from "../library/types";
 
@@ -54,7 +54,7 @@ export async function runSocialAgent(props: SocialAgentProps) {
     businessSocialGoals: integration.agent.businessSocialGoals,
   });
 
-  const response = await runLLM({
+  const response = await runTextLLM({
     systemPrompt,
     messages: newMessages,
   });

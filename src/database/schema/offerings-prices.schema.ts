@@ -1,6 +1,6 @@
 import { integer, pgTable, serial, timestamp, varchar } from "drizzle-orm/pg-core";
 import { createInsertSchema, createUpdateSchema } from "drizzle-zod";
-import { type z } from "zod";
+import { type z } from "zod/v4";
 
 import { OfferingTable } from "./offerings.schema";
 

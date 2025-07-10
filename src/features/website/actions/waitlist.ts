@@ -1,7 +1,7 @@
 "use server";
 
 import { createClerkClient } from "@clerk/nextjs/server";
-import { z } from "zod";
+import { z } from "zod/v4";
 
 import { env } from "@/lib/env/server";
 

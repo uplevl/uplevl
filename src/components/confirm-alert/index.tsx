@@ -26,8 +26,8 @@ export function ConfirmAlert({
   description,
   onConfirm,
   children,
-  cancelLabel = "Cancel",
-  confirmLabel = "Continue",
+  cancelLabel = "No, stop it",
+  confirmLabel = "Yes, I'm sure",
 }: ConfirmAlertProps) {
   return (
     <AlertDialog>
