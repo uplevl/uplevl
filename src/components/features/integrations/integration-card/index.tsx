@@ -1,7 +1,7 @@
 "use client";
 
 import { Trash2Icon } from "lucide-react";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
 import { INTEGRATION_STRATEGIES, type IntegrationStrategy } from "@/database/schema";
