@@ -1,12 +1,14 @@
 "use client";
 
 import { Trash2Icon } from "lucide-react";
+import { useRouter } from "next/router";
 import { toast } from "sonner";
 
-import { type IntegrationStrategy } from "@/database/schema";
+import { INTEGRATION_STRATEGIES, type IntegrationStrategy } from "@/database/schema";
+
+import { env } from "@/lib/env/client";
 
 import { deleteIntegration } from "@/data/integrations/mutations";
-import { connectOAuthAccount } from "@/data/integrations/social-accounts";
 
 import { ConfirmAlert } from "@/components/common/confirm-alert";
 import { Button } from "@/components/ui/button";
@@ -29,8 +31,12 @@ export function IntegrationCard({
   isIntegrated,
   integrationId,
 }: IntegrationCardProps) {
+  const router = useRouter();
+
   async function handleConnect() {
-    await connectOAuthAccount(strategy);
+    if (strategy === INTEGRATION_STRATEGIES.INSTAGRAM) {
+      return router.push(env.NEXT_PUBLIC_META_INSTAGRAM_EMBEDDED_OAUTH_URL);
+    }
   }
 
   async function handleDisconnect() {

@@ -24,7 +24,6 @@ export const env = createEnv({
     META_INSTAGRAM_BASE_URL: z.string().min(1),
     META_INSTAGRAM_CLIENT_ID: z.string().min(1),
     META_INSTAGRAM_CLIENT_SECRET: z.string().min(1),
-    META_INSTAGRAM_EMBEDDED_OAUTH_URL: z.string().min(1),
     STRIPE_SECRET_KEY: z.string().min(1),
     STRIPE_WEBHOOK_CHECKOUT_SIGNING_SECRET: z.string().min(1),
     STRIPE_PRICE_ID_FOUNDING_MEMBER: z.string().min(1),
