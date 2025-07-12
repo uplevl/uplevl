@@ -44,11 +44,8 @@ export function Waitlist(props: WaitlistProps) {
   async function onSubmit(data: z.infer<typeof formSchema>) {
     startTransition(async () => {
       console.log("Submitting waitlist", data);
-      const addedToWaitlist = await addToWaitlist(data);
-
-      if (addedToWaitlist) {
-        setSubmitted(true);
-      }
+      await addToWaitlist(data);
+      setSubmitted(true);
     });
   }
 

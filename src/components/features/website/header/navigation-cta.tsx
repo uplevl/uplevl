@@ -2,18 +2,22 @@
 
 import Link from "next/link";
 
+import { useFeatureFlag } from "@/hooks/use-feature-flag";
+
 import { SignedIn, SignedOut } from "@/components/features/auth/sign-in-status";
 import { PlayIcon } from "@/components/icons";
 import { Button } from "@/components/ui/button";
 
+import { Waitlist } from "../waitlist";
+
 // import { NavigationItem } from "./navigation-item";
 
 export default function NavigationCta() {
-  // const dashboardAccessEnabled = useFeatureFlag("dashboard-access");
+  const dashboardAccessEnabled = useFeatureFlag("dashboard-access");
 
-  // if (!dashboardAccessEnabled) {
-  //   return <Waitlist />;
-  // }
+  if (!dashboardAccessEnabled) {
+    return <Waitlist />;
+  }
 
   return (
     <>
