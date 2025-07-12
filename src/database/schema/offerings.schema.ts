@@ -1,6 +1,6 @@
 import { index, pgTable, serial, smallint, text, timestamp, uuid, varchar } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
-import { type z } from "zod";
+import { type z } from "zod/v4";
 
 import { AgentTable } from "./agents.schema";
 

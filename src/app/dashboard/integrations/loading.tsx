@@ -1,6 +1,6 @@
-import { FormPanel } from "@/components/form-panel";
-import { Page, PageHeader } from "@/components/page";
-import { PageLoading } from "@/components/page-loading";
+import { FormPanel } from "@/components/common/form-panel";
+import { Page, PageHeader } from "@/components/common/page";
+import { PageLoading } from "@/components/common/page-loading";
 
 export default function IntegrationsLoading() {
   return (

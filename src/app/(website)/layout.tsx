@@ -1,5 +1,5 @@
-import { Footer } from "@/features/website/components/footer";
-import { Header } from "@/features/website/components/header";
+import { Footer } from "@/components/features/website/footer";
+import { Header } from "@/components/features/website/header";
 
 export default function WebsiteLayout({ children }: { children: React.ReactNode }) {
   return (

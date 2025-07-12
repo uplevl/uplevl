@@ -1,6 +1,6 @@
 import { boolean, integer, pgTable, serial, smallint, timestamp, varchar } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
-import { type z } from "zod";
+import { type z } from "zod/v4";
 
 export const PackageTable = pgTable("packages", {
   // IDs

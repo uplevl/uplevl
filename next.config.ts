@@ -11,6 +11,12 @@ const nextConfig: NextConfig = {
       {
         hostname: "picsum.photos",
       },
+      {
+        hostname: "utfs.io",
+      },
+      {
+        hostname: "x7gddzcov6.ufs.sh",
+      },
     ],
   },
   experimental: {

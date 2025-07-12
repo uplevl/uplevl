@@ -20,8 +20,7 @@
     ],
     "paths": {
       "@/*": ["./src/*"],
-      "@hookform/resolvers/zod": ["./src/lib/forms/zod-resolver.ts"],
-      "zod": ["./node_modules/zod/v4"]
+      "@hookform/resolvers/zod": ["./src/lib/forms/zod-resolver.ts"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

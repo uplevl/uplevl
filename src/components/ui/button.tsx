@@ -41,7 +41,6 @@ function Button({ className, variant, size, asChild = false, disabled, ...props 
   return (
     <Comp
       data-slot="button"
-      disabled={disabled}
       aria-disabled={disabled}
       className={cn(buttonVariants({ variant, size, className }))}
       {...props}

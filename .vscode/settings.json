@@ -10,6 +10,7 @@
     "autoincrement",
     "automations",
     "dbgenerated",
+    "inngest",
     "JPCM",
     "nextjs",
     "NGROK",

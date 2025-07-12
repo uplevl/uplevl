@@ -1,4 +1,5 @@
 import { type ClassValue, clsx } from "clsx";
+import dayjs from "dayjs";
 import { twMerge } from "tailwind-merge";
 
 /**
@@ -35,6 +36,10 @@ export function getFormattedDateTime(date?: Date, { omitTime = false }: { omitTi
   const formattableDate = date ?? new Date();
 
   return formattableDate.toLocaleString("en-US", options);
+}
+
+export function getFormattedPostDate(date: Date) {
+  return dayjs(date).format("MM/DD/YYYY hh:mm A");
 }
 
 /**

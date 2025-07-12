@@ -1,15 +1,20 @@
-import { Page, PageHeader } from "@/components/page";
+import { getAgent } from "@/data/agent/queries";
 
-import EditCancelButton from "@/features/posts/components/edit-cancel-button";
-import PostForm from "@/features/posts/components/post-form";
+import { Page, PageHeader } from "@/components/common/page";
+import { CreatePostsForm } from "@/components/features/posts/create-posts-form";
+import { CreatePostsFormProvider } from "@/components/features/posts/create-posts-form-provider";
 
-export default function NewPostPage() {
+export default async function NewPostPage() {
+  const agent = await getAgent();
+
   return (
     <Page>
-      <PageHeader title="New Post" description="Create a new social post.">
-        <EditCancelButton />
-      </PageHeader>
-      <PostForm />
+      <PageHeader title="New Post(s)" description="Create a new social post(s)." />
+      <div className="space-y-6">
+        <CreatePostsFormProvider agent={agent}>
+          <CreatePostsForm />
+        </CreatePostsFormProvider>
+      </div>
     </Page>
   );
 }

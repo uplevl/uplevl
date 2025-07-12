@@ -1,8 +1,8 @@
 import { type FileRouter, createUploadthing } from "uploadthing/next";
 import { UploadThingError } from "uploadthing/server";
 
-import { getCurrentAgentId } from "@/features/agent/actions/agent";
-import { getCurrentUser } from "@/features/auth/actions/user";
+import { getAgentId } from "@/data/agent/queries";
+import { getCurrentUser } from "@/data/user/queries";
 
 const uploadthing = createUploadthing();
 
@@ -16,13 +16,13 @@ export const postImageFileRouter = {
        * @see https://docs.uploadthing.com/file-routes#route-config
        */
       maxFileSize: "4MB",
-      maxFileCount: 20,
+      maxFileCount: 10,
     },
   })
     // Set permissions and file types for this FileRoute
     .middleware(async () => {
       const { userId } = await getCurrentUser();
-      const agentId = await getCurrentAgentId();
+      const agentId = await getAgentId();
 
       // If you throw, the user will not be able to upload
       if (!userId) throw new UploadThingError("Unauthorized");
