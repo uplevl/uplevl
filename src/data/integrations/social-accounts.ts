@@ -1,6 +1,8 @@
 import "server-only";
 
-import { type IntegrationStrategy } from "@/database/schema";
+import { redirect } from "next/navigation";
+
+import { INTEGRATION_STRATEGIES, type IntegrationStrategy } from "@/database/schema";
 
 import { env } from "@/lib/env/server";
 
@@ -85,4 +87,12 @@ async function getInstagramShortLivedToken(code: string) {
   const data = await response.json();
   console.log("🌐 short lived token data", data);
   return data;
+}
+
+export async function connectOAuthAccount(strategy: IntegrationStrategy) {
+  "use server";
+
+  if (strategy === INTEGRATION_STRATEGIES.INSTAGRAM) {
+    return redirect(env.META_INSTAGRAM_EMBEDDED_OAUTH_URL);
+  }
 }

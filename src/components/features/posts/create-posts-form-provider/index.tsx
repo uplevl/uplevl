@@ -1,11 +1,11 @@
 "use client";
 
-import { useUser } from "@clerk/nextjs";
 import { DialogTitle } from "@radix-ui/react-dialog";
+import { atom } from "jotai";
 import { useAtom } from "jotai/react";
 import { atomWithStorage } from "jotai/utils";
 import Image from "next/image";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/router";
 import { createContext, use, useState } from "react";
 
 import { POST_REVIEW_STATUSES, POST_STATUSES } from "@/database/schema";
@@ -23,7 +23,7 @@ import { Dialog, DialogContent, DialogFooter, DialogHeader } from "@/components/
 const uploadedFilesAtom = atomWithStorage<string[]>("uplv_np_uploaded_files", []);
 const descriptionAtom = atomWithStorage<string>("uplv_np_description", "");
 const dripCampaignAtom = atomWithStorage<boolean>("uplv_np_drip_campaign", false);
-const isSubmittingAtom = atomWithStorage<boolean>("uplv_np_is_submitting", false);
+const isSubmittingAtom = atom<boolean>(false);
 
 const CreatePostsFormContext = createContext<{
   images: string[];
@@ -47,7 +47,7 @@ interface CreatePostsFormProviderProps {
 }
 
 export function CreatePostsFormProvider({ children, agent }: CreatePostsFormProviderProps) {
-  const { user } = useUser();
+  const router = useRouter();
   const [uploadedFiles, setUploadedFiles] = useAtom(uploadedFilesAtom);
   const [description, setDescription] = useAtom(descriptionAtom);
   const [dripCampaign, setDripCampaign] = useAtom(dripCampaignAtom);
@@ -61,16 +61,11 @@ export function CreatePostsFormProvider({ children, agent }: CreatePostsFormProv
     setIsSubmitting(true);
     setDialogOpen(true);
 
-    if (!user?.id) {
-      throw new Error("User ID is required");
-    }
-
     await Promise.all(
       uploadedFiles.map(async (image) => {
         const post = await runPostAgent({ imageUrl: image, description: description });
         setPosts((prev) => [...prev, post]);
         await insertPost({
-          userId: user.id,
           agentId: agent.id,
           imageUrl: image,
           content: post.content,
@@ -89,7 +84,7 @@ export function CreatePostsFormProvider({ children, agent }: CreatePostsFormProv
     setDescription("");
     setDripCampaign(false);
     setPosts([]);
-    redirect("/dashboard/posts");
+    router.push("/dashboard/posts");
   }
 
   const values = {

@@ -1,14 +1,12 @@
 "use client";
 
 import { Trash2Icon } from "lucide-react";
-import { redirect } from "next/navigation";
 import { toast } from "sonner";
 
-import { INTEGRATION_STRATEGIES, type IntegrationStrategy } from "@/database/schema";
-
-import { env } from "@/lib/env/client";
+import { type IntegrationStrategy } from "@/database/schema";
 
 import { deleteIntegration } from "@/data/integrations/mutations";
+import { connectOAuthAccount } from "@/data/integrations/social-accounts";
 
 import { ConfirmAlert } from "@/components/common/confirm-alert";
 import { Button } from "@/components/ui/button";
@@ -83,10 +81,4 @@ export function IntegrationCard({
       </CardContent>
     </Card>
   );
-}
-
-export async function connectOAuthAccount(strategy: IntegrationStrategy) {
-  if (strategy === INTEGRATION_STRATEGIES.INSTAGRAM) {
-    return redirect(env.NEXT_PUBLIC_META_INSTAGRAM_EMBEDDED_OAUTH_URL);
-  }
 }
