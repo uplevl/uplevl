@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import logo from "@/assets/logo.svg";
+import logoWhite from "@/assets/logo-white.svg";
 
 import { NavigationItem } from "../header/navigation-item";
 
@@ -9,11 +9,11 @@ const currentYear = new Date().getFullYear();
 
 export function Footer() {
   return (
-    <footer>
+    <footer className="bg-neutral-800 text-white">
       <div className="mx-auto w-full max-w-screen-2xl px-4 py-4 sm:px-8">
         <nav className="grid gap-8 py-8 sm:grid-cols-12 md:py-12">
-          <div className="flex flex-col items-start gap-4 text-neutral-600 sm:col-span-6">
-            <Image src={logo} alt="Uplevl Logo" className="max-h-7 w-auto" priority />
+          <div className="flex flex-col items-start gap-4 text-neutral-400 sm:col-span-6">
+            <Image src={logoWhite} alt="Uplevl Logo White" className="max-h-7 w-auto" priority />
             <p className="text-xs">&copy; 2024-{currentYear} DevBucket, LLC. All rights reserved.</p>
           </div>
           <div className="flex flex-col sm:col-span-2">

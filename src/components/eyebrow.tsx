@@ -1,17 +1,13 @@
 import { cn } from "@/lib/utils";
 
-type EyebrowProps = React.HTMLAttributes<HTMLParagraphElement>;
-
-function Eyebrow({ className, ...props }: EyebrowProps) {
+export function Eyebrow({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <p
       className={cn(
-        "text-primary rounded-lg border border-neutral-200 bg-white px-3 py-1 text-sm font-medium",
+        "inline-block rounded-2xl border border-neutral-200 px-3 py-2 text-xs font-semibold text-neutral-500 sm:mb-8 sm:px-4 sm:text-sm",
         className,
       )}
       {...props}
     />
   );
 }
-
-export default Eyebrow;

@@ -20,7 +20,9 @@ import {
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
-type WaitlistProps = React.ComponentProps<typeof Button>;
+interface WaitlistProps extends React.ComponentProps<typeof Button> {
+  buttonLabel?: string;
+}
 
 const formSchema = z.object({
   firstName: z.string().min(1),
@@ -53,7 +55,7 @@ export function Waitlist(props: WaitlistProps) {
     <Form {...form}>
       <Dialog>
         <DialogTrigger asChild>
-          <Button {...props}>Get Started</Button>
+          <Button {...props}>{props.buttonLabel ?? "Get Started"}</Button>
         </DialogTrigger>
         <DialogContent>
           <DialogHeader className="space-y-1">

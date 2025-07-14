@@ -9,6 +9,13 @@ import { env } from "@/lib/env/infra";
     authtoken: env.NGROK_AUTH_TOKEN,
     // If you haven't reserved a domain, omit this
     domain: "dev.uplevl.ai",
+    compression: true,
+    onLogEvent: (event) => {
+      console.log(event);
+    },
+    onStatusChange: (status) => {
+      console.log(status);
+    },
   });
 
   // Output ngrok url to console

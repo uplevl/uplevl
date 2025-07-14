@@ -21,7 +21,7 @@ type MailLinkProps = Omit<React.HTMLAttributes<HTMLButtonElement>, "children"> &
   email: string;
 };
 
-function MailLink({ className, email, ...props }: MailLinkProps) {
+export function MailLink({ className, email, ...props }: MailLinkProps) {
   const [isCopied, setIsCopied] = useState(false);
   const [, copyToClipboard] = useCopyToClipboard();
 
@@ -73,5 +73,3 @@ function MailLink({ className, email, ...props }: MailLinkProps) {
     </button>
   );
 }
-
-export default MailLink;
