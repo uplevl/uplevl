@@ -23,7 +23,7 @@ export function Header() {
   return (
     <HeaderContext value={{ isOpen, toggleIsOpen }}>
       <header className="bg-background/90 sticky inset-0 isolate z-50 backdrop-blur-sm">
-        <div className="relative mx-auto flex w-full max-w-screen-2xl items-center gap-6 px-4 py-4 sm:px-8">
+        <div className="wrapper relative flex w-full items-center gap-6 py-4">
           <NavigationItem href="/" linkOnly>
             <Image src={logo} alt="Uplevl Logo" className="max-h-8 w-auto" priority />
           </NavigationItem>
