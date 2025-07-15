@@ -43,6 +43,13 @@
       "when": 1752597404607,
       "tag": "0005_old_polaris",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1752598350271,
+      "tag": "0006_bizarre_slipstream",
+      "breakpoints": true
     }
   ]
 }
