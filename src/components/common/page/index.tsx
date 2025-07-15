@@ -8,9 +8,7 @@ interface PageProps {
 
 export function Page({ children, className, simple }: PageProps) {
   return (
-    <article
-      className={cn("min-h-screen space-y-4 px-4 pb-20 sm:px-6", simple && "mx-auto max-w-screen-lg", className)}
-    >
+    <article className={cn("min-h-screen space-y-4 pr-4 pb-20", simple && "mx-auto max-w-screen-lg", className)}>
       {children}
     </article>
   );
@@ -25,7 +23,7 @@ interface PageHeaderProps {
 
 export function PageHeader({ title, description, children, simple }: PageHeaderProps) {
   return (
-    <div className={cn(!simple && "bg-background sticky top-0 z-10 -ml-4 pt-2 sm:-ml-6")}>
+    <div className={cn(!simple && "bg-background sticky top-0 z-10 pt-2")}>
       <header
         className={cn(
           !simple &&
