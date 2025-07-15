@@ -50,6 +50,7 @@ export const PostTable = pgTable(
     status: postStatusEnum("status").notNull().default(POST_STATUSES.DRAFT),
     reviewStatus: postReviewStatusEnum("review_status").notNull().default(POST_REVIEW_STATUSES.PENDING),
     reviewedBy: varchar("reviewed_by", { length: 128 }),
+    scheduledAt: timestamp("scheduled_at", { mode: "string" }),
 
     // Timestamps
     createdAt: timestamp("created_at", { mode: "string" }).defaultNow().notNull(),
