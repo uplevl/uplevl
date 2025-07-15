@@ -31,17 +31,15 @@ export default function PostCard({ post }: PostCardProps) {
             src={post.imageUrl}
             alt="Post Image"
             width={1080}
-            height={1350}
-            className="relative aspect-[4/5] max-w-full overflow-hidden rounded-md object-cover"
+            height={1080}
+            className="relative aspect-square max-w-full rounded-lg object-cover"
           />
           <PostBadge status={post.status} className="absolute top-2 right-2" />
         </div>
-        <div className="flex-1 space-y-1">
-          <div className="text-muted-foreground text-xs">
-            Created at {getFormattedPostDate(new Date(post.createdAt))}
-          </div>
+        <div className="flex-1 space-y-2">
           <div className="space-y-1 text-sm">{post.content}</div>
         </div>
+        <div className="text-muted-foreground text-xs">Created at {getFormattedPostDate(new Date(post.createdAt))}</div>
         <Button variant={isPending ? "default" : "outline"} disabled={isApproved}>
           {buttonLabel}
         </Button>

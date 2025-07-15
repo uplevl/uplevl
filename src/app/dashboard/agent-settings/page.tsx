@@ -8,7 +8,6 @@ import { PageLoading } from "@/components/common/page-loading";
 import { AgentSettingsFormProvider } from "@/components/features/agent-settings/agent-settings-form-provider";
 import { BusinessForm } from "@/components/features/agent-settings/business-form";
 import { OfferingsForm } from "@/components/features/agent-settings/offerings-form";
-import { Separator } from "@/components/ui/separator";
 
 export const metadata: Metadata = {
   title: "Agent Settings",
@@ -31,9 +30,8 @@ async function AgentSettingsContent() {
 
   return (
     <AgentSettingsFormProvider agent={agent}>
-      <div className="space-y-6">
+      <div className="divide-y">
         <BusinessForm />
-        <Separator />
         <OfferingsForm agent={agent} />
       </div>
     </AgentSettingsFormProvider>
