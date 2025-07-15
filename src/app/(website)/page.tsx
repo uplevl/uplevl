@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 
-import { Benefits } from "@/components/features/website/benefits";
+// import { Benefits } from "@/components/features/website/benefits";
 import { DripCampaignFeature } from "@/components/features/website/drip-campaign-feature";
 import { FinalCTA } from "@/components/features/website/final-cta";
 import { Hero } from "@/components/features/website/hero";
@@ -20,7 +20,7 @@ export default function WebsiteHome() {
       <VisualProcess />
       <MobileUploader />
       <DripCampaignFeature />
-      <Benefits />
+      {/* <Benefits /> */}
       {/* <SocialProof /> */}
       <FinalCTA />
       {/* <AiAgentShowcase />
