@@ -7,7 +7,10 @@ interface FormPanelProps {
 
 export function FormPanel({ title, description, children, actions }: FormPanelProps) {
   return (
-    <section className="grid gap-6 sm:grid-cols-4 sm:gap-14">
+    <section
+      data-slot="form-panel"
+      className="ml-4 grid gap-6 py-6 first-of-type:pt-0 last-of-type:pb-0 sm:ml-6 sm:grid-cols-4 sm:gap-14"
+    >
       <header>
         <h2 className="text-lg font-semibold">{title}</h2>
         {description && <p className="text-muted-foreground text-xs leading-relaxed text-pretty">{description}</p>}
