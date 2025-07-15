@@ -1,0 +1,46 @@
+# Commit Message Rules
+
+## Format
+
+All commit messages must follow this format:
+
+```
+<type>: <description>
+```
+
+## Type Prefixes
+
+Use one of these prefixes based on the change:
+
+- `feat:` - New features or functionality
+- `refactor:` - Code refactoring (no functional changes)
+- `fix:` - Bug fixes
+- `chore:` - Maintenance tasks, dependencies, build processes
+
+## Rules
+
+1. **Single line only** - No multi-line descriptions or body text
+2. **Lowercase** - All text must be in lowercase
+3. **Present tense** - Use present tense (e.g., "add feature" not "added feature")
+4. **Concise and precise** - Keep it short but descriptive
+5. **No period** - Don't end with a period
+
+## Examples
+
+✅ Good:
+
+- `feat: add user authentication`
+- `fix: resolve login button not working`
+- `refactor: simplify user data fetching`
+- `chore: update dependencies`
+
+❌ Bad:
+
+- `feat: Add user authentication` (capitalized)
+- `fix: resolved login button not working` (past tense)
+- `refactor: simplify user data fetching.` (ends with period)
+- `feat: add user authentication
+This adds a new authentication system with JWT tokens` (multi-line)
+- `update: something` (invalid prefix)
+
+---
