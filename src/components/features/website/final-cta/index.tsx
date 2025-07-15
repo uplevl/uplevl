@@ -7,7 +7,10 @@ import { Waitlist } from "../waitlist";
 
 export function FinalCTA() {
   return (
-    <section className="from-primary/5 via-background to-primary/10 bg-gradient-to-br py-10 sm:py-14 lg:py-20">
+    <section
+      id="get-started"
+      className="from-primary/5 via-background to-primary/10 bg-gradient-to-br py-10 sm:py-14 lg:py-20"
+    >
       <div className="container mx-auto px-4 lg:px-6">
         <div className="mx-auto max-w-4xl">
           {/* Main CTA Card */}
@@ -84,40 +87,24 @@ export function FinalCTA() {
               </div>
             </div>
 
-            {/* Social Proof */}
-            <BentoCardWhite className="flex flex-col items-center justify-center gap-6 p-8 sm:flex-row">
-              <div className="flex -space-x-4">
-                {[...Array(5)].map((_, i) => (
-                  <div key={i} className="bg-primary-light border-background h-10 w-10 rounded-full border-2"></div>
-                ))}
-                <div className="bg-primary border-background flex h-10 w-10 items-center justify-center rounded-full border-2">
-                  <span className="text-primary-foreground text-xs font-bold">+</span>
-                </div>
-              </div>
-              <div className="text-center sm:text-left">
-                <p className="text-foreground font-semibold">Join Sarah, Mike, Lisa and 197+ other business owners</p>
-                <p className="text-muted-foreground text-sm">who are already on the waitlist</p>
-              </div>
-            </BentoCardWhite>
-
             {/* Urgency Message */}
-            <div className="rounded-2xl border border-orange-200 bg-gradient-to-r from-orange-50 to-red-50 p-6">
-              <div className="mb-3 flex items-center justify-center space-x-2">
-                <ClockIcon className="h-5 w-5 text-orange-600" />
+            <BentoCardWhite className="rounded-2xl border border-orange-200 bg-gradient-to-r from-orange-50 to-red-50 p-6">
+              <div className="mb-3 flex items-center justify-center space-x-1">
+                <ClockIcon className="h-5 w-5 text-orange-800" />
                 <span className="font-semibold text-orange-800">Limited Time Offer</span>
               </div>
-              <p className="mx-auto max-w-2xl text-sm text-orange-700">
+              <p className="mx-auto max-w-2xl text-sm text-balance text-orange-700">
                 We&apos;re only accepting 200 more businesses into our early access program. Once we hit capacity, the
                 waitlist closes and you&apos;ll have to wait for our public launch in Q2 2025.
               </p>
-            </div>
+            </BentoCardWhite>
 
             {/* Final Reassurance */}
-            <div className="space-y-3 text-center">
+            <div className="space-y-2 text-center">
               <p className="text-muted-foreground">
-                Questions? Email us at{" "}
+                <span>Questions? Email us at </span>
                 <a href="mailto:hello@uplevl.com" className="text-primary font-medium hover:underline">
-                  hello@uplevl.com
+                  hello<span>@</span>uplevl.com
                 </a>
               </p>
               <div className="text-muted-foreground flex items-center justify-center space-x-4 text-xs">

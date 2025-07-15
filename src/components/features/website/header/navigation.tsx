@@ -19,7 +19,7 @@ export function Navigation() {
     >
       <NavigationItem href="#how-it-works">How It Works</NavigationItem>
       <NavigationItem href="#features">Features</NavigationItem>
-      <NavigationItem href="#pricing">Pricing</NavigationItem>
+      <NavigationItem href="#get-started">Join Early Access</NavigationItem>
     </nav>
   );
 }
