@@ -65,6 +65,7 @@ export const PostTable = pgTable(
     index("posts_deleted_at_idx").on(table.deletedAt),
     index("posts_status_idx").on(table.status),
     index("posts_review_status_idx").on(table.reviewStatus),
+    index("posts_scheduled_at_idx").on(table.scheduledAt),
   ],
 );
 
