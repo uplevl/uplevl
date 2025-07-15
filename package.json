@@ -8,7 +8,7 @@
     "dev:app": "next dev --turbopack",
     "dev:docker": "docker compose up",
     "postdev": "docker compose down",
-    "build": "next build --turbopack",
+    "build": "next build",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "lint:staged": "lint-staged -q",
