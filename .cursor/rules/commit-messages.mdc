@@ -24,6 +24,8 @@ Use one of these prefixes based on the change:
 3. **Present tense** - Use present tense (e.g., "add feature" not "added feature")
 4. **Concise and precise** - Keep it short but descriptive
 5. **No period** - Don't end with a period
+6. **Migration Names** - Don't use the names of the migrations in commit messages, they are random names and don't reflect the changes made.
+7. **Multiple types** - If code changes reflect multiple commit type (feat,chore,fix), use `feat:` as the fallback.
 
 ## Examples
 

@@ -50,6 +50,7 @@ export const PostTable = pgTable(
     status: postStatusEnum("status").notNull().default(POST_STATUSES.DRAFT),
     reviewStatus: postReviewStatusEnum("review_status").notNull().default(POST_REVIEW_STATUSES.PENDING),
     reviewedBy: varchar("reviewed_by", { length: 128 }),
+    scheduledAt: timestamp("scheduled_at", { mode: "string" }),
 
     // Timestamps
     createdAt: timestamp("created_at", { mode: "string" }).defaultNow().notNull(),
@@ -64,6 +65,7 @@ export const PostTable = pgTable(
     index("posts_deleted_at_idx").on(table.deletedAt),
     index("posts_status_idx").on(table.status),
     index("posts_review_status_idx").on(table.reviewStatus),
+    index("posts_scheduled_at_idx").on(table.scheduledAt),
   ],
 );
 
