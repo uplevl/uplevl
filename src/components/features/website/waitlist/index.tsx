@@ -30,7 +30,7 @@ const formSchema = z.object({
   email: z.string().email(),
 });
 
-export function Waitlist(props: WaitlistProps) {
+export function Waitlist({ buttonLabel, ...props }: WaitlistProps) {
   const [submitted, setSubmitted] = useState(false);
   const [isPending, startTransition] = useTransition();
 
@@ -55,7 +55,7 @@ export function Waitlist(props: WaitlistProps) {
     <Form {...form}>
       <Dialog>
         <DialogTrigger asChild>
-          <Button {...props}>{props.buttonLabel ?? "Get Started"}</Button>
+          <Button {...props}>{buttonLabel ?? "Get Started"}</Button>
         </DialogTrigger>
         <DialogContent>
           <DialogHeader className="space-y-1">

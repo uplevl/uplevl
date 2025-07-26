@@ -23,12 +23,13 @@ export function MobileUploader() {
               {/* Headline */}
               <div className="space-y-4">
                 <h2 className="text-2xl leading-tight font-bold tracking-tight sm:text-3xl lg:text-4xl">
-                  From Your Phone to Professional Post In <span className="text-primary">Under 30 Seconds</span>
+                  From Property Photo to Professional Marketing Post In{" "}
+                  <span className="text-primary">Under 30 Seconds</span>
                 </h2>
 
                 <p className="text-muted-foreground text-balance sm:text-lg">
-                  No complicated software or design skills needed. Just snap a photo of your work, add an optional note,
-                  and watch Uplevl create a stunning social media post that gets results.
+                  No complicated software or design skills needed. Just snap a photo of your listing, add an optional
+                  note about the property, and watch Uplevl create a compelling marketing post that attracts buyers.
                 </p>
               </div>
 
@@ -42,7 +43,7 @@ export function MobileUploader() {
                     <NumberBullet number={1} />
                     <div className="flex-1">
                       <h4 className="text-primary text-lg font-semibold">Upload</h4>
-                      <p className="text-muted-foreground text-sm">Snap or choose a photo from your gallery</p>
+                      <p className="text-muted-foreground text-sm">Snap or choose property photos from your gallery</p>
                     </div>
                     <CameraIcon className="text-primary h-6 w-6" />
                   </BentoCardWhite>
@@ -57,7 +58,9 @@ export function MobileUploader() {
                     <NumberBullet number={2} />
                     <div className="flex-1">
                       <h4 className="text-primary text-lg font-semibold">Generate</h4>
-                      <p className="text-muted-foreground text-sm">AI creates caption, hashtags & timing</p>
+                      <p className="text-muted-foreground text-sm">
+                        AI creates listing descriptions, hashtags & timing
+                      </p>
                     </div>
                     <ZapIcon className="text-primary h-6 w-6" />
                   </BentoCardWhite>
@@ -72,7 +75,7 @@ export function MobileUploader() {
                     <NumberBullet number={3} />
                     <div className="flex-1">
                       <h4 className="text-primary text-lg font-semibold">Schedule</h4>
-                      <p className="text-muted-foreground text-sm">Post goes live automatically at best time</p>
+                      <p className="text-muted-foreground text-sm">Post goes live when buyers are most active</p>
                     </div>
                     <ClockIcon className="text-primary h-6 w-6" />
                   </BentoCardWhite>
@@ -87,15 +90,15 @@ export function MobileUploader() {
                 </div>
                 <div className="flex items-center space-x-3 rounded-lg border border-blue-200 bg-blue-50 p-3">
                   <CheckCircleIcon className="h-5 w-5 flex-shrink-0 text-blue-600" />
-                  <span className="text-sm font-medium text-blue-800">No design experience needed</span>
+                  <span className="text-sm font-medium text-blue-800">No marketing experience needed</span>
                 </div>
                 <div className="flex items-center space-x-3 rounded-lg border border-purple-200 bg-purple-50 p-3">
                   <CheckCircleIcon className="h-5 w-5 flex-shrink-0 text-purple-600" />
-                  <span className="text-sm font-medium text-purple-800">Upload multiple photos at once</span>
+                  <span className="text-sm font-medium text-purple-800">Upload multiple listings at once</span>
                 </div>
                 <div className="flex items-center space-x-3 rounded-lg border border-orange-200 bg-orange-50 p-3">
                   <CheckCircleIcon className="h-5 w-5 flex-shrink-0 text-orange-600" />
-                  <span className="text-sm font-medium text-orange-800">Add personal notes if you want</span>
+                  <span className="text-sm font-medium text-orange-800">Add property details if you want</span>
                 </div>
               </div>
 
@@ -117,7 +120,7 @@ export function MobileUploader() {
                         <div className="bg-primary flex h-8 w-8 items-center justify-center rounded-lg">
                           <span className="text-primary-foreground text-sm font-bold">U</span>
                         </div>
-                        <span className="font-semibold">Mobile Uploader</span>
+                        <span className="font-semibold">Property Uploader</span>
                       </div>
                       <Badge variant="secondary" className="text-xs">
                         New
@@ -132,7 +135,7 @@ export function MobileUploader() {
                       <div className="from-primary/10 to-primary/5 border-primary/30 flex h-40 w-full flex-col items-center justify-center space-y-3 rounded-2xl border-2 border-dashed bg-gradient-to-br">
                         <CameraIcon className="text-primary/60 h-12 w-12" />
                         <div className="text-center">
-                          <p className="text-primary text-sm font-medium">Tap to take photo</p>
+                          <p className="text-primary text-sm font-medium">Tap to photo property</p>
                           <p className="text-muted-foreground text-xs">or choose from gallery</p>
                         </div>
                       </div>
@@ -152,14 +155,16 @@ export function MobileUploader() {
 
                     {/* Optional Note Section */}
                     <div className="space-y-3">
-                      <label className="text-sm font-medium">Add a note (optional)</label>
+                      <label className="text-sm font-medium">Add property details (optional)</label>
                       <div className="relative">
-                        <Input placeholder="e.g., 'Customer loved the new highlights!'" className="text-sm" />
+                        <Input placeholder="e.g., 'Stunning 3BR with updated kitchen!'" className="text-sm" />
                         <div className="absolute top-1/2 right-3 -translate-y-1/2 transform">
                           <span className="text-muted-foreground text-xs">0/100</span>
                         </div>
                       </div>
-                      <p className="text-muted-foreground text-xs">This helps our AI create better captions for you</p>
+                      <p className="text-muted-foreground text-xs">
+                        This helps our AI create better listing descriptions
+                      </p>
                     </div>
 
                     {/* Recent Uploads Preview */}
@@ -196,7 +201,7 @@ export function MobileUploader() {
                       <div className="grid grid-cols-2 gap-4 text-center">
                         <div>
                           <div className="text-primary text-lg font-bold">12</div>
-                          <div className="text-muted-foreground text-xs">Photos uploaded</div>
+                          <div className="text-muted-foreground text-xs">Properties uploaded</div>
                         </div>
                         <div>
                           <div className="text-primary text-lg font-bold">8</div>

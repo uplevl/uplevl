@@ -1,6 +1,6 @@
 import { type NextRequest, NextResponse } from "next/server";
 
-import { runInstagramCommentAutomation, runInstagramMessageAutomation } from "@/automations/instagram";
+import { runInstagramCommentAutomation, runInstagramMessageAutomation } from "@/api/automations/instagram";
 
 export async function GET(request: NextRequest) {
   const hub = request.nextUrl.searchParams.get("hub.challenge");
