@@ -1,3 +1,9 @@
+---
+
+description: Commit Message Rules
+alwaysApply: true
+---
+
 # Commit Message Rules
 
 ## Format
@@ -22,27 +28,31 @@ Use one of these prefixes based on the change:
 1. **Single line only** - No multi-line descriptions or body text
 2. **Lowercase** - All text must be in lowercase
 3. **Present tense** - Use present tense (e.g., "add feature" not "added feature")
-4. **Concise and precise** - Keep it short but descriptive
+4. **Keep it short** - Since ClickUp ticket IDs are automatically added by pre-commit hooks, keep the message brief and focused
 5. **No period** - Don't end with a period
-6. **Migration Names** - Don't use the names of the migrations in commit messages, they are random names and don't reflect the changes made.
-7. **Multiple types** - If code changes reflect multiple commit type (feat,chore,fix), use `feat:` as the fallback.
+6. **Migration Names** - Don't use the names of the migrations in commit messages, they are random names and don't reflect the changes made
+7. **Multiple types** - If code changes reflect multiple commit type (feat,chore,fix), use `feat:` as the fallback
+8. **Multiple changes** - When multiple changes are made, write a generalized message that captures the overall purpose rather than listing individual changes
+9. **Avoid redundancy** - Don't repeat information that will be in the ticket ID
 
 ## Examples
 
 ✅ Good:
 
 - `feat: add user authentication`
-- `fix: resolve login button not working`
-- `refactor: simplify user data fetching`
+- `fix: resolve login errors`
+- `refactor: simplify data fetching`
 - `chore: update dependencies`
+- `feat: implement post review system` (for multiple related changes)
+- `fix: resolve ui issues` (when fixing multiple UI problems)
 
 ❌ Bad:
 
 - `feat: Add user authentication` (capitalized)
 - `fix: resolved login button not working` (past tense)
 - `refactor: simplify user data fetching.` (ends with period)
+- `feat: add user authentication, update login form, fix validation errors` (too detailed for multiple changes)
 - `feat: add user authentication
 This adds a new authentication system with JWT tokens` (multi-line)
 - `update: something` (invalid prefix)
-
----
+- `feat: add user authentication for CU-123456` (redundant ticket reference)
