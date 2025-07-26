@@ -9,10 +9,10 @@ export function ProblemStatement() {
         <div className="mx-auto max-w-4xl">
           <div className="mb-12 space-y-2 text-center sm:mb-16">
             <h2 className="px-4 text-2xl font-bold tracking-tight text-white sm:px-0 sm:text-3xl md:text-4xl">
-              Running Your Business Is Hard Enough
+              Selling Real Estate Is Your Expertise
             </h2>
             <p className="px-4 text-lg text-white/80 sm:px-0 sm:text-xl">
-              You shouldn&apos;t have to be a social media expert too
+              Social media marketing shouldn&apos;t be another full-time job
             </p>
           </div>
 
@@ -21,21 +21,21 @@ export function ProblemStatement() {
               <ClockIcon className="text-primary mx-auto mb-4 h-10 w-10 sm:h-12 sm:w-12" />
               <h3 className="mb-3 text-xl font-semibold text-white sm:text-2xl sm:tracking-tight">No Time</h3>
               <p className="text-sm text-white/70 sm:text-base">
-                Between appointments and admin work, who has time to create posts every day?
+                Between showings, closings, and prospecting, when do you have time to create daily social content?
               </p>
             </BentoCard>
             <BentoCard className="flex flex-col items-center justify-center p-10 text-center">
               <ZapIcon className="text-primary mx-auto mb-4 h-10 w-10 sm:h-12 sm:w-12" />
-              <h3 className="mb-3 text-xl font-semibold text-white sm:text-2xl sm:tracking-tight">No Skills</h3>
+              <h3 className="mb-3 text-xl font-semibold text-white sm:text-2xl sm:tracking-tight">No Strategy</h3>
               <p className="text-sm text-white/70 sm:text-base">
-                Creating engaging content and knowing when to post feels like a full-time job.
+                Knowing what content converts browsers into buyers requires marketing expertise you don&apos;t have.
               </p>
             </BentoCard>
             <BentoCard className="flex flex-col items-center justify-center p-10 text-center">
               <TrendingUpIcon className="text-primary mx-auto mb-4 h-10 w-10 sm:h-12 sm:w-12" />
-              <h3 className="mb-3 text-xl font-semibold text-white sm:text-2xl sm:tracking-tight">No Results</h3>
+              <h3 className="mb-3 text-xl font-semibold text-white sm:text-2xl sm:tracking-tight">No Leads</h3>
               <p className="text-sm text-white/70 sm:text-base">
-                Posting randomly doesn&apos;t bring in new customers or grow your business.
+                Random listing posts don&apos;t build trust or generate the qualified leads your business needs.
               </p>
             </BentoCard>
           </div>

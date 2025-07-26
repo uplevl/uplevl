@@ -10,12 +10,12 @@ export function SolutionStatement() {
             <div className="order-2 space-y-6 sm:space-y-8 lg:order-1">
               <div className="space-y-2">
                 <h2 className="text-2xl leading-tight font-bold tracking-tight text-balance sm:text-3xl md:text-4xl">
-                  What If Your Social Media Could Run Itself?
+                  What If Your Real Estate Marketing Could Run Itself?
                 </h2>
 
                 <p className="text-muted-foreground sm:text-lg">
-                  Uplevl uses AI to handle everything, from creating beautiful posts from your photos to engaging with
-                  customers. You focus on your business, we handle your online presence.
+                  Uplevl uses AI to transform your property photos into compelling social content and automatically
+                  engage with potential buyers. You focus on closing deals, we handle building your online presence.
                 </p>
               </div>
 
@@ -23,9 +23,11 @@ export function SolutionStatement() {
                 <div className="active:bg-muted/30 flex items-start space-x-3 rounded-lg p-3 transition-colors sm:space-x-4 sm:p-0 sm:active:bg-transparent">
                   <CheckCircleIcon className="text-primary mt-1 h-5 w-5 flex-shrink-0 sm:h-6 sm:w-6" />
                   <div>
-                    <h4 className="mb-1 text-sm font-semibold sm:text-base">Upload photos, get professional posts</h4>
+                    <h4 className="mb-1 text-sm font-semibold sm:text-base">
+                      Upload property photos, get marketing posts
+                    </h4>
                     <p className="text-muted-foreground text-sm sm:text-base">
-                      AI transforms your work photos into engaging social media content
+                      AI creates engaging listing content and market updates from your property photos
                     </p>
                   </div>
                 </div>
@@ -33,9 +35,9 @@ export function SolutionStatement() {
                 <div className="active:bg-muted/30 flex items-start space-x-3 rounded-lg p-3 transition-colors sm:space-x-4 sm:p-0 sm:active:bg-transparent">
                   <CheckCircleIcon className="text-primary mt-1 h-5 w-5 flex-shrink-0 sm:h-6 sm:w-6" />
                   <div>
-                    <h4 className="mb-1 text-sm font-semibold sm:text-base">Smart scheduling for maximum reach</h4>
+                    <h4 className="mb-1 text-sm font-semibold sm:text-base">Smart scheduling for maximum exposure</h4>
                     <p className="text-muted-foreground text-sm sm:text-base">
-                      Posts go live when your customers are most active
+                      Posts go live when potential buyers and sellers are most active online
                     </p>
                   </div>
                 </div>
@@ -43,9 +45,9 @@ export function SolutionStatement() {
                 <div className="active:bg-muted/30 flex items-start space-x-3 rounded-lg p-3 transition-colors sm:space-x-4 sm:p-0 sm:active:bg-transparent">
                   <CheckCircleIcon className="text-primary mt-1 h-5 w-5 flex-shrink-0 sm:h-6 sm:w-6" />
                   <div>
-                    <h4 className="mb-1 text-sm font-semibold sm:text-base">AI responds to comments and messages</h4>
+                    <h4 className="mb-1 text-sm font-semibold sm:text-base">AI responds to inquiries and comments</h4>
                     <p className="text-muted-foreground text-sm sm:text-base">
-                      Never miss a potential booking or customer question
+                      Never miss a potential lead or client question about your listings
                     </p>
                   </div>
                 </div>

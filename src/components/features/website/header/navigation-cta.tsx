@@ -9,6 +9,7 @@ import { PlayIcon } from "@/components/icons";
 import { Button } from "@/components/ui/button";
 
 import { Waitlist } from "../waitlist";
+import { NavigationItem } from "./navigation-item";
 
 // import { NavigationItem } from "./navigation-item";
 
@@ -30,7 +31,7 @@ export default function NavigationCta() {
         </Button>
       </SignedIn>
       <SignedOut>
-        {/* <NavigationItem href="/sign-in">Sign In</NavigationItem> */}
+        <NavigationItem href="/sign-in">Sign In</NavigationItem>
         <Button asChild>
           <Link href="/sign-up">
             <span>Get Started</span>

@@ -19,13 +19,13 @@ export function DripCampaignFeature() {
             </Eyebrow>
 
             <h2 className="mb-6 text-2xl font-bold tracking-tight text-white sm:text-3xl lg:text-4xl">
-              Upload Once, Stay Active For <span className="text-primary">Weeks</span>
+              Upload All Your Listings Once, Market For <span className="text-primary">Weeks</span>
             </h2>
 
             <p className="mx-auto max-w-3xl text-lg text-balance text-white/80 sm:text-xl">
-              The secret to consistent social media without the daily hassle. Upload all your photos at once, and Uplevl
-              automatically spreads them out over time, keeping your business visible even when you&apos;re swamped with
-              customers.
+              The secret to consistent real estate marketing without the daily grind. Upload all your property photos at
+              once, and Uplevl automatically spreads them out over time, keeping your listings visible even when
+              you&apos;re swamped with showings and closings.
             </p>
           </div>
 
@@ -40,12 +40,12 @@ export function DripCampaignFeature() {
                   </div>
                   <div>
                     <h3 className="text-primary mb-3 text-xl font-bold text-balance">
-                      Upload 20 photos today, post for the next month
+                      Upload 20 property photos today, market for the next month
                     </h3>
                     <p className="text-neutral-300">
-                      Perfect for when you have a productive day and want to get ahead: Take all your photos, upload
-                      them in one batch, and let Uplevl handle the rest. Your social media stays active even during your
-                      busiest weeks.
+                      Perfect for when you have multiple new listings or a productive photo shoot day: Upload all your
+                      property photos in one batch, and let Uplevl handle the marketing. Your social media showcases
+                      fresh listings even during your busiest closing weeks.
                     </p>
                   </div>
                 </div>
@@ -59,9 +59,10 @@ export function DripCampaignFeature() {
                   <BentoCard className="flex items-start space-x-4 px-6 py-4">
                     <NumberBullet number={1} />
                     <div className="space-y-1">
-                      <h4 className="text-primary text-lg font-semibold">Bulk Upload Your Photos</h4>
+                      <h4 className="text-primary text-lg font-semibold">Bulk Upload Your Property Photos</h4>
                       <p className="text-sm text-neutral-300">
-                        Select multiple photos from your phone or computer — as many as you want, all at once
+                        Select multiple listing photos from your phone or camera — interior, exterior, neighborhood
+                        shots, all at once
                       </p>
                     </div>
                   </BentoCard>
@@ -69,9 +70,10 @@ export function DripCampaignFeature() {
                   <BentoCard className="flex items-start space-x-4 px-6 py-4">
                     <NumberBullet number={2} />
                     <div className="space-y-1">
-                      <h4 className="text-primary text-lg font-semibold">AI Creates Individual Posts</h4>
+                      <h4 className="text-primary text-lg font-semibold">AI Creates Marketing Posts</h4>
                       <p className="text-sm text-neutral-300">
-                        Each photo gets its own unique caption, hashtags, and optimal posting time
+                        Each property gets compelling descriptions, market insights, and optimal posting times to
+                        attract buyers
                       </p>
                     </div>
                   </BentoCard>
@@ -81,7 +83,8 @@ export function DripCampaignFeature() {
                     <div className="space-y-1">
                       <h4 className="text-primary text-lg font-semibold">Auto-Schedule Across Time</h4>
                       <p className="text-sm text-neutral-300">
-                        Posts spread out naturally — maybe 2-3 per week — so you look consistently active
+                        Posts spread out strategically — mix of listings, market updates, and neighborhood features to
+                        keep buyers engaged
                       </p>
                     </div>
                   </BentoCard>
@@ -101,25 +104,25 @@ export function DripCampaignFeature() {
                 <div className="rounded-xl border border-blue-200 bg-blue-50 p-4">
                   <div className="mb-2 flex items-center space-x-2">
                     <TrendingUpIcon className="h-5 w-5 text-blue-600" />
-                    <h4 className="font-semibold text-blue-800">Stay Consistently Visible</h4>
+                    <h4 className="font-semibold text-blue-800">Maximum Listing Exposure</h4>
                   </div>
-                  <p className="text-sm text-blue-700">Never go quiet online, even during busy periods</p>
+                  <p className="text-sm text-blue-700">Properties stay visible to buyers, even during busy periods</p>
                 </div>
 
                 <div className="rounded-xl border border-orange-200 bg-orange-50 p-4">
                   <div className="mb-2 flex items-center space-x-2">
                     <ZapIcon className="h-5 w-5 text-orange-600" />
-                    <h4 className="font-semibold text-orange-800">Perfect Timing</h4>
+                    <h4 className="font-semibold text-orange-800">Perfect Market Timing</h4>
                   </div>
-                  <p className="text-sm text-orange-700">AI spaces posts for maximum engagement</p>
+                  <p className="text-sm text-orange-700">AI posts when potential buyers are most active</p>
                 </div>
 
                 <div className="rounded-xl border border-green-200 bg-green-50 p-4">
                   <div className="mb-2 flex items-center space-x-2">
                     <StarIcon className="h-5 w-5 text-green-600" />
-                    <h4 className="font-semibold text-green-800">Looks Natural</h4>
+                    <h4 className="font-semibold text-green-800">Professional Presence</h4>
                   </div>
-                  <p className="text-sm text-green-700">Customers think you&apos;re posting in real-time</p>
+                  <p className="text-sm text-green-700">Buyers see you as consistently active and successful</p>
                 </div>
               </div>
             </div>
@@ -128,8 +131,10 @@ export function DripCampaignFeature() {
             <div className="relative">
               <div className="bg-background border-primary/20 rounded-3xl border p-6 shadow-2xl sm:p-8">
                 <div className="mb-6 text-center">
-                  <h3 className="mb-2 text-lg font-semibold">Your Drip Campaign in Action</h3>
-                  <p className="text-muted-foreground text-sm">Upload 12 photos today → Posts for 4 weeks</p>
+                  <h3 className="mb-2 text-lg font-semibold">Your Marketing Campaign in Action</h3>
+                  <p className="text-muted-foreground text-sm">
+                    Upload 12 property photos today → Marketing for 4 weeks
+                  </p>
                 </div>
 
                 {/* Timeline */}
@@ -237,12 +242,12 @@ export function DripCampaignFeature() {
                     <div className="flex items-center justify-center space-x-4 text-sm">
                       <div className="flex items-center space-x-2">
                         <div className="bg-primary h-3 w-3 rounded-full"></div>
-                        <span className="text-muted-foreground">12 photos uploaded</span>
+                        <span className="text-muted-foreground">12 properties uploaded</span>
                       </div>
                       <ArrowRightIcon className="text-muted-foreground h-4 w-4" />
                       <div className="flex items-center space-x-2">
                         <div className="h-3 w-3 rounded-full bg-green-500"></div>
-                        <span className="text-muted-foreground">4 weeks of posts</span>
+                        <span className="text-muted-foreground">4 weeks of marketing</span>
                       </div>
                     </div>
                     <p className="text-muted-foreground text-xs">
@@ -257,7 +262,7 @@ export function DripCampaignFeature() {
                 ⏰ Set & Forget
               </div>
               <div className="absolute -bottom-4 -left-4 rounded-full bg-blue-500 px-3 py-1 text-xs font-medium text-white">
-                📈 Always Active
+                📈 Always Marketing
               </div>
             </div>
           </div>
@@ -265,44 +270,46 @@ export function DripCampaignFeature() {
           {/* Real-World Scenarios */}
           <div className="mt-16 lg:mt-20">
             <h3 className="mb-8 text-center text-xl font-semibold tracking-tight text-white sm:text-2xl md:text-3xl lg:text-4xl">
-              Perfect For Real Business Situations
+              Perfect For Real Estate Situations
             </h3>
 
             <div className="grid gap-6 md:grid-cols-3">
               <BentoCard className="px-8 py-6">
                 <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-orange-100">
-                  <span className="text-2xl">💇‍♀️</span>
+                  <span className="text-2xl">🌸</span>
                 </div>
-                <h4 className="mb-3 font-semibold text-white">Busy Season Prep</h4>
+                <h4 className="mb-3 font-semibold text-white">Spring Market Rush</h4>
                 <p className="text-sm leading-relaxed text-white/70">
-                  &quot;Before prom season hits, I upload all my best hair photos. While I&apos;m booked solid with
-                  appointments, Uplevl keeps posting my work and bringing in new clients.&quot;
+                  &quot;Before spring market hits, I upload photos from all my new listings. While I&apos;m busy with
+                  showings and open houses, Uplevl keeps marketing my properties and attracting new buyers.&quot;
                 </p>
-                <div className="text-primary mt-4 text-xs font-medium">— Sarah, Hair Salon Owner</div>
+                <div className="text-primary mt-4 text-xs font-medium">— Jennifer, Luxury Home Specialist</div>
               </BentoCard>
 
               <BentoCard className="px-8 py-6">
                 <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-blue-100">
-                  <span className="text-2xl">🔧</span>
+                  <span className="text-2xl">✈️</span>
                 </div>
-                <h4 className="mb-3 font-semibold text-white">Vacation Coverage</h4>
+                <h4 className="mb-3 font-semibold text-white">Conference & Training</h4>
                 <p className="text-sm leading-relaxed text-white/70">
-                  &quot;Before my family vacation, I uploaded photos from recent jobs. My social media stayed active the
-                  whole week I was away, and I came back to new customer inquiries.&quot;
+                  &quot;Before attending the national real estate conference, I uploaded photos from recent listings and
+                  neighborhood highlights. My social media stayed active the whole week, and I came back to several new
+                  lead inquiries.&quot;
                 </p>
-                <div className="text-primary mt-4 text-xs font-medium">— Mike, Auto Repair Shop</div>
+                <div className="text-primary mt-4 text-xs font-medium">— David, Commercial Real Estate Agent</div>
               </BentoCard>
 
               <BentoCard className="px-8 py-6">
                 <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-purple-100">
-                  <span className="text-2xl">💆‍♀️</span>
+                  <span className="text-2xl">📸</span>
                 </div>
-                <h4 className="mb-3 font-semibold text-white">Productive Days</h4>
+                <h4 className="mb-3 font-semibold text-white">Photo Shoot Days</h4>
                 <p className="text-sm leading-relaxed text-white/70">
-                  &quot;Some days I&apos;m feeling creative and take tons of photos. Instead of posting them all at
-                  once, Uplevl spreads them out so I always have fresh content going live.&quot;
+                  &quot;Some days I do professional shoots for multiple properties. Instead of posting everything at
+                  once, Uplevl spreads them out strategically so each listing gets proper attention from potential
+                  buyers.&quot;
                 </p>
-                <div className="text-primary mt-4 text-xs font-medium">— Lisa, Med Spa Director</div>
+                <div className="text-primary mt-4 text-xs font-medium">— Maria, Residential Sales Expert</div>
               </BentoCard>
             </div>
           </div>
@@ -310,11 +317,11 @@ export function DripCampaignFeature() {
           {/* CTA */}
           <BentoCard className="mt-8 space-y-6 px-8 py-12 text-center sm:mt-12 md:mt-14 lg:mt-18">
             <h3 className="text-xl font-semibold tracking-tight text-white md:text-2xl lg:text-3xl">
-              Ready To Upload Once And Stay Active For Weeks?
+              Ready To Upload Once And Market Your Listings For Weeks?
             </h3>
             <p className="mx-auto max-w-2xl text-balance text-white/80">
-              Join the waitlist to be among the first to experience bulk upload and auto-scheduling. Your future self
-              will thank you.
+              Join the waitlist to be among the first to experience bulk upload and auto-scheduling for real estate
+              marketing. Focus on closing deals while we handle your online presence.
             </p>
             <Waitlist size="lg" buttonLabel="Get Early Access to Bulk Upload" />
           </BentoCard>

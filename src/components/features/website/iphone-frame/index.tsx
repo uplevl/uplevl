@@ -11,9 +11,7 @@ export function IPhoneFrame({ children }: IPhoneFrameProps) {
         <div className="absolute top-3 left-1/2 z-10 h-7 w-28 -translate-x-1/2 transform rounded-full bg-black"></div>
 
         {/* Content Area */}
-        <div className="relative h-full w-full overflow-hidden">
-          <div className="h-full w-full overflow-auto">{children}</div>
-        </div>
+        <div className="relative h-full w-full overflow-hidden">{children}</div>
 
         {/* Home Indicator */}
         <div className="absolute bottom-2 left-1/2 h-1 w-32 -translate-x-1/2 transform rounded-full bg-black opacity-60"></div>
