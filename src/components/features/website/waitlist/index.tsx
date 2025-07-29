@@ -2,7 +2,8 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CheckCircleIcon, MailIcon } from "lucide-react";
-import { useState, useTransition } from "react";
+import { usePostHog } from "posthog-js/react";
+import { useEffect, useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod/v4";
 
@@ -31,8 +32,11 @@ const formSchema = z.object({
 });
 
 export function Waitlist({ buttonLabel, ...props }: WaitlistProps) {
+  const [dialogOpen, setDialogOpen] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
+  const posthog = usePostHog();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -43,17 +47,38 @@ export function Waitlist({ buttonLabel, ...props }: WaitlistProps) {
     },
   });
 
+  useEffect(() => {
+    if (dialogOpen) {
+      form.reset();
+    }
+  }, [dialogOpen, form]);
+
   async function onSubmit(data: z.infer<typeof formSchema>) {
     startTransition(async () => {
-      console.log("Submitting waitlist", data);
-      await addToWaitlist(data);
+      setError(null); // Clear any previous errors
+
+      const result = await addToWaitlist(data);
+
+      if (!result.success) {
+        setError(result.message);
+        setSubmitted(true);
+        return;
+      }
+
+      posthog.capture("Waitlist Signup", {
+        first_name: data.firstName,
+        last_name: data.lastName,
+        email: data.email,
+      });
+
+      setError(null);
       setSubmitted(true);
     });
   }
 
   return (
     <Form {...form}>
-      <Dialog>
+      <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
         <DialogTrigger asChild>
           <Button {...props}>{buttonLabel ?? "Get Started"}</Button>
         </DialogTrigger>
@@ -64,11 +89,16 @@ export function Waitlist({ buttonLabel, ...props }: WaitlistProps) {
               <span className="text-2xl font-semibold tracking-tight">Join the Waitlist</span>
             </DialogTitle>
             {!submitted && (
-              <DialogDescription className="text-pretty">
+              <DialogDescription className="text-balance">
                 Be the first to know when we launch and get early access to the platform.
               </DialogDescription>
             )}
           </DialogHeader>
+          {error && (
+            <div className="rounded-lg border border-red-200 bg-red-50 px-4 py-2">
+              <p className="text-sm text-red-800">{error}</p>
+            </div>
+          )}
           {submitted ? (
             <div className="flex flex-col items-center justify-center gap-4">
               <CheckCircleIcon className="size-12 text-green-500" />
