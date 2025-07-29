@@ -53,10 +53,10 @@ function Button({
   const posthog = usePostHog();
 
   function handleClick(event: React.MouseEvent<HTMLButtonElement>) {
-    props.onClick?.(event);
     if (trackingLabel) {
       posthog.capture(trackingLabel);
     }
+    props.onClick?.(event);
   }
 
   return (

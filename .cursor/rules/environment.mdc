@@ -1,0 +1,58 @@
+---
+description: Coding Environment
+alwaysApply: true
+---
+
+# Coding Environment Rules
+
+This project is a **Next.js 15 web application** powered by **Bun**. Follow these rules for consistent local development and automation.
+
+## Runtime & Package Manager
+
+- **Always** use **Bun** for dependency management and script execution. Do **not** use `npm`, `yarn`, or `npx`.
+- Install packages with `bun add …` and remove with `bun remove …`.
+
+## Scripts & Commands
+
+| Purpose | Command | Notes |
+|---------|---------|-------|
+| Start development server | `bun run dev:app` | Starts Next.js dev server with Turbopack |
+| Start with ngrok tunnel | `bun run dev:ngrok` | Starts development with public tunnel for webhooks |
+| Build for production | `bun run build` | Creates optimized production build |
+| Run type checking | `bun run typecheck` | Validates TypeScript types across the project |
+| Execute a CLI tool once | `bunx <tool> …` | `bunx` (or `bun x`) is Bun's drop-in replacement for `npx`; no `--bun` flag is needed. |
+
+> **Why not `bunx --bun`?**  
+> The `--bun` flag is only for **`npx`** (e.g. `npx --bun <tool>`).  
+> `bunx` already runs with Bun, so `bunx <tool>` is the correct form.
+
+## Database Operations
+
+- Generate migrations: `bun run db:generate`
+- Run migrations: `bun run db:migrate`
+- Seed database: `bun run db:seed`
+- Open Drizzle Studio: `bun run db:studio`
+
+## Docker Development
+
+- Start services with Docker: `bun run dev:docker`
+- Services automatically stop after `dev:app` ends via `postdev` hook
+
+## Formatting & Linting
+
+- The project ships with **Prettier** and **ESLint**. All code must pass `bun run format` and `bun run lint` (or the equivalent scripts) before every commit.
+- Format code: `bun run format`
+- Lint code: `bun run lint`
+- Auto-fix linting issues: `bun run lint:fix`
+- CI will fail if code is unformatted or lints fail.
+
+## Environment Variables
+
+- Store secrets in **`.env`** (ignored by Git).  
+- Keep **`.env.example`** up-to-date so new contributors know which keys are required.
+
+## Cursor IDE Agents
+
+- Assume **Bun + TypeScript + Next.js 15**; prefer `bun`/`bunx` in generated commands.
+- Follow the project's TypeScript conventions and directory structure when auto-refactoring or generating code.
+- Use App Router patterns with proper file conventions (`page.tsx`, `layout.tsx`, `loading.tsx`, `error.tsx`).
