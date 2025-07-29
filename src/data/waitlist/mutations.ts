@@ -1,7 +1,5 @@
 "use server";
 
-// eslint-disable-next-line import-x/no-named-as-default
-import posthog from "posthog-js";
 import { z } from "zod/v4";
 
 import { db } from "@/database";
@@ -10,6 +8,7 @@ import { WaitlistTable } from "@/database/schema";
 import { EMAIL_SENDER_PERSONAL, EMAIL_SENDER_SYSTEM } from "@/constants/emails";
 import { clerkClient } from "@/lib/clerk";
 import { env } from "@/lib/env/server";
+import { getPostHogServer } from "@/lib/posthog-server";
 import { resend } from "@/lib/resend";
 
 import { WaitlistIssueEmail } from "@/components/features/email/waitlist-issue-email";
@@ -29,6 +28,8 @@ const IS_DEV = env.NODE_ENV === "development";
 const WELCOME_EMAIL_1_DELAY = IS_DEV ? "in 1 minute" : "in 1 minute";
 const WELCOME_EMAIL_2_DELAY = IS_DEV ? "in 2 minute" : "in 2 days";
 const WELCOME_EMAIL_3_DELAY = IS_DEV ? "in 3 minutes" : "in 5 days";
+
+const posthog = getPostHogServer();
 
 export async function addToWaitlist(props: AddToWaitlistProps): Promise<WaitlistResult> {
   try {
@@ -98,7 +99,7 @@ export async function addToWaitlist(props: AddToWaitlistProps): Promise<Waitlist
     // Schedule welcome emails asynchronously (don't await to avoid blocking)
     scheduleWelcomeEmails(email, firstName).catch((error) => {
       console.error("Email scheduling failed for user:", email, error);
-      posthog.captureException(error, { email, firstName, lastName });
+      posthog.captureException(error, email, { email, firstName, lastName });
     });
 
     // Log successful signup for analytics
@@ -109,7 +110,7 @@ export async function addToWaitlist(props: AddToWaitlistProps): Promise<Waitlist
       message: null,
     };
   } catch (error) {
-    posthog.captureException(error, props);
+    posthog.captureException(error, props.email, props);
     console.error("Waitlist signup failed:", error, {
       email: props.email,
       firstName: props.firstName,
@@ -136,7 +137,7 @@ async function scheduleWelcomeEmails(email: string, firstName: string) {
       })
       .catch((error) => {
         console.error("Failed to send welcome email 1:", error);
-        posthog.captureException(error, { email, firstName });
+        posthog.captureException(error, email, { email, firstName });
         return { error: "Failed to send welcome email 1", details: error };
       }),
 
@@ -150,7 +151,7 @@ async function scheduleWelcomeEmails(email: string, firstName: string) {
       })
       .catch((error) => {
         console.error("Failed to send welcome email 2:", error);
-        posthog.captureException(error, { email, firstName });
+        posthog.captureException(error, email, { email, firstName });
         return { error: "Failed to send welcome email 2", details: error };
       }),
 
@@ -164,7 +165,7 @@ async function scheduleWelcomeEmails(email: string, firstName: string) {
       })
       .catch((error) => {
         console.error("Failed to send welcome email 3:", error);
-        posthog.captureException(error, { email, firstName });
+        posthog.captureException(error, email, { email, firstName });
         return { error: "Failed to send welcome email 3", details: error };
       }),
   ];

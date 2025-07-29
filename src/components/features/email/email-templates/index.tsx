@@ -1,8 +1,6 @@
-"use client";
-
 import { Body, Head, Html, Img, Text } from "@react-email/components";
 
-import { env } from "@/lib/env/client";
+import { env } from "@/lib/env/server";
 
 interface EmailTemplateProps {
   children: React.ReactNode;
@@ -20,7 +18,7 @@ export function PersonalEmailTemplate({ children }: EmailTemplateProps) {
           <br />
           <b>Founder & CEO</b>
         </Text>
-        <Img src={`${env.NEXT_PUBLIC_URL}/email-logo.png`} alt="Uplevl" width="80" height="26" style={logo} />
+        <Img src={`${env.PUBLIC_URL}/email-logo.png`} alt="Uplevl" width="80" height="26" style={logo} />
         <Text style={paragraphStyles}>
           <a href="https://uplevl.ai" style={linkStyles}>
             uplevl.ai
