@@ -92,6 +92,7 @@ export {
   type PostInsert,
   type PostUpdate,
 } from "./posts.schema";
+export { WaitlistTable, type WaitlistInsert, type WaitlistUpdate } from "./waitlist.schema";
 
 // Relations
 

@@ -8,7 +8,6 @@ import { type UserInsert, UserTable, type UserUpdate } from "@/database/schema";
 import { verifySession } from "./queries";
 
 export async function insertUser(data: UserInsert) {
-  await verifySession();
   await db.insert(UserTable).values(data).onConflictDoNothing();
 }
 

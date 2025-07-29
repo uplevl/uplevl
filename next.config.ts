@@ -1,3 +1,4 @@
+import { withPostHogConfig } from "@posthog/nextjs-config";
 import type { NextConfig } from "next";
 
 import { env } from "@/lib/env/infra";
@@ -26,4 +27,12 @@ const nextConfig: NextConfig = {
   devIndicators: false,
 };
 
-export default nextConfig;
+export default withPostHogConfig(nextConfig, {
+  personalApiKey: env.POSTHOG_API_KEY, // Personal API Key
+  envId: env.POSTHOG_ENV_ID, // Environment ID
+  host: env.POSTHOG_HOST, // (optional), defaults to https://us.posthog.com
+  sourcemaps: {
+    enabled: true, // (optional) Enable sourcemaps generation and upload, default to true on production builds
+    deleteAfterUpload: true, // (optional) Delete sourcemaps after upload, defaults to true
+  },
+});

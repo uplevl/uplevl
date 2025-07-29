@@ -6,7 +6,7 @@ import { type NextRequest } from "next/server";
 import { type UserInsert, type UserUpdate } from "@/database/schema";
 
 import { env } from "@/lib/env/server";
-import { posthogClient } from "@/lib/posthog";
+import { getPostHogServer } from "@/lib/posthog-server";
 
 import { deleteUser, insertUser, updateUser } from "@/data/user/mutations";
 
@@ -17,6 +17,7 @@ interface WebhookResponse {
 
 async function handleUserCreated(data: UserJSON): Promise<WebhookResponse> {
   try {
+    const posthog = getPostHogServer();
     const { id, email_addresses, first_name, last_name, image_url } = data;
 
     if (!id || !email_addresses?.length) {
@@ -34,7 +35,7 @@ async function handleUserCreated(data: UserJSON): Promise<WebhookResponse> {
     };
 
     await insertUser(userData);
-    posthogClient.capture({
+    posthog.capture({
       distinctId: id,
       event: "user_signed_up",
       properties: {

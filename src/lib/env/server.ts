@@ -19,6 +19,10 @@ export const env = createEnv({
     PIPEDRIVE_API_KEY: z.string().min(1),
     UPSTASH_REDIS_URL: z.string().min(1),
     UPSTASH_REDIS_TOKEN: z.string().min(1),
+    UPSTASH_QSTASH_URL: z.string().min(1),
+    UPSTASH_QSTASH_TOKEN: z.string().min(1),
+    UPSTASH_QSTASH_CURRENT_SIGNING_KEY: z.string().min(1),
+    UPSTASH_QSTASH_NEXT_SIGNING_KEY: z.string().min(1),
     OPENAI_API_KEY: z.string().min(1),
     META_INSTAGRAM_WEBHOOK_VERIFY_TOKEN: z.string().min(1),
     META_INSTAGRAM_BASE_URL: z.string().min(1),
@@ -32,6 +36,8 @@ export const env = createEnv({
     STRIPE_PRICE_ID_ENTERPRISE: z.string().min(1),
     POSTHOG_KEY: z.string().min(1),
     POSTHOG_HOST: z.string().min(1),
+    RESEND_API_KEY: z.string().min(1),
+    SYSTEM_EMAIL_RECIPIENTS: z.string().min(1),
   },
   createFinalSchema: (env) =>
     z.object(env).transform((val) => {
