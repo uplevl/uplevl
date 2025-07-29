@@ -1,3 +1,5 @@
+"use client";
+
 import { Body, Head, Html, Img, Text } from "@react-email/components";
 
 import { env } from "@/lib/env/client";

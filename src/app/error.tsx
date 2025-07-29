@@ -6,7 +6,7 @@ import { useEffect } from "react";
 
 import { Page } from "@/components/common/page";
 
-export default function Error({ error }: { error: Error & { digest?: string }; reset: () => void }) {
+export default function Error({ error }: { error: Error & { digest?: string } }) {
   useEffect(() => {
     posthog.captureException(error);
   }, [error]);
