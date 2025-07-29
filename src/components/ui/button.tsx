@@ -1,5 +1,8 @@
+"use client";
+
 import { Slot } from "@radix-ui/react-slot";
 import { type VariantProps, cva } from "class-variance-authority";
+import { usePostHog } from "posthog-js/react";
 
 import { cn } from "@/lib/utils";
 
@@ -34,10 +37,27 @@ const buttonVariants = cva(
 );
 
 export type ButtonVariants = VariantProps<typeof buttonVariants>;
-export type ButtonProps = React.ComponentProps<"button"> & ButtonVariants & { asChild?: boolean };
+export type ButtonProps = React.ComponentProps<"button"> &
+  ButtonVariants & { asChild?: boolean; "data-tracking-label"?: string };
 
-function Button({ className, variant, size, asChild = false, disabled, ...props }: ButtonProps) {
+function Button({
+  className,
+  variant,
+  size,
+  asChild = false,
+  disabled,
+  "data-tracking-label": trackingLabel,
+  ...props
+}: ButtonProps) {
   const Comp = asChild ? Slot : "button";
+  const posthog = usePostHog();
+
+  function handleClick(event: React.MouseEvent<HTMLButtonElement>) {
+    props.onClick?.(event);
+    if (trackingLabel) {
+      posthog.capture(trackingLabel);
+    }
+  }
 
   return (
     <Comp
@@ -45,6 +65,7 @@ function Button({ className, variant, size, asChild = false, disabled, ...props 
       aria-disabled={disabled}
       className={cn(buttonVariants({ variant, size, className }))}
       {...props}
+      onClick={handleClick}
     />
   );
 }

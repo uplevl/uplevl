@@ -2,8 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CheckCircleIcon, MailIcon } from "lucide-react";
-import { usePostHog } from "posthog-js/react";
-import { useEffect, useState, useTransition } from "react";
+import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod/v4";
 
@@ -32,11 +31,9 @@ const formSchema = z.object({
 });
 
 export function Waitlist({ buttonLabel, ...props }: WaitlistProps) {
-  const [dialogOpen, setDialogOpen] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
-  const posthog = usePostHog();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -46,12 +43,6 @@ export function Waitlist({ buttonLabel, ...props }: WaitlistProps) {
       email: "",
     },
   });
-
-  useEffect(() => {
-    if (dialogOpen) {
-      form.reset();
-    }
-  }, [dialogOpen, form]);
 
   async function onSubmit(data: z.infer<typeof formSchema>) {
     startTransition(async () => {
@@ -65,12 +56,6 @@ export function Waitlist({ buttonLabel, ...props }: WaitlistProps) {
         return;
       }
 
-      posthog.capture("Waitlist Signup", {
-        first_name: data.firstName,
-        last_name: data.lastName,
-        email: data.email,
-      });
-
       setError(null);
       setSubmitted(true);
     });
@@ -78,9 +63,11 @@ export function Waitlist({ buttonLabel, ...props }: WaitlistProps) {
 
   return (
     <Form {...form}>
-      <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+      <Dialog>
         <DialogTrigger asChild>
-          <Button {...props}>{buttonLabel ?? "Get Started"}</Button>
+          <Button id="waitlist-button" {...props} data-tracking-label="Waitlist Signup Button Clicked">
+            {buttonLabel ?? "Get Started"}
+          </Button>
         </DialogTrigger>
         <DialogContent>
           <DialogHeader className="space-y-1">
