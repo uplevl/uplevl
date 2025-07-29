@@ -1,0 +1,124 @@
+---
+description: Uplevl Project Context
+alwaysApply: true
+---
+
+# Uplevl Product Context
+
+Uplevl is a modern AI-powered SaaS platform designed specifically for small, local, service-based businesses — including med spas, salons, personal trainers, dental clinics, and beauty studios. Its core mission is to automate social media marketing so business owners can grow their brand **without having to do the work themselves**.
+
+This project represents the **Next.js web application** that powers the entire Uplevl platform. It includes the marketing website (uplevl.ai), the business dashboard for managing content and settings, the complete backend API, AI agents, automations, and all the core business logic that enables the social media automation workflow.
+
+---
+
+## Core Promise
+
+**Social Media on Autopilot.**  
+Uplevl helps overwhelmed business owners stay visible, consistent, and professional on Instagram — without hiring an agency or learning complex tools.
+
+---
+
+## Key Platform Capabilities
+
+### 1. AI-Powered Post Generation & Automation
+
+- Business owners upload photos via the mobile app or web uploader
+- AI analyzes visual content for tone, activity, and themes
+- Generates warm, human-like captions in the voice of the business
+- Creates drip campaigns that schedule posts over time for consistent visibility
+- Automatically engages with comments and DMs to capture interest
+
+### 2. Complete Marketing Automation Pipeline
+
+- **Content Upload**: Secure file handling via UploadThing
+- **AI Post Generation**: Transforms uploads into branded social media content
+- **Drip Scheduling**: Schedules posts across platforms using automated campaigns
+- **Social Engagement**: Monitors and responds to comments/DMs on Instagram
+- **Website Handoff**: Directs engaged users to business websites
+- **AI Website Assistant**: Handles bookings, questions, and conversions
+
+### 3. Business Dashboard & Management
+
+- Comprehensive dashboard for reviewing and managing content
+- Agent settings for customizing AI behavior and brand voice
+- Integration management for social platforms (Instagram, etc.)
+- Performance analytics and engagement insights
+- User management and subscription handling
+
+### 4. Backend Infrastructure & APIs
+
+- Complete REST API powering the mobile app and web interface
+- Webhook handlers for Instagram, Stripe, Clerk integrations
+- Database management with Drizzle ORM and Neon
+- Authentication and user management via Clerk
+- Automated scheduling and queue management
+
+---
+
+## Technical Stack
+
+- **Full-Stack Framework**: Next.js 15 (App Router)
+- **Authentication**: Clerk
+- **Database**: Neon with Drizzle ORM
+- **AI Integration**: OpenAI (LLM-based agents)
+- **File Uploads**: UploadThing
+- **Scheduling & Automation**: Upstash QStash
+- **Analytics**: PostHog + internal tracking
+- **Payments**: Stripe
+- **Email**: Resend
+
+---
+
+## Target User Profile
+
+Uplevl is built for small business owners who:
+
+- Are not tech-savvy and don't want to manage marketing tools
+- Don't have time to post on Instagram but know it's important
+- Want their brand to appear consistent, professional, and active online
+- Need a complete solution from content creation to customer conversion
+
+Typical user workflow:
+
+- Upload content via mobile app or web interface
+- Review and approve AI-generated posts in the dashboard
+- Configure their AI agent settings and brand voice
+- Monitor performance and engagement through analytics
+- Manage integrations and subscription settings
+
+---
+
+## Product Architecture
+
+This Next.js application serves multiple roles:
+
+1. **Marketing Website** (`/`) - Public-facing site explaining Uplevl's value proposition
+2. **Authentication Pages** (`/sign-in`, `/sign-up`) - User onboarding via Clerk
+3. **Business Dashboard** (`/dashboard`) - Main interface for managing content, settings, and analytics
+4. **API Layer** (`/api`) - Backend services powering mobile app and web interface
+5. **Webhook Handlers** (`/api/webhooks`) - Integration endpoints for Instagram, Stripe, Clerk
+6. **AI Agents** (`/src/api/agents`) - LLM-powered content generation and engagement
+
+---
+
+## Design Philosophy
+
+- **Comprehensive Platform** — handles the entire marketing automation pipeline
+- **API-First** — designed to power multiple client interfaces (web, mobile)
+- **Business-Focused** — prioritizes dashboard usability and business management
+- **Scalable Architecture** — built to handle multiple users and high-volume automation
+- **Integration-Heavy** — seamlessly connects with social platforms, payment systems, and external services
+
+---
+
+## Cursor Context Notes
+
+- Assume this is the **complete Uplevl platform** - web app, API, and backend infrastructure
+- This includes marketing website, business dashboard, and all backend services
+- The mobile app is a separate React Native project that consumes this platform's APIs
+- Prioritize **scalable web architecture**, comprehensive business logic, and robust integrations
+- Focus on dashboard UX, API design, AI agent functionality, and automation workflows
+
+- This is not an admin panel or internal tool — it’s the core experience for the customer.
+- Prioritize **mobile UX**, fast interactions, and code simplicity.
+- Focus on visual upload, AI captioning, and content scheduling flows.

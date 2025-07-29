@@ -68,7 +68,10 @@ export async function addToWaitlist(props: AddToWaitlistProps): Promise<Waitlist
           subject: "Waitlist Issue",
           text: `Waitlist Issue for ${email}\n\n${JSON.stringify(waitlistEntry)}`,
         }),
-      ]);
+      ]).catch((error) => {
+        console.error("Failed to send waitlist issue email:", error);
+        posthog.captureException(error, email, { email, firstName, lastName });
+      });
 
       return {
         success: false,
@@ -97,13 +100,22 @@ export async function addToWaitlist(props: AddToWaitlistProps): Promise<Waitlist
     });
 
     // Schedule welcome emails asynchronously (don't await to avoid blocking)
-    scheduleWelcomeEmails(email, firstName).catch((error) => {
+    scheduleWelcomeEmails(email, firstName, lastName).catch((error) => {
       console.error("Email scheduling failed for user:", email, error);
       posthog.captureException(error, email, { email, firstName, lastName });
     });
 
-    // Log successful signup for analytics
     console.log("Successful waitlist signup:", { email, firstName, lastName });
+    // Log successful signup for analytics
+    posthog.capture({
+      event: "Waitlist Signup",
+      distinctId: email,
+      properties: {
+        first_name: firstName,
+        last_name: lastName,
+        email: email,
+      },
+    });
 
     return {
       success: true,
@@ -124,7 +136,7 @@ export async function addToWaitlist(props: AddToWaitlistProps): Promise<Waitlist
 }
 
 // Async email sending helper - doesn't block main flow
-async function scheduleWelcomeEmails(email: string, firstName: string) {
+async function scheduleWelcomeEmails(email: string, firstName: string, lastName: string) {
   // Send emails in parallel and handle failures gracefully
   const emailPromises = [
     resend.emails
@@ -137,7 +149,7 @@ async function scheduleWelcomeEmails(email: string, firstName: string) {
       })
       .catch((error) => {
         console.error("Failed to send welcome email 1:", error);
-        posthog.captureException(error, email, { email, firstName });
+        posthog.captureException(error, email, { email, firstName, lastName });
         return { error: "Failed to send welcome email 1", details: error };
       }),
 
@@ -151,7 +163,7 @@ async function scheduleWelcomeEmails(email: string, firstName: string) {
       })
       .catch((error) => {
         console.error("Failed to send welcome email 2:", error);
-        posthog.captureException(error, email, { email, firstName });
+        posthog.captureException(error, email, { email, firstName, lastName });
         return { error: "Failed to send welcome email 2", details: error };
       }),
 
@@ -165,7 +177,7 @@ async function scheduleWelcomeEmails(email: string, firstName: string) {
       })
       .catch((error) => {
         console.error("Failed to send welcome email 3:", error);
-        posthog.captureException(error, email, { email, firstName });
+        posthog.captureException(error, email, { email, firstName, lastName });
         return { error: "Failed to send welcome email 3", details: error };
       }),
   ];
