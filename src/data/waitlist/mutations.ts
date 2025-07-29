@@ -55,7 +55,7 @@ export async function addToWaitlist(props: AddToWaitlistProps): Promise<Waitlist
     if (waitlistEntry.status === "rejected") {
       console.warn("Waitlist entry rejected for:", email);
 
-      await Promise.allSettled([
+      await Promise.all([
         resend.emails.send({
           from: EMAIL_SENDER_PERSONAL,
           to: [email],
