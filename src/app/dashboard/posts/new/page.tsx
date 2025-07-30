@@ -1,19 +1,18 @@
-import { getAgent } from "@/data/agent/queries";
+import { Suspense } from "react";
 
 import { Page, PageHeader } from "@/components/common/page";
-import { CreatePostsForm } from "@/components/features/posts/create-posts-form";
-import { CreatePostsFormProvider } from "@/components/features/posts/create-posts-form-provider";
+import { PageLoading } from "@/components/common/page-loading";
 
-export default async function NewPostPage() {
-  const agent = await getAgent();
+import PageContent from "./page-content";
 
+export default function NewPostPage() {
   return (
     <Page>
       <PageHeader title="New Post(s)" description="Create a new social post(s)." />
       <div className="space-y-6">
-        <CreatePostsFormProvider agent={agent}>
-          <CreatePostsForm />
-        </CreatePostsFormProvider>
+        <Suspense fallback={<PageLoading />}>
+          <PageContent />
+        </Suspense>
       </div>
     </Page>
   );

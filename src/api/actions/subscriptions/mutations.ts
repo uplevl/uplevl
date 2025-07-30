@@ -4,14 +4,23 @@ import Stripe from "stripe";
 
 import { env } from "@/lib/env/server";
 
-import { type PriceTag, priceTags } from "../constants";
+import { verifySession } from "@/api/actions/user/queries";
+import { type PriceTag, priceTags } from "@/api/constants/prices";
 
 const stripeClient = new Stripe(env.STRIPE_SECRET_KEY, {
   typescript: true,
 });
 
-export async function createStripeSession(priceTag: PriceTag, pathname: string): Promise<string> {
+interface CreateStripeSessionVariables {
+  priceTag: PriceTag;
+  pathname: string;
+}
+
+export async function createStripeSession(variables: CreateStripeSessionVariables): Promise<string> {
   try {
+    const { priceTag, pathname } = variables;
+
+    await verifySession();
     const { url } = await stripeClient.checkout.sessions.create({
       payment_method_types: ["card"],
       mode: "subscription",

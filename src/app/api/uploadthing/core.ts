@@ -1,8 +1,7 @@
 import { type FileRouter, createUploadthing } from "uploadthing/next";
-import { UploadThingError } from "uploadthing/server";
 
-import { getAgentId } from "@/data/agent/queries";
-import { getCurrentUser } from "@/data/user/queries";
+import { getAgentId } from "@/api/actions/agent/queries";
+import { verifySession } from "@/api/actions/user/queries";
 
 const uploadthing = createUploadthing();
 
@@ -21,12 +20,8 @@ export const postImageFileRouter = {
   })
     // Set permissions and file types for this FileRoute
     .middleware(async () => {
-      const { userId } = await getCurrentUser();
+      const { userId } = await verifySession();
       const agentId = await getAgentId();
-
-      // If you throw, the user will not be able to upload
-      if (!userId) throw new UploadThingError("Unauthorized");
-      if (!agentId) throw new UploadThingError("Agent not found");
 
       // Whatever is returned here is accessible in onUploadComplete as `metadata`
       return { agentId, userId };

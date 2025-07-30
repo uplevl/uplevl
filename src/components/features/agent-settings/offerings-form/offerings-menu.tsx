@@ -1,8 +1,10 @@
 "use client";
 
+import { useMutation } from "@tanstack/react-query";
 import { EllipsisIcon } from "lucide-react";
+import { toast } from "sonner";
 
-import { deleteOffering } from "@/data/offerings/mutations";
+import { deleteOffering } from "@/api/actions/offerings/mutations";
 
 import { ConfirmAlert } from "@/components/common/confirm-alert";
 import { DeleteIcon, PenIcon } from "@/components/icons";
@@ -25,15 +27,27 @@ interface OfferingsMenuProps {
 export function OfferingsMenu({ offeringId }: OfferingsMenuProps) {
   const offering = useOfferingById(offeringId);
 
+  const { mutate } = useMutation({
+    mutationFn: deleteOffering,
+  });
+
   async function handleDeleteOffering() {
-    await deleteOffering(offering.agentId, offering.id);
+    mutate(offering.id, {
+      onSuccess: () => {
+        toast.success("Offering deleted successfully");
+      },
+      onError: (error) => {
+        console.error(error);
+        toast.error("We could not delete the offering. Please try again later.");
+      },
+    });
   }
 
   return (
     <ConfirmAlert
       title="Delete Offering"
       description="Are you sure you want to delete this offering? This action cannot be undone."
-      onConfirm={handleDeleteOffering}
+      onConfirmAction={handleDeleteOffering}
     >
       <OfferingsModal>
         <DropdownMenu>

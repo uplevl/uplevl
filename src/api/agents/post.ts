@@ -3,8 +3,8 @@
 import { Agent, run } from "@openai/agents";
 import z from "zod";
 
-import { getAgent } from "@/data/agent/queries";
-import { verifySession } from "@/data/user/queries";
+import { getAgent } from "@/api/actions/agent/queries";
+import { verifySession } from "@/api/actions/user/queries";
 
 export interface SocialMediaPost {
   imageUrl: string;
@@ -21,6 +21,10 @@ export async function runPostAgent(props: RunPostAgentProps): Promise<SocialMedi
 
   await verifySession();
   const agent = await getAgent();
+
+  if (!agent) {
+    throw new Error("Agent not found");
+  }
 
   const businessContextLines = [
     agent.businessName ? `Business Name: ${agent.businessName}` : null,

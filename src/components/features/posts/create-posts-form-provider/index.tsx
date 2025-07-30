@@ -1,18 +1,20 @@
 "use client";
 
 import { DialogTitle } from "@radix-ui/react-dialog";
+import { useMutation } from "@tanstack/react-query";
 import { atom } from "jotai";
 import { useAtom } from "jotai/react";
 import { atomWithStorage } from "jotai/utils";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { createContext, use, useState } from "react";
+import { toast } from "sonner";
 
 import { POST_REVIEW_STATUSES, POST_STATUSES } from "@/database/schema";
 
+import { insertPost } from "@/api/actions/posts/mutations";
 import { type SocialMediaPost, runPostAgent } from "@/api/agents/post";
-import { type AgentWithOfferings } from "@/data/agent/types";
-import { insertPost } from "@/data/posts/mutations";
+import { type AgentWithOfferings } from "@/api/types/agent";
 
 import { LoadingButton } from "@/components/common/loading-button";
 import { Spinner } from "@/components/common/spinner";
@@ -53,6 +55,13 @@ export function CreatePostsFormProvider({ children, agent }: CreatePostsFormProv
   const [isSubmitting, setIsSubmitting] = useAtom(isSubmittingAtom);
   const [posts, setPosts] = useState<SocialMediaPost[]>([]);
   const [dialogOpen, setDialogOpen] = useState(false);
+  const { mutate } = useMutation({
+    mutationFn: insertPost,
+    onError: (error) => {
+      console.error(error);
+      toast.error("There was an error creating your posts. Please try again.");
+    },
+  });
 
   const canSubmit = uploadedFiles.length > 0;
 
@@ -64,7 +73,7 @@ export function CreatePostsFormProvider({ children, agent }: CreatePostsFormProv
       uploadedFiles.map(async (image) => {
         const post = await runPostAgent({ imageUrl: image, description: description });
         setPosts((prev) => [...prev, post]);
-        await insertPost({
+        mutate({
           agentId: agent.id,
           imageUrl: image,
           content: post.content,
@@ -73,6 +82,8 @@ export function CreatePostsFormProvider({ children, agent }: CreatePostsFormProv
         });
       }),
     );
+
+    toast.success("Your posts have been created successfully. You can now review and approve them.");
 
     setIsSubmitting(false);
   }

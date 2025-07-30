@@ -2,8 +2,8 @@ import "server-only";
 
 import * as schema from "@/database/schema";
 
+import { sendInstagramComment, sendInstagramDM } from "@/api/actions/integrations/mutations";
 import { runSocialAgent } from "@/api/agents/social";
-import { sendInstagramComment, sendInstagramDM } from "@/data/integrations/mutations";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function runInstagramCommentAutomation(entry: any) {

@@ -1,7 +1,7 @@
 import { LogOutIcon } from "lucide-react";
 import { Suspense } from "react";
 
-import { getCurrentUser } from "@/data/user/queries";
+import { getCurrentUser } from "@/api/actions/user/queries";
 
 import { SidebarMenuButton } from "@/components/ui/sidebar";
 

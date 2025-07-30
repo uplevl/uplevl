@@ -1,38 +1,51 @@
 "use server";
 
 import { and, eq, notInArray } from "drizzle-orm";
+import z from "zod/v4";
 
 import { db } from "@/database";
 import {
   type OfferingInsert,
+  OfferingInsertSchema,
   type OfferingPriceInsert,
+  OfferingPriceInsertSchema,
   OfferingPriceTable,
   type OfferingPriceUpdate,
   OfferingTable,
   type OfferingUpdate,
+  OfferingUpdateSchema,
 } from "@/database/schema";
 
-import { verifySession } from "@/data/user/queries";
+import { verifySession } from "@/api/actions/user/queries";
+
+const OfferingPriceBulkInsertSchema = z.array(OfferingPriceInsertSchema);
 
 export async function insertOffering({ prices, ...data }: OfferingInsert & { prices: OfferingPriceInsert[] }) {
   await verifySession();
 
+  const parsedData = OfferingInsertSchema.parse(data);
+
   await db.transaction(async (tx) => {
-    const [offering] = await tx.insert(OfferingTable).values(data).returning({ id: OfferingTable.id });
-    await tx.insert(OfferingPriceTable).values(prices.map((price) => ({ ...price, offeringId: offering.id })));
+    const [offering] = await tx.insert(OfferingTable).values(parsedData).returning({ id: OfferingTable.id });
+    const priceValues = prices.map((price) => ({ ...price, offeringId: offering.id }));
+    const parsedPriceValues = OfferingPriceBulkInsertSchema.parse(priceValues);
+    await tx.insert(OfferingPriceTable).values(parsedPriceValues);
   });
 }
 
-export async function updateOffering(
-  offeringId: number,
-  { prices, ...data }: OfferingUpdate & { prices: OfferingPriceUpdate[] },
-) {
+export async function updateOffering({
+  offeringId,
+  prices,
+  ...data
+}: OfferingUpdate & { prices: OfferingPriceUpdate[]; offeringId: number }) {
   await verifySession();
+
+  const parsedData = OfferingUpdateSchema.parse(data);
 
   await db.transaction(async (tx) => {
     const [offering] = await tx
       .update(OfferingTable)
-      .set(data)
+      .set(parsedData)
       .where(eq(OfferingTable.id, offeringId))
       .returning({ id: OfferingTable.id });
 
@@ -59,11 +72,7 @@ export async function updateOffering(
         throw new Error("Price value is required");
       }
 
-      const validatedPrice = {
-        tier: price.tier,
-        price: price.price,
-        unit: price.unit,
-      };
+      const validatedPrice = OfferingPriceInsertSchema.parse(price);
 
       if (priceId) {
         pricesToUpdate.push({ id: priceId, data: validatedPrice });
@@ -103,7 +112,8 @@ export async function updateOffering(
   });
 }
 
-export async function deleteOffering(agentId: string, offeringId: number) {
+export async function deleteOffering(offeringId: number) {
   await verifySession();
+
   await db.update(OfferingTable).set({ deletedAt: new Date().toISOString() }).where(eq(OfferingTable.id, offeringId));
 }

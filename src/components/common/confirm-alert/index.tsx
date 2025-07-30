@@ -15,7 +15,7 @@ import {
 interface ConfirmAlertProps {
   title: string;
   description: string;
-  onConfirm: () => void;
+  onConfirmAction: () => void;
   children: React.ReactNode;
   cancelLabel?: string;
   confirmLabel?: string;
@@ -24,7 +24,7 @@ interface ConfirmAlertProps {
 export function ConfirmAlert({
   title,
   description,
-  onConfirm,
+  onConfirmAction,
   children,
   cancelLabel = "No, stop it",
   confirmLabel = "Yes, I'm sure",
@@ -39,7 +39,7 @@ export function ConfirmAlert({
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>{cancelLabel}</AlertDialogCancel>
-          <AlertDialogAction onClick={onConfirm}>{confirmLabel}</AlertDialogAction>
+          <AlertDialogAction onClick={onConfirmAction}>{confirmLabel}</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

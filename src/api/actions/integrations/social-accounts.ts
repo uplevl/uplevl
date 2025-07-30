@@ -1,17 +1,25 @@
-import "server-only";
+"use server";
+
+import { redirect } from "next/navigation";
 
 import { type IntegrationStrategy } from "@/database/schema";
 
 import { env } from "@/lib/env/server";
 
 import { getAgent } from "../agent/queries";
+import { verifySession } from "../user/queries";
 import { insertIntegration } from "./mutations";
 import { getIntegrationByStrategy } from "./queries";
 
 export async function addNewIntegration(strategy: IntegrationStrategy, code: string) {
   try {
+    await verifySession();
     const agent = await getAgent();
     const integration = await getIntegrationByStrategy(strategy);
+
+    if (!agent) {
+      return redirect("/onboarding");
+    }
 
     // If the integration already exists, we don't need to do anything.
     if (integration !== undefined) {

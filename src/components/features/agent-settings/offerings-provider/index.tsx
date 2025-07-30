@@ -1,6 +1,8 @@
+"use client";
+
 import { createContext, useContext } from "react";
 
-import { type AgentWithOfferings } from "@/data/agent/types";
+import { type AgentWithOfferings } from "@/api/types/agent";
 
 const OfferingsContext = createContext<AgentWithOfferings["offerings"]>([]);
 

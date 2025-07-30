@@ -1,6 +1,5 @@
 import "server-only";
 
-import { redirect } from "next/navigation";
 import { cache } from "react";
 
 import { db } from "@/database";
@@ -17,11 +16,7 @@ export const getAgentId = cache(async () => {
     },
   });
 
-  if (!agent) {
-    return redirect("/onboarding");
-  }
-
-  return { agentId: agent.id };
+  return agent?.id ?? null;
 });
 
 export async function getAgent() {
@@ -41,9 +36,5 @@ export async function getAgent() {
     },
   });
 
-  if (!agent) {
-    return redirect("/onboarding");
-  }
-
-  return agent;
+  return agent ?? null;
 }

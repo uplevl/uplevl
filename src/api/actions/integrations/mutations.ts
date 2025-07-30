@@ -1,9 +1,16 @@
 "use server";
 
 import { eq } from "drizzle-orm";
+import { revalidatePath } from "next/cache";
 
 import { db } from "@/database";
-import { type IntegrationInsert, IntegrationTable, type IntegrationUpdate } from "@/database/schema";
+import {
+  type IntegrationInsert,
+  IntegrationInsertSchema,
+  IntegrationTable,
+  type IntegrationUpdate,
+  IntegrationUpdateSchema,
+} from "@/database/schema";
 
 import { env } from "@/lib/env/server";
 
@@ -135,15 +142,39 @@ export async function sendInstagramComment({
 
 export async function insertIntegration(data: IntegrationInsert) {
   await verifySession();
-  await db.insert(IntegrationTable).values(data).returning({ id: IntegrationTable.id });
+
+  const parsedData = IntegrationInsertSchema.parse(data);
+
+  await db
+    .insert(IntegrationTable)
+    .values(parsedData)
+    .returning({ id: IntegrationTable.id })
+    .onConflictDoUpdate({
+      target: [IntegrationTable.entityId, IntegrationTable.name],
+      set: {
+        ...parsedData,
+        deletedAt: null,
+      },
+    });
+
+  revalidatePath("/dashboard/integrations");
 }
 
 export async function updateIntegration(id: number, data: IntegrationUpdate) {
   await verifySession();
-  await db.update(IntegrationTable).set(data).where(eq(IntegrationTable.id, id)).returning({ id: IntegrationTable.id });
+  const parsedData = IntegrationUpdateSchema.parse(data);
+  await db
+    .update(IntegrationTable)
+    .set(parsedData)
+    .where(eq(IntegrationTable.id, id))
+    .returning({ id: IntegrationTable.id });
+
+  revalidatePath("/dashboard/integrations");
 }
 
 export async function deleteIntegration(id: number) {
   await verifySession();
   await db.update(IntegrationTable).set({ deletedAt: new Date().toISOString() }).where(eq(IntegrationTable.id, id));
+
+  revalidatePath("/dashboard/integrations");
 }

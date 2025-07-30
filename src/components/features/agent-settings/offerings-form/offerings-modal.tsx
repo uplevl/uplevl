@@ -1,13 +1,14 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation } from "@tanstack/react-query";
 import { PlusIcon, TrashIcon } from "lucide-react";
 import { createContext, use, useEffect, useState } from "react";
 import { useFieldArray, useForm, useFormState } from "react-hook-form";
 import { toast } from "sonner";
 import z from "zod/v4";
 
-import { insertOffering, updateOffering } from "@/data/offerings/mutations";
+import { insertOffering, updateOffering } from "@/api/actions/offerings/mutations";
 
 import { LoadingButton } from "@/components/common/loading-button";
 import { Button } from "@/components/ui/button";
@@ -108,6 +109,12 @@ function OfferingsModalContent({ offeringId }: OfferingsModalContentProps) {
   const { setOpen } = useOfferingsModal();
   const offering = useOfferingById(offeringId ?? 0);
   const agentId = offering.agentId;
+  const { mutate: doInsertOffering } = useMutation({
+    mutationFn: insertOffering,
+  });
+  const { mutate: doUpdateOffering } = useMutation({
+    mutationFn: updateOffering,
+  });
 
   const title = offering ? "Edit Offering" : "Create Offering";
   const description = offering ? "Edit the offering details" : "Create a new offering";
@@ -139,26 +146,40 @@ function OfferingsModalContent({ offeringId }: OfferingsModalContentProps) {
   }, [offering, form]);
 
   async function onSubmit(values: FormValues) {
-    try {
-      if (offering) {
-        await updateOffering(offering.id, values);
-      } else {
-        await insertOffering({
+    if (offering) {
+      doUpdateOffering(
+        { ...values, offeringId: offering.id },
+        {
+          onSuccess: () => {
+            toast.success("Offering saved successfully");
+            form.reset();
+            setOpen(false);
+          },
+          onError: (error) => {
+            console.error(error);
+            toast.error("We could not save the offering. Please try again later.");
+          },
+        },
+      );
+    } else {
+      doInsertOffering(
+        {
           ...values,
           agentId: agentId,
           prices: values.prices.map((price) => ({ ...price, offeringId: 0 })), // The offeringId is set to 0 because it will be set by the function.
-        });
-      }
-
-      toast.success("Offering saved successfully");
-      form.reset();
-      setOpen(false);
-    } catch (error) {
-      if (error instanceof Error) {
-        toast.error(error.message);
-      } else {
-        toast.error("We could not save the offering. Please try again.");
-      }
+        },
+        {
+          onSuccess: () => {
+            toast.success("Offering saved successfully");
+            form.reset();
+            setOpen(false);
+          },
+          onError: (error) => {
+            console.error(error);
+            toast.error("We could not save the offering. Please try again later.");
+          },
+        },
+      );
     }
   }
 
