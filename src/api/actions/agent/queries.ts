@@ -16,7 +16,7 @@ export const getAgentId = cache(async () => {
     },
   });
 
-  return { agentId: agent?.id ?? null };
+  return agent?.id ?? null;
 });
 
 export async function getAgent() {

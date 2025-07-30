@@ -22,6 +22,10 @@ export async function runPostAgent(props: RunPostAgentProps): Promise<SocialMedi
   await verifySession();
   const agent = await getAgent();
 
+  if (!agent) {
+    throw new Error("Agent not found");
+  }
+
   const businessContextLines = [
     agent.businessName ? `Business Name: ${agent.businessName}` : null,
     agent.businessDescription ? `Business Description: ${agent.businessDescription}` : null,

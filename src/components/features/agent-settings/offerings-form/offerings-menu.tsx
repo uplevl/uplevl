@@ -47,7 +47,7 @@ export function OfferingsMenu({ offeringId }: OfferingsMenuProps) {
     <ConfirmAlert
       title="Delete Offering"
       description="Are you sure you want to delete this offering? This action cannot be undone."
-      onConfirm={handleDeleteOffering}
+      onConfirmAction={handleDeleteOffering}
     >
       <OfferingsModal>
         <DropdownMenu>

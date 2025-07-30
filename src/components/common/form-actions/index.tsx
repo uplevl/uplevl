@@ -109,7 +109,7 @@ export default function FormActions<T extends FieldValues = FieldValues>({
           description={confirmDescription}
           cancelLabel={confirmCancelLabel}
           confirmLabel={confirmConfirmLabel}
-          onConfirm={handleCancel}
+          onConfirmAction={handleCancel}
         >
           <Button variant="outline" type="button" disabled={isSubmitting}>
             {cancelLabel}
