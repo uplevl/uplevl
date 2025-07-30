@@ -3,15 +3,11 @@ import { type Metadata } from "next";
 import Link from "next/link";
 import { Suspense } from "react";
 
-// import { Card, CardContent } from "@/components/ui/card";
-
-import { getPosts } from "@/data/posts/queries";
-
 import { Page, PageHeader } from "@/components/common/page";
 import { PageLoading } from "@/components/common/page-loading";
-import EmptyState from "@/components/features/posts/empty-state";
-import PostCard from "@/components/features/posts/post-card";
 import { Button } from "@/components/ui/button";
+
+import PostsContent from "./posts-content";
 
 export const metadata: Metadata = {
   title: "Posts",
@@ -33,22 +29,5 @@ export default function PostsPage() {
         <PostsContent />
       </Suspense>
     </Page>
-  );
-}
-
-async function PostsContent() {
-  const posts = await getPosts();
-
-  return (
-    <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 2xl:grid-cols-5">
-      {posts.map((post) => (
-        <PostCard key={post.id} post={post} />
-      ))}
-      {posts.length === 0 && (
-        <div className="col-span-full">
-          <EmptyState />
-        </div>
-      )}
-    </div>
   );
 }

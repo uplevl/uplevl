@@ -1,3 +1,5 @@
+import "server-only";
+
 /**
  * The time to live for an entry in the cache: 1 day
  */

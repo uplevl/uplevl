@@ -19,7 +19,7 @@ export function NavigationItem({ href, children, linkOnly = false, ...props }: N
   function handleClick(event: React.MouseEvent<HTMLAnchorElement>) {
     // If the user is not on the home page, don't scroll to the content
     // but navigate to the href.
-    if (pathname !== "/" && !href.startsWith("#")) {
+    if (pathname !== "/" || !href.startsWith("#")) {
       return;
     }
 

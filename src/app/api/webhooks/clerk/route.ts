@@ -8,7 +8,7 @@ import { type UserInsert, type UserUpdate } from "@/database/schema";
 import { env } from "@/lib/env/server";
 import { getPostHogServer } from "@/lib/posthog-server";
 
-import { deleteUser, insertUser, updateUser } from "@/data/user/mutations";
+import { deleteUser, insertUser, updateUser } from "@/api/actions/user/mutations";
 
 interface WebhookResponse {
   status: number;

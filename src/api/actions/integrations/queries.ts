@@ -10,8 +10,12 @@ import { verifySession } from "../user/queries";
 
 async function getIntegrationByEntityIdAndStrategy(entityId: string, strategy: IntegrationStrategy) {
   const integration = await db.query.IntegrationTable.findFirst({
-    where: (IntegrationTable, { and, eq }) =>
-      and(eq(IntegrationTable.entityId, entityId), eq(IntegrationTable.name, strategy)),
+    where: (IntegrationTable, { and, eq, isNull }) =>
+      and(
+        eq(IntegrationTable.entityId, entityId),
+        eq(IntegrationTable.name, strategy),
+        isNull(IntegrationTable.deletedAt),
+      ),
     with: {
       agent: true,
     },
@@ -31,6 +35,8 @@ async function getIntegrationByEntityIdAndStrategy(entityId: string, strategy: I
 type IntegrationWithAgent = Awaited<ReturnType<typeof getIntegrationByEntityIdAndStrategy>>;
 
 export async function getCachedIntegrationByEntityIdAndStrategy(entityId: string, strategy: IntegrationStrategy) {
+  await verifySession();
+
   const cacheKey = createCacheKey(["integrations", entityId, strategy]);
 
   const cachedIntegration = await getEntry<IntegrationWithAgent>(cacheKey);

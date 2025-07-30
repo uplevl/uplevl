@@ -20,7 +20,7 @@ const waitlistSchema = z.object({
   lastName: z.string().min(1, "Last name is required"),
 });
 
-type AddToWaitlistProps = z.infer<typeof waitlistSchema>;
+export type AddToWaitlistProps = z.infer<typeof waitlistSchema>;
 
 type WaitlistResult = { success: true; message: null } | { success: false; message: string };
 

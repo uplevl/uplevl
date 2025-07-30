@@ -1,11 +1,11 @@
 "use client";
 
+import { useMutation } from "@tanstack/react-query";
 import { usePathname, useRouter } from "next/navigation";
-import { useTransition } from "react";
 
 import { type PriceTag } from "@/constants/prices";
 
-import { createStripeSession } from "@/data/subscriptions/mutations";
+import { createStripeSession } from "@/api/actions/subscriptions/mutations";
 
 import { LoadingButton } from "@/components/common/loading-button";
 import { type ButtonVariants } from "@/components/ui/button";
@@ -19,18 +19,22 @@ interface SubscribeButtonProps {
 export function SubscribeButton({ priceTag, label, variant }: SubscribeButtonProps) {
   const router = useRouter();
   const pathname = usePathname();
-  const [isPending, startTransition] = useTransition();
+  const { mutate, isPending } = useMutation({
+    mutationFn: createStripeSession,
+  });
 
   function handleButtonClick() {
-    startTransition(async () => {
-      try {
-        const url = await createStripeSession(priceTag, pathname);
-        router.push(url);
-      } catch (error) {
-        console.error("Failed to create subscription:", error);
-        // You might want to show a toast or error message to the user here
-      }
-    });
+    mutate(
+      { priceTag, pathname },
+      {
+        onSuccess: (url) => {
+          router.push(url);
+        },
+        onError: (error) => {
+          console.error("Failed to create subscription:", error);
+        },
+      },
+    );
   }
 
   return (

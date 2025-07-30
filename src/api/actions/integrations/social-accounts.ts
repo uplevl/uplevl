@@ -1,15 +1,17 @@
-import "server-only";
+"use server";
 
 import { type IntegrationStrategy } from "@/database/schema";
 
 import { env } from "@/lib/env/server";
 
 import { getAgent } from "../agent/queries";
+import { verifySession } from "../user/queries";
 import { insertIntegration } from "./mutations";
 import { getIntegrationByStrategy } from "./queries";
 
 export async function addNewIntegration(strategy: IntegrationStrategy, code: string) {
   try {
+    await verifySession();
     const agent = await getAgent();
     const integration = await getIntegrationByStrategy(strategy);
 

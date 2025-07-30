@@ -2,7 +2,7 @@
 
 import { formatCentsToDollarsIntl } from "@/lib/utils";
 
-import { type AgentWithOfferings } from "@/data/agent/types";
+import { type AgentWithOfferings } from "@/api/types/agent";
 
 import { FormPanel } from "@/components/common/form-panel";
 import { Card, CardContent } from "@/components/ui/card";

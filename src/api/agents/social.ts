@@ -2,7 +2,7 @@
 
 import { type IntegrationStrategy } from "@/database/schema/integrations.schema";
 
-import { getCachedIntegrationByEntityIdAndStrategy } from "@/data/integrations/queries";
+import { getCachedIntegrationByEntityIdAndStrategy } from "@/api/actions/integrations/queries";
 
 import { baseSystemPrompt } from "./library/base-system-prompt";
 import { runTextLLM } from "./library/llm";

@@ -3,12 +3,13 @@
 import { eq } from "drizzle-orm";
 
 import { db } from "@/database";
-import { type UserInsert, UserTable, type UserUpdate } from "@/database/schema";
+import { type UserInsert, UserInsertSchema, UserTable, type UserUpdate } from "@/database/schema";
 
 import { verifySession } from "./queries";
 
 export async function insertUser(data: UserInsert) {
-  await db.insert(UserTable).values(data).onConflictDoNothing();
+  const parsedData = UserInsertSchema.parse(data);
+  await db.insert(UserTable).values(parsedData).onConflictDoNothing();
 }
 
 export async function updateUser(id: string, data: UserUpdate) {

@@ -1,12 +1,13 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation } from "@tanstack/react-query";
 import { CheckCircleIcon, MailIcon } from "lucide-react";
-import { useState, useTransition } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod/v4";
 
-import { addToWaitlist } from "@/data/waitlist/mutations";
+import { addToWaitlist } from "@/api/actions/waitlist/mutations";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -33,7 +34,9 @@ const formSchema = z.object({
 export function Waitlist({ buttonLabel, ...props }: WaitlistProps) {
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [isPending, startTransition] = useTransition();
+  const { mutate, isPending } = useMutation({
+    mutationFn: addToWaitlist,
+  });
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -44,20 +47,18 @@ export function Waitlist({ buttonLabel, ...props }: WaitlistProps) {
     },
   });
 
-  async function onSubmit(data: z.infer<typeof formSchema>) {
-    startTransition(async () => {
-      setError(null); // Clear any previous errors
-
-      const result = await addToWaitlist(data);
-
-      if (!result.success) {
-        setError(result.message);
+  function onSubmit(data: z.infer<typeof formSchema>) {
+    setError(null); // Clear any previous errors
+    mutate(data, {
+      onSuccess: () => {
+        setError(null);
+      },
+      onError: (error) => {
+        setError(error.message);
+      },
+      onSettled: () => {
         setSubmitted(true);
-        return;
-      }
-
-      setError(null);
-      setSubmitted(true);
+      },
     });
   }
 

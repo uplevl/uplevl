@@ -16,7 +16,11 @@ export const verifySession = cache(async () => {
   return { userId };
 });
 
-export async function getCurrentUser({ allData = false } = {}) {
+export interface GetCurrentUserParams {
+  allData?: boolean;
+}
+
+export async function getCurrentUser({ allData = false }: GetCurrentUserParams = {}) {
   const { userId } = await verifySession();
 
   return {

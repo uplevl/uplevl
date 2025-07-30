@@ -3,8 +3,8 @@
 import { Agent, run } from "@openai/agents";
 import z from "zod";
 
-import { getAgent } from "@/data/agent/queries";
-import { verifySession } from "@/data/user/queries";
+import { getAgent } from "@/api/actions/agent/queries";
+import { verifySession } from "@/api/actions/user/queries";
 
 export interface SocialMediaPost {
   imageUrl: string;

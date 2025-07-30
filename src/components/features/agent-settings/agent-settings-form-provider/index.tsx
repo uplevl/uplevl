@@ -1,14 +1,15 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { type z } from "zod/v4";
 
 import { AgentUpdateSchema } from "@/database/schema";
 
-import { updateAgent } from "@/data/agent/mutations";
-import { type AgentWithOfferings } from "@/data/agent/types";
+import { updateAgent } from "@/api/actions/agent/mutations";
+import { type AgentWithOfferings } from "@/api/types/agent";
 
 import FormActions from "@/components/common/form-actions";
 import { Form } from "@/components/ui/form";
@@ -26,6 +27,10 @@ interface AgentSettingsFormProviderProps {
 }
 
 export function AgentSettingsFormProvider({ children, agent }: AgentSettingsFormProviderProps) {
+  const { mutate } = useMutation({
+    mutationFn: updateAgent,
+  });
+
   const form = useForm<FormValues>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -38,13 +43,18 @@ export function AgentSettingsFormProvider({ children, agent }: AgentSettingsForm
   });
 
   async function handleSubmit(data: FormValues) {
-    try {
-      await updateAgent(agent.id, data);
-      toast.success("Agent updated successfully");
-    } catch (error) {
-      console.error(error);
-      toast.error("Failed to update agent");
-    }
+    mutate(
+      { agentId: agent.id, ...data },
+      {
+        onSuccess: () => {
+          toast.success("Agent updated successfully");
+        },
+        onError: (error) => {
+          console.error(error);
+          toast.error("Failed to update agent");
+        },
+      },
+    );
   }
 
   return (

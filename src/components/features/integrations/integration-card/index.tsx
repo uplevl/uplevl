@@ -1,5 +1,6 @@
 "use client";
 
+import { useMutation } from "@tanstack/react-query";
 import { Trash2Icon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
@@ -8,9 +9,10 @@ import { INTEGRATION_STRATEGIES, type IntegrationStrategy } from "@/database/sch
 
 import { env } from "@/lib/env/client";
 
-import { deleteIntegration } from "@/data/integrations/mutations";
+import { deleteIntegration } from "@/api/actions/integrations/mutations";
 
 import { ConfirmAlert } from "@/components/common/confirm-alert";
+import { LoadingButton } from "@/components/common/loading-button";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
@@ -32,6 +34,16 @@ export function IntegrationCard({
   integrationId,
 }: IntegrationCardProps) {
   const router = useRouter();
+  const { mutate: disconnectIntegration, isPending: isDisconnecting } = useMutation({
+    mutationFn: deleteIntegration,
+    onSuccess: () => {
+      toast.success(`Successfully disconnected from ${title}`);
+    },
+    onError: (error) => {
+      console.error(error);
+      toast.error("Could not disconnect from the account. Please try again later.");
+    },
+  });
 
   async function handleConnect() {
     if (strategy === INTEGRATION_STRATEGIES.INSTAGRAM) {
@@ -40,18 +52,8 @@ export function IntegrationCard({
   }
 
   async function handleDisconnect() {
-    try {
-      if (!integrationId) return;
-      await deleteIntegration(integrationId);
-      toast.success(`Successfully disconnected from ${title}`);
-    } catch (error) {
-      console.error(error);
-      if (error instanceof Error) {
-        toast.error(error.message);
-      } else {
-        toast.error("Could not disconnect from the account");
-      }
-    }
+    if (!integrationId) return;
+    disconnectIntegration(integrationId);
   }
 
   return (
@@ -72,14 +74,14 @@ export function IntegrationCard({
               <ConfirmAlert
                 title={`Are you sure you want to disconnect from ${title}?`}
                 description="This will remove Uplevl from your account and it will no longer pamper your audience."
-                onConfirm={handleDisconnect}
+                onConfirmAction={handleDisconnect}
                 cancelLabel="No, keep it"
                 confirmLabel="Yes, disconnect"
               >
-                <Button variant="outline">
+                <LoadingButton variant="outline" isLoading={isDisconnecting}>
                   <Trash2Icon className="size-4" />
                   <span>Disconnect</span>
-                </Button>
+                </LoadingButton>
               </ConfirmAlert>
             )}
           </div>
