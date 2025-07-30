@@ -22,6 +22,7 @@ const OfferingPriceBulkInsertSchema = z.array(OfferingPriceInsertSchema);
 
 export async function insertOffering({ prices, ...data }: OfferingInsert & { prices: OfferingPriceInsert[] }) {
   await verifySession();
+
   const parsedData = OfferingInsertSchema.parse(data);
 
   await db.transaction(async (tx) => {
@@ -113,5 +114,6 @@ export async function updateOffering({
 
 export async function deleteOffering(offeringId: number) {
   await verifySession();
+
   await db.update(OfferingTable).set({ deletedAt: new Date().toISOString() }).where(eq(OfferingTable.id, offeringId));
 }
