@@ -8,6 +8,7 @@ import { atomWithStorage } from "jotai/utils";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { createContext, use, useState } from "react";
+import { toast } from "sonner";
 
 import { POST_REVIEW_STATUSES, POST_STATUSES } from "@/database/schema";
 
@@ -56,6 +57,10 @@ export function CreatePostsFormProvider({ children, agent }: CreatePostsFormProv
   const [dialogOpen, setDialogOpen] = useState(false);
   const { mutate } = useMutation({
     mutationFn: insertPost,
+    onError: (error) => {
+      console.error(error);
+      toast.error("There was an error creating your posts. Please try again.");
+    },
   });
 
   const canSubmit = uploadedFiles.length > 0;
@@ -77,6 +82,8 @@ export function CreatePostsFormProvider({ children, agent }: CreatePostsFormProv
         });
       }),
     );
+
+    toast.success("Your posts have been created successfully. You can now review and approve them.");
 
     setIsSubmitting(false);
   }
