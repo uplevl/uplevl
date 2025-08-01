@@ -25,6 +25,15 @@ fbq('init', '${env.NEXT_PUBLIC_FACEBOOK_PIXEL_ID}');
 fbq('track', 'PageView');`,
         }}
       />
+      <Script
+        strategy="afterInteractive"
+        id="facebook-pixel-track-15s"
+        dangerouslySetInnerHTML={{
+          __html: `setTimeout(function() {
+    fbq('trackCustom', 'TimeOnSite15s');
+  }, 15000);`,
+        }}
+      />
       <noscript>
         <Image
           alt="facebook-pixel"
