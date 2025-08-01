@@ -18,6 +18,9 @@ const nextConfig: NextConfig = {
       {
         hostname: "x7gddzcov6.ufs.sh",
       },
+      {
+        hostname: "facebook.com",
+      },
     ],
   },
   experimental: {
