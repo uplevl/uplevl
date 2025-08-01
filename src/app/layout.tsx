@@ -5,6 +5,8 @@ import "./styles.css";
 
 import Providers from "@/providers";
 
+import { PixelTracker } from "@/components/common/pixel-tracker";
+
 const geist = Geist({ subsets: ["latin"], variable: "--font-geist" });
 const geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-geist-mono" });
 
@@ -89,6 +91,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       suppressHydrationWarning
     >
       <body className="bg-background text-foreground flex min-h-screen min-w-screen flex-col font-sans">
+        <PixelTracker />
         <Providers>{children}</Providers>
       </body>
     </html>
