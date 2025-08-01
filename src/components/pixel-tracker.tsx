@@ -30,8 +30,21 @@ fbq('track', 'PageView');`,
         id="facebook-pixel-track-15s"
         dangerouslySetInnerHTML={{
           __html: `setTimeout(function() {
-    fbq('trackCustom', 'TimeOnSite15s');
-  }, 15000);`,
+  fbq('trackCustom', 'TimeOnSite15s');
+}, 15000);`,
+        }}
+      />
+      <Script
+        strategy="afterInteractive"
+        id="facebook-pixel-track-scrolled-50percent"
+        dangerouslySetInnerHTML={{
+          __html: `window.addEventListener('scroll', function() {
+  let scrollDepth = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+  if (scrollDepth > 0.5 && !window.scrollTracked) {
+    fbq('trackCustom', 'Scrolled50Percent');
+    window.scrollTracked = true;
+  }
+});`,
         }}
       />
       <noscript>
