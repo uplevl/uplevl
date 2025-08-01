@@ -11,8 +11,8 @@ const redis = new Redis({
  * Creates a cache key by joining array elements with colons.
  * Used to generate consistent and unique keys for Redis storage.
  */
-export function createCacheKey(props: string[]) {
-  return props.join(":");
+export function createCacheKey(props: (string | number)[]) {
+  return props.map((prop) => String(prop)).join(":");
 }
 
 /**

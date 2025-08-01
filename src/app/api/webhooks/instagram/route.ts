@@ -1,6 +1,9 @@
 import { type NextRequest, NextResponse } from "next/server";
 
-import { runInstagramCommentAutomation, runInstagramMessageAutomation } from "@/api/automations/instagram";
+import {
+  runInstagramCommentAutomation,
+  runInstagramMessageAutomation,
+} from "@/features/social-media/automations/instagram";
 
 export async function GET(request: NextRequest) {
   const hub = request.nextUrl.searchParams.get("hub.challenge");
@@ -18,6 +21,7 @@ export async function POST(request: NextRequest) {
       return new NextResponse("Invalid payload structure", { status: 400 });
     }
 
+    console.dir(payload, { depth: null });
     const entry = payload.entry[0];
 
     if ("messaging" in entry) {

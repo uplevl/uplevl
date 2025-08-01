@@ -1,6 +1,4 @@
 import { boolean, integer, pgTable, serial, smallint, timestamp, varchar } from "drizzle-orm/pg-core";
-import { createInsertSchema } from "drizzle-zod";
-import { type z } from "zod/v4";
 
 export const PackageTable = pgTable("packages", {
   // IDs
@@ -23,15 +21,3 @@ export const PackageTable = pgTable("packages", {
     .$onUpdate(() => new Date().toISOString()),
   deletedAt: timestamp("deleted_at", { mode: "string" }),
 });
-
-export const PackageInsertSchema = createInsertSchema(PackageTable).omit({
-  id: true,
-  createdAt: true,
-  updatedAt: true,
-  deletedAt: true,
-});
-
-export const PackageUpdateSchema = PackageInsertSchema.partial();
-
-export type PackageInsert = z.infer<typeof PackageInsertSchema>;
-export type PackageUpdate = z.infer<typeof PackageUpdateSchema>;

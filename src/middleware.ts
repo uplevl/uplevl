@@ -2,6 +2,7 @@ import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 
 const isProtectedRoute = createRouteMatcher(["/dashboard(.*)"]);
+const isApiStudioRoute = createRouteMatcher(["/api/studio(.*)"]);
 const isOnboardingRoute = createRouteMatcher(["/onboarding(.*)"]);
 const isAdminRoute = createRouteMatcher(["/admin(.*)"]);
 
@@ -12,9 +13,12 @@ export default clerkMiddleware(async (auth, req) => {
     },
   });
 
-  response.headers.set("x-current-path", req.nextUrl.pathname);
-
   const { userId, sessionClaims, redirectToSignIn } = await auth();
+
+  // If not logged in and trying to access API Studio route, return 401
+  if (!userId && isApiStudioRoute(req)) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
 
   // If not logged in and trying to access protected route, redirect to sign in
   if (!userId && isProtectedRoute(req)) {
@@ -43,10 +47,6 @@ export default clerkMiddleware(async (auth, req) => {
   }
 
   // Allow access to protected routes for logged-in users with completed onboarding
-  // if (userId && isProtectedRoute(req)) {
-  //   return response;
-  // }
-
   return response;
 });
 

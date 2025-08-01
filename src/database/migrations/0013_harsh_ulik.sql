@@ -1,0 +1,1 @@
+ALTER TABLE "posts_social_media" ALTER COLUMN "entity_id" DROP NOT NULL;

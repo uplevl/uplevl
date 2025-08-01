@@ -1,0 +1,171 @@
+---
+description: React Compiler Rules
+alwaysApply: true
+---
+
+# React Compiler Rules
+
+This project uses **React Compiler** with **React 19**, which automatically optimizes components and handles memoization. Follow these rules to work effectively with React Compiler.
+
+## Avoid Manual Memoization
+
+React Compiler automatically memoizes components, props, and values. **Do NOT use these hooks** unless explicitly necessary:
+
+- `useMemo` - React Compiler handles value memoization automatically
+- `useCallback` - React Compiler handles function memoization automatically  
+- `React.memo` - React Compiler handles component memoization automatically
+
+### ❌ Bad (Unnecessary with React Compiler)
+
+```tsx
+// Don't do this - React Compiler handles it automatically
+const expensiveValue = useMemo(() => {
+  return data.filter(item => item.active).map(item => item.name);
+}, [data]);
+
+const handleClick = useCallback((id: string) => {
+  onItemClick(id);
+}, [onItemClick]);
+
+const MemoizedComponent = React.memo(({ data }) => {
+  return <div>{data.title}</div>;
+});
+```
+
+### ✅ Good (Let React Compiler optimize)
+
+```tsx
+// React Compiler will automatically optimize these
+const expensiveValue = data.filter(item => item.active).map(item => item.name);
+
+function handleClick(id: string) {
+  onItemClick(id);
+};
+
+function Component({ data }) {
+  return <div>{data.title}</div>;
+};
+```
+
+## When Manual Memoization IS Still Needed
+
+Use manual memoization hooks **only** in these specific cases:
+
+### 1. **Semantic Requirements**
+
+When you need referential stability for non-React code:
+
+```tsx
+// ✅ Good - useCallback needed for referential stability
+const ref = useRef();
+const measureRef = useCallback((node) => {
+  ref.current = node;
+}, []);
+```
+
+### 2. **External Library Integration**
+
+When third-party libraries require stable references:
+
+```tsx
+// ✅ Good - External library needs stable reference
+const stableCallback = useCallback(
+  (value) => analytics.track('event', value),
+  []
+);
+```
+
+### 3. **Complex Computations with Custom Dependencies**
+
+When you need fine-grained control over when expensive operations run:
+
+```tsx
+// ✅ Good - Custom optimization logic
+const complexResult = useMemo(() => {
+  return performVeryExpensiveOperation(data);
+}, [data.specificProperty]); // Only recompute when specific property changes
+```
+
+## React Compiler Best Practices
+
+### Write Idiomatic React Code
+
+React Compiler works best with standard React patterns:
+
+```tsx
+// ✅ Good - Clear, readable component
+function UserProfile({ user, onUpdate }) {
+  const isActive = user.status === 'active';
+  const displayName = user.firstName + ' ' + user.lastName;
+  
+  function handleSave(newData) {
+    onUpdate(user.id, newData);
+  };
+
+  if (!user) {
+    return <div>Loading...</div>;
+  }
+
+  return (
+    <div className={isActive ? 'active' : 'inactive'}>
+      <h1>{displayName}</h1>
+      <button onPress={() => handleSave(userData)}>
+        Save Changes
+      </button>
+    </div>
+  );
+}
+```
+
+### Avoid Anti-Patterns
+
+Don't try to "help" React Compiler with unnecessary optimizations:
+
+```tsx
+// ❌ Bad - Over-optimization
+function Component({ items }) {
+  // Don't pre-optimize - let React Compiler handle it
+  const memoizedItems = useMemo(() => items, [items]);
+  const renderItem = useCallback((item) => <Item key={item.id} data={item} />, []);
+  
+  return (
+    <FlatList
+      data={memoizedItems}
+      renderItem={renderItem}
+    />
+  );
+}
+
+// ✅ Good - Clean and simple
+function Component({ items }) {
+  function renderItem(item) {
+    return <Item key={item.id} data={item} />;
+  }
+  
+  return (
+    <FlatList
+      data={items}
+      renderItem={renderItem}
+    />
+  );
+}
+```
+
+## Migration Guidelines
+
+When updating existing code:
+
+1. **Remove unnecessary memoization** - Start by removing `useMemo`, `useCallback`, and `React.memo` unless they fall into the exceptions above
+2. **Simplify component logic** - Write clear, readable code and let React Compiler optimize
+3. **Test performance** - Verify that removing manual memoization doesn't cause performance regressions
+4. **Keep complex optimizations** - Preserve any `useMemo`/`useCallback` that has specific semantic requirements
+
+## Code Review Checklist
+
+When reviewing code, check for:
+
+- [ ] No unnecessary `useMemo` or `useCallback` usage
+- [ ] Manual memoization only used for semantic requirements or external library integration
+- [ ] Components written in clear, idiomatic React patterns
+- [ ] No premature optimization attempts
+- [ ] Performance-critical paths still properly optimized where needed

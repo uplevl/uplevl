@@ -1,0 +1,1 @@
+ALTER TABLE "posts_comments" ALTER COLUMN "is_booking_interest" SET DEFAULT false;

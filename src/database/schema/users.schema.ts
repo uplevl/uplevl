@@ -1,6 +1,4 @@
 import { boolean, index, pgEnum, pgTable, serial, timestamp, varchar } from "drizzle-orm/pg-core";
-import { createInsertSchema } from "drizzle-zod";
-import { type z } from "zod/v4";
 
 import { PackageTable } from "./packages.schema";
 
@@ -39,10 +37,3 @@ export const UserTable = pgTable(
   },
   (table) => [index("users_deleted_at_idx").on(table.deletedAt), index("users_is_active_idx").on(table.isActive)],
 );
-
-export const UserInsertSchema = createInsertSchema(UserTable);
-
-export const UserUpdateSchema = UserInsertSchema.partial();
-
-export type UserInsert = z.infer<typeof UserInsertSchema>;
-export type UserUpdate = z.infer<typeof UserUpdateSchema>;

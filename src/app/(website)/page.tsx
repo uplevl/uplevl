@@ -1,15 +1,15 @@
 import { Suspense } from "react";
 
 // import { Benefits } from "@/components/features/website/benefits";
-import { DripCampaignFeature } from "@/components/features/website/drip-campaign-feature";
-import { FinalCTA } from "@/components/features/website/final-cta";
-import { Hero } from "@/components/features/website/hero";
-import { MobileUploader } from "@/components/features/website/mobile-uploader";
-import { ProblemStatement } from "@/components/features/website/problem-statement";
+import { DripCampaignFeature } from "@/features/website/components/drip-campaign-feature";
+import { FinalCTA } from "@/features/website/components/final-cta";
+import { Hero } from "@/features/website/components/hero";
+import { MobileUploader } from "@/features/website/components/mobile-uploader";
+import { ProblemStatement } from "@/features/website/components/problem-statement";
 // import { SocialProof } from "@/components/features/website/social-proof";
-import { SolutionStatement } from "@/components/features/website/solution-statement";
-import { SubscriptionSuccess } from "@/components/features/website/subscription-success";
-import { VisualProcess } from "@/components/features/website/visual-process";
+import { SolutionStatement } from "@/features/website/components/solution-statement";
+import { SubscriptionSuccess } from "@/features/website/components/subscription-success";
+import { VisualProcess } from "@/features/website/components/visual-process";
 
 export default function WebsiteHome() {
   return (
@@ -23,9 +23,7 @@ export default function WebsiteHome() {
       {/* <Benefits /> */}
       {/* <SocialProof /> */}
       <FinalCTA />
-      {/* <AiAgentShowcase />
-      <Features />
-      <WhyUplevl /> */}
+      {/* <Features /> */}
       {/* <Pricing /> */}
       <Suspense fallback={null}>
         <SubscriptionSuccess />

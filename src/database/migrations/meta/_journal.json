@@ -71,6 +71,55 @@
       "when": 1753616250617,
       "tag": "0009_brave_warbound",
       "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1753991333619,
+      "tag": "0010_bored_hardball",
+      "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "7",
+      "when": 1754033719097,
+      "tag": "0011_curly_meteorite",
+      "breakpoints": true
+    },
+    {
+      "idx": 12,
+      "version": "7",
+      "when": 1754043931492,
+      "tag": "0012_clumsy_bastion",
+      "breakpoints": true
+    },
+    {
+      "idx": 13,
+      "version": "7",
+      "when": 1754044529542,
+      "tag": "0013_harsh_ulik",
+      "breakpoints": true
+    },
+    {
+      "idx": 14,
+      "version": "7",
+      "when": 1754045265684,
+      "tag": "0014_wild_punisher",
+      "breakpoints": true
+    },
+    {
+      "idx": 15,
+      "version": "7",
+      "when": 1754045854706,
+      "tag": "0015_jittery_grim_reaper",
+      "breakpoints": true
+    },
+    {
+      "idx": 16,
+      "version": "7",
+      "when": 1754047664707,
+      "tag": "0016_steady_shadowcat",
+      "breakpoints": true
     }
   ]
 }

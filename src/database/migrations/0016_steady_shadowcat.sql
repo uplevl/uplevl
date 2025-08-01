@@ -1,0 +1,2 @@
+ALTER TABLE "posts_comments" ADD COLUMN "agent_id" uuid NOT NULL;--> statement-breakpoint
+ALTER TABLE "posts_comments" ADD CONSTRAINT "posts_comments_agent_id_agents_id_fk" FOREIGN KEY ("agent_id") REFERENCES "public"."agents"("id") ON DELETE cascade ON UPDATE no action;

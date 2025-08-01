@@ -1,7 +1,6 @@
-import { getPosts } from "@/api/actions/posts/queries";
-
-import EmptyState from "@/components/features/posts/empty-state";
-import PostCard from "@/components/features/posts/post-card";
+import { getPosts } from "@/features/posts/api/queries";
+import { EmptyState } from "@/features/posts/components/empty-state";
+import { PostCard } from "@/features/posts/components/post-card";
 
 export default async function PostsContent() {
   const posts = await getPosts();

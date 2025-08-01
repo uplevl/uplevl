@@ -1,6 +1,4 @@
 import { index, pgEnum, pgTable, text, timestamp, uuid, varchar } from "drizzle-orm/pg-core";
-import { createInsertSchema } from "drizzle-zod";
-import { type z } from "zod/v4";
 
 import { AgentTable } from "./agents.schema";
 import { UserTable } from "./users.schema";
@@ -8,16 +6,11 @@ import { UserTable } from "./users.schema";
 export const POST_STATUSES = {
   DRAFT: "draft",
   PUBLISHED: "published",
-  ARCHIVED: "archived",
 } as const;
 
 export type PostStatus = (typeof POST_STATUSES)[keyof typeof POST_STATUSES];
 
-export const postStatusEnum = pgEnum("post_status", [
-  POST_STATUSES.DRAFT,
-  POST_STATUSES.PUBLISHED,
-  POST_STATUSES.ARCHIVED,
-]);
+export const postStatusEnum = pgEnum("post_status", [POST_STATUSES.DRAFT, POST_STATUSES.PUBLISHED]);
 
 export const POST_REVIEW_STATUSES = {
   PENDING: "pending",
@@ -44,9 +37,10 @@ export const PostTable = pgTable(
     userId: varchar("user_id", { length: 128 })
       .references(() => UserTable.id, { onDelete: "cascade" })
       .notNull(),
+    entityId: varchar("entity_id", { length: 128 }),
     // Data
     content: text("content").notNull(),
-    imageUrl: varchar("image_url", { length: 255 }).notNull(),
+    images: varchar("images", { length: 255 }).array().notNull(),
     status: postStatusEnum("status").notNull().default(POST_STATUSES.DRAFT),
     reviewStatus: postReviewStatusEnum("review_status").notNull().default(POST_REVIEW_STATUSES.PENDING),
     reviewedBy: varchar("reviewed_by", { length: 128 }),
@@ -68,16 +62,3 @@ export const PostTable = pgTable(
     index("posts_scheduled_at_idx").on(table.scheduledAt),
   ],
 );
-
-export const PostInsertSchema = createInsertSchema(PostTable).omit({
-  id: true,
-  createdAt: true,
-  updatedAt: true,
-  deletedAt: true,
-});
-
-export const PostUpdateSchema = PostInsertSchema.partial();
-
-export type Post = typeof PostTable.$inferSelect;
-export type PostInsert = z.infer<typeof PostInsertSchema>;
-export type PostUpdate = z.infer<typeof PostUpdateSchema>;

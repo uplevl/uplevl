@@ -1,6 +1,4 @@
 import { index, pgEnum, pgTable, serial, timestamp, uuid, varchar } from "drizzle-orm/pg-core";
-import { createInsertSchema } from "drizzle-zod";
-import { type z } from "zod/v4";
 
 import { AgentTable } from "./agents.schema";
 
@@ -77,15 +75,3 @@ export const SessionTable = pgTable(
   },
   (table) => [index("sessions_agent_id_idx").on(table.agentId), index("sessions_deleted_at_idx").on(table.deletedAt)],
 );
-
-export const SessionInsertSchema = createInsertSchema(SessionTable).omit({
-  id: true,
-  createdAt: true,
-  updatedAt: true,
-  deletedAt: true,
-});
-
-export const SessionUpdateSchema = SessionInsertSchema.partial();
-
-export type SessionInsert = z.infer<typeof SessionInsertSchema>;
-export type SessionUpdate = z.infer<typeof SessionUpdateSchema>;

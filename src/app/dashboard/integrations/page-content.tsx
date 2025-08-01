@@ -1,10 +1,9 @@
 import { SiFacebook, SiInstagram } from "@icons-pack/react-simple-icons";
 
-import { getIntegrations } from "@/api/actions/integrations/queries";
+import { getIntegrations } from "@/features/social-media/api/queries";
+import { IntegrationCard } from "@/features/social-media/components/integration-card";
 
-import { IntegrationCard } from "@/components/features/integrations/integration-card";
-
-export default async function PageContent() {
+export async function PageContent() {
   const integrations = await getIntegrations();
 
   const instagramIntegration = integrations.find((integration) => integration.name === "instagram");

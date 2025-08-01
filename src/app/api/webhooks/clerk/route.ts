@@ -2,13 +2,14 @@ import { type UserJSON } from "@clerk/nextjs/server";
 import { verifyWebhook } from "@clerk/nextjs/webhooks";
 import { revalidatePath } from "next/cache";
 import { type NextRequest } from "next/server";
+import type z from "zod/v4";
 
-import { type UserInsert, type UserUpdate } from "@/database/schema";
+import { type UserInsertSchema, type UserUpdateSchema } from "@/database/validation/users.validation";
 
 import { env } from "@/lib/env/server";
 import { getPostHogServer } from "@/lib/posthog-server";
 
-import { deleteUser, insertUser, updateUser } from "@/api/actions/user/mutations";
+import { deleteUser, insertUser, updateUser } from "@/features/user/api/mutations";
 
 interface WebhookResponse {
   status: number;
@@ -26,10 +27,10 @@ async function handleUserCreated(data: UserJSON): Promise<WebhookResponse> {
 
     const email = email_addresses[0].email_address;
 
-    const userData: UserInsert = {
+    const userData: z.infer<typeof UserInsertSchema> = {
       id: id,
-      firstName: first_name,
-      lastName: last_name,
+      firstName: first_name!,
+      lastName: last_name!,
       email,
       imageUrl: image_url,
     };
@@ -66,9 +67,9 @@ async function handleUserUpdated(data: UserJSON): Promise<WebhookResponse> {
       return { status: 400, message: "Missing user ID" };
     }
 
-    const userData: UserUpdate = {
-      firstName: first_name,
-      lastName: last_name,
+    const userData: z.infer<typeof UserUpdateSchema> = {
+      firstName: first_name!,
+      lastName: last_name!,
       imageUrl: image_url,
     };
 
