@@ -1,7 +1,7 @@
 import { type FileRouter, createUploadthing } from "uploadthing/next";
 
-import { getAgentId } from "@/api/actions/agent/queries";
-import { verifySession } from "@/api/actions/user/queries";
+import { getAgentId } from "@/features/agent-settings/api/queries";
+import { verifySession } from "@/features/user/api/queries";
 
 const uploadthing = createUploadthing();
 

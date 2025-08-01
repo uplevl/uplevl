@@ -1,6 +1,4 @@
 import { index, pgTable, serial, smallint, text, timestamp, uuid, varchar } from "drizzle-orm/pg-core";
-import { createInsertSchema } from "drizzle-zod";
-import { type z } from "zod/v4";
 
 import { AgentTable } from "./agents.schema";
 
@@ -28,15 +26,3 @@ export const OfferingTable = pgTable(
   },
   (table) => [index("offerings_deleted_at_idx").on(table.deletedAt), index("offerings_agent_id_idx").on(table.agentId)],
 );
-
-export const OfferingInsertSchema = createInsertSchema(OfferingTable).omit({
-  id: true,
-  createdAt: true,
-  updatedAt: true,
-  deletedAt: true,
-});
-
-export const OfferingUpdateSchema = OfferingInsertSchema.partial();
-
-export type OfferingInsert = z.infer<typeof OfferingInsertSchema>;
-export type OfferingUpdate = z.infer<typeof OfferingUpdateSchema>;

@@ -2,7 +2,7 @@ import { redirect } from "next/navigation";
 
 import { INTEGRATION_STRATEGIES } from "@/database/schema";
 
-import { addNewIntegration } from "@/api/actions/integrations/social-accounts";
+import { addNewIntegration } from "@/features/social-media/integrations/instagram";
 
 export const dynamic = "force-dynamic";
 

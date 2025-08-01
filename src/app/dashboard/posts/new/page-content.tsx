@@ -1,11 +1,10 @@
 import { redirect } from "next/navigation";
 
-import { getAgent } from "@/api/actions/agent/queries";
+import { getAgent } from "@/features/agent-settings/api/queries";
+import { CreatePostsForm } from "@/features/posts/components/create-posts-form";
+import { CreatePostsFormProvider } from "@/features/posts/components/create-posts-form-provider";
 
-import { CreatePostsForm } from "@/components/features/posts/create-posts-form";
-import { CreatePostsFormProvider } from "@/components/features/posts/create-posts-form-provider";
-
-export default async function PageContent() {
+export async function PageContent() {
   const agent = await getAgent();
 
   if (!agent) {

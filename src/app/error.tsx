@@ -4,7 +4,7 @@
 import { posthog } from "posthog-js";
 import { useEffect } from "react";
 
-import { Page } from "@/components/common/page";
+import { Page } from "@/components/page";
 
 export default function Error({ error }: { error: Error & { digest?: string } }) {
   useEffect(() => {

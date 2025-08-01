@@ -1,6 +1,4 @@
 import { index, pgEnum, pgTable, serial, timestamp, uuid, varchar } from "drizzle-orm/pg-core";
-import { createInsertSchema, createSelectSchema } from "drizzle-zod";
-import { type z } from "zod/v4";
 
 import { AgentTable } from "./agents.schema";
 import { UserTable } from "./users.schema";
@@ -48,22 +46,3 @@ export const IntegrationTable = pgTable(
     index("integrations_deleted_at_idx").on(table.deletedAt),
   ],
 );
-
-export const IntegrationSelectSchema = createSelectSchema(IntegrationTable).omit({
-  createdAt: true,
-  updatedAt: true,
-  deletedAt: true,
-});
-
-export const IntegrationInsertSchema = createInsertSchema(IntegrationTable).omit({
-  id: true,
-  createdAt: true,
-  updatedAt: true,
-  deletedAt: true,
-});
-
-export const IntegrationUpdateSchema = IntegrationInsertSchema.partial();
-
-export type Integration = z.infer<typeof IntegrationSelectSchema>;
-export type IntegrationInsert = z.infer<typeof IntegrationInsertSchema>;
-export type IntegrationUpdate = z.infer<typeof IntegrationUpdateSchema>;

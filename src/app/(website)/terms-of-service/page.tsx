@@ -1,7 +1,7 @@
 import { type Metadata } from "next";
 
-import { Page, PageHeader } from "@/components/common/page";
 import { MailLink } from "@/components/mail-link";
+import { Page, PageHeader } from "@/components/page";
 import { Heading, List } from "@/components/typography";
 
 export const metadata: Metadata = {

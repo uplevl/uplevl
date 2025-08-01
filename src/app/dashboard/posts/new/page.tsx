@@ -1,9 +1,9 @@
 import { Suspense } from "react";
 
-import { Page, PageHeader } from "@/components/common/page";
-import { PageLoading } from "@/components/common/page-loading";
+import { Page, PageHeader } from "@/components/page";
+import { PageLoading } from "@/components/page-loading";
 
-import PageContent from "./page-content";
+import { PageContent } from "./page-content";
 
 export default function NewPostPage() {
   return (

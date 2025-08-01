@@ -1,6 +1,4 @@
 import { boolean, index, integer, pgTable, serial, smallint, timestamp, varchar } from "drizzle-orm/pg-core";
-import { createInsertSchema } from "drizzle-zod";
-import { type z } from "zod/v4";
 
 import { PackageTable } from "./packages.schema";
 
@@ -35,15 +33,3 @@ export const PackageFeatureTable = pgTable(
     index("packages_features_sort_order_idx").on(table.sortOrder),
   ],
 );
-
-export const PackageFeatureInsertSchema = createInsertSchema(PackageFeatureTable).omit({
-  id: true,
-  createdAt: true,
-  updatedAt: true,
-  deletedAt: true,
-});
-
-export const PackageFeatureUpdateSchema = PackageFeatureInsertSchema.partial();
-
-export type PackageFeatureInsert = z.infer<typeof PackageFeatureInsertSchema>;
-export type PackageFeatureUpdate = z.infer<typeof PackageFeatureUpdateSchema>;

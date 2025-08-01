@@ -9,7 +9,7 @@ export async function onRequestError(err: Error, request: Request) {
     const posthog = getPostHogServer();
     let distinctId = null;
     if ("cookie" in request.headers) {
-      const cookieString = request.headers.get("cookie")!;
+      const cookieString = request.headers.cookie as string;
       const postHogCookieMatch = cookieString.match(/ph_phc_.*?_posthog=([^;]+)/);
 
       if (postHogCookieMatch && postHogCookieMatch[1]) {

@@ -3,8 +3,8 @@ import { type Metadata } from "next";
 import Link from "next/link";
 import { Suspense } from "react";
 
-import { Page, PageHeader } from "@/components/common/page";
-import { PageLoading } from "@/components/common/page-loading";
+import { Page, PageHeader } from "@/components/page";
+import { PageLoading } from "@/components/page-loading";
 import { Button } from "@/components/ui/button";
 
 import PostsContent from "./posts-content";

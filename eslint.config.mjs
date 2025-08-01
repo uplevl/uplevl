@@ -18,7 +18,7 @@ const compat = new FlatCompat({
 });
 
 const eslintConfig = [
-  ...compat.extends("next/core-web-vitals", "next/typescript", "plugin:drizzle/recommended"),
+  ...compat.extends("next/core-web-vitals", "next/typescript"),
   reactPlugin.configs.flat.recommended,
   reactPlugin.configs.flat["jsx-runtime"],
   reactCompiler.configs.recommended,

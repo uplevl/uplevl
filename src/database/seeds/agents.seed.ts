@@ -1,15 +1,17 @@
+import type z from "zod/v4";
+
 import { db } from "@/database";
 import {
   AgentTable,
   INTEGRATION_STRATEGIES,
   IntegrationTable,
-  type OfferingPriceInsert,
   OfferingPriceTable,
   OfferingTable,
 } from "@/database/schema";
 
 import { env } from "@/lib/env/infra";
 
+import { type OfferingPriceInsertSchema } from "../validation/offerings-prices.validation";
 import agents from "./data/agents.data.json";
 
 export async function agentsSeed() {
@@ -54,7 +56,7 @@ export async function agentsSeed() {
         numberOfOfferings++;
 
         // Insert Offerings Prices
-        const pricesData: OfferingPriceInsert[] = prices.map((price) => ({
+        const pricesData: z.infer<typeof OfferingPriceInsertSchema>[] = prices.map((price) => ({
           ...price,
           offeringId: insertedOfferings[0].id,
         }));

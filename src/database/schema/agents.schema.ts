@@ -1,6 +1,4 @@
 import { boolean, index, pgTable, text, timestamp, uuid, varchar } from "drizzle-orm/pg-core";
-import { createInsertSchema } from "drizzle-zod";
-import { type z } from "zod/v4";
 
 import { UserTable } from "./users.schema";
 
@@ -34,16 +32,3 @@ export const AgentTable = pgTable(
     index("agents_is_active_idx").on(table.isActive),
   ],
 );
-
-export const AgentInsertSchema = createInsertSchema(AgentTable).omit({
-  id: true,
-  createdAt: true,
-  updatedAt: true,
-  deletedAt: true,
-});
-
-export const AgentUpdateSchema = AgentInsertSchema.partial();
-
-export type Agent = typeof AgentTable.$inferSelect;
-export type AgentInsert = z.infer<typeof AgentInsertSchema>;
-export type AgentUpdate = z.infer<typeof AgentUpdateSchema>;

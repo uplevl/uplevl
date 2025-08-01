@@ -1,45 +1,12 @@
-export {
-  UserTable,
-  USER_ROLES,
-  type UserRole,
-  userRolesEnum,
-  UserInsertSchema,
-  UserUpdateSchema,
-  type UserInsert,
-  type UserUpdate,
-} from "./users.schema";
-export {
-  AgentTable,
-  AgentInsertSchema,
-  AgentUpdateSchema,
-  type Agent,
-  type AgentInsert,
-  type AgentUpdate,
-} from "./agents.schema";
-export {
-  OfferingTable,
-  OfferingInsertSchema,
-  OfferingUpdateSchema,
-  type OfferingInsert,
-  type OfferingUpdate,
-} from "./offerings.schema";
-export {
-  OfferingPriceTable,
-  OfferingPriceInsertSchema,
-  OfferingPriceUpdateSchema,
-  type OfferingPriceInsert,
-  type OfferingPriceUpdate,
-} from "./offerings-prices.schema";
+export { UserTable, USER_ROLES, type UserRole, userRolesEnum } from "./users.schema";
+export { AgentTable } from "./agents.schema";
+export { OfferingTable } from "./offerings.schema";
+export { OfferingPriceTable } from "./offerings-prices.schema";
 export {
   IntegrationTable,
   INTEGRATION_STRATEGIES,
   type IntegrationStrategy,
   integrationName,
-  IntegrationInsertSchema,
-  IntegrationUpdateSchema,
-  type Integration,
-  type IntegrationInsert,
-  type IntegrationUpdate,
 } from "./integrations.schema";
 export {
   SessionTable,
@@ -52,47 +19,21 @@ export {
   SESSION_INTENTS,
   type SessionIntent,
   sessionIntent,
-  SessionInsertSchema,
-  SessionUpdateSchema,
-  type SessionInsert,
-  type SessionUpdate,
 } from "./sessions.schema";
-export {
-  SessionSummaryTable,
-  SessionSummaryInsertSchema,
-  SessionSummaryUpdateSchema,
-  type SessionSummaryInsert,
-  type SessionSummaryUpdate,
-} from "./sessions-summaries";
-export {
-  PackageTable,
-  PackageInsertSchema,
-  PackageUpdateSchema,
-  type PackageInsert,
-  type PackageUpdate,
-} from "./packages.schema";
-export {
-  PackageFeatureTable,
-  PackageFeatureInsertSchema,
-  PackageFeatureUpdateSchema,
-  type PackageFeatureInsert,
-  type PackageFeatureUpdate,
-} from "./packages-features.schema";
+export { SessionSummaryTable } from "./sessions-summaries";
+export { PackageTable } from "./packages.schema";
+export { PackageFeatureTable } from "./packages-features.schema";
 export {
   PostTable,
   postStatusEnum,
   POST_STATUSES,
   postReviewStatusEnum,
   POST_REVIEW_STATUSES,
-  PostInsertSchema,
-  PostUpdateSchema,
   type PostStatus,
   type PostReviewStatus,
-  type Post,
-  type PostInsert,
-  type PostUpdate,
 } from "./posts.schema";
-export { WaitlistTable, type WaitlistInsert, type WaitlistUpdate } from "./waitlist.schema";
+export { PostsCommentsTable } from "./posts-comments.schema";
+export { WaitlistTable } from "./waitlist.schema";
 
 // Relations
 
@@ -107,4 +48,5 @@ export {
   packageRelations,
   packageFeatureRelations,
   postRelations,
+  postsCommentsRelations,
 } from "./relations";

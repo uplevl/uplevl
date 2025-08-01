@@ -3,8 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { extractRouterConfig } from "uploadthing/server";
 
-import { SidebarUserButton } from "@/components/features/auth/sidebar-user-button";
-import { Navigation } from "@/components/layouts/navigation";
+import { Navigation } from "@/components/navigation";
 import {
   Sidebar,
   SidebarContent,
@@ -19,6 +18,7 @@ import {
 
 import { postImageFileRouter } from "@/app/api/uploadthing/core";
 import logo from "@/assets/logo.svg";
+import { SidebarUserButton } from "@/features/user/components/sidebar-user-button";
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (

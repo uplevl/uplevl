@@ -19,7 +19,7 @@ const nextConfig: NextConfig = {
         hostname: "x7gddzcov6.ufs.sh",
       },
       {
-        hostname: "facebook.com",
+        hostname: "www.facebook.com",
       },
     ],
   },

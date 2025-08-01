@@ -3,9 +3,9 @@ import { Geist, Geist_Mono } from "next/font/google";
 
 import "./styles.css";
 
-import Providers from "@/providers";
+import { Providers } from "@/providers/providers";
 
-import { PixelTracker } from "@/components/common/pixel-tracker";
+import { PixelTracker } from "@/components/pixel-tracker";
 
 const geist = Geist({ subsets: ["latin"], variable: "--font-geist" });
 const geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-geist-mono" });

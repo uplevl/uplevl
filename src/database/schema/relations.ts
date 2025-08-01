@@ -6,6 +6,7 @@ import { OfferingPriceTable } from "./offerings-prices.schema";
 import { OfferingTable } from "./offerings.schema";
 import { PackageFeatureTable } from "./packages-features.schema";
 import { PackageTable } from "./packages.schema";
+import { PostsCommentsTable } from "./posts-comments.schema";
 import { PostTable } from "./posts.schema";
 import { SessionSummaryTable } from "./sessions-summaries";
 import { SessionTable } from "./sessions.schema";
@@ -20,9 +21,10 @@ export const agentRelations = relations(AgentTable, ({ one, many }) => ({
   integrations: many(IntegrationTable),
   sessions: many(SessionTable),
   posts: many(PostTable),
+  postsComments: many(PostsCommentsTable),
 }));
 
-export const integrationRelations = relations(IntegrationTable, ({ one }) => ({
+export const integrationRelations = relations(IntegrationTable, ({ one, many }) => ({
   agent: one(AgentTable, {
     fields: [IntegrationTable.agentId],
     references: [AgentTable.id],
@@ -31,6 +33,7 @@ export const integrationRelations = relations(IntegrationTable, ({ one }) => ({
     fields: [IntegrationTable.userId],
     references: [UserTable.id],
   }),
+  postsComments: many(PostsCommentsTable),
 }));
 
 export const offeringRelations = relations(OfferingTable, ({ one, many }) => ({
@@ -68,6 +71,17 @@ export const postRelations = relations(PostTable, ({ one }) => ({
   user: one(UserTable, {
     fields: [PostTable.userId],
     references: [UserTable.id],
+  }),
+}));
+
+export const postsCommentsRelations = relations(PostsCommentsTable, ({ one }) => ({
+  integration: one(IntegrationTable, {
+    fields: [PostsCommentsTable.integrationId],
+    references: [IntegrationTable.id],
+  }),
+  agent: one(AgentTable, {
+    fields: [PostsCommentsTable.agentId],
+    references: [AgentTable.id],
   }),
 }));
 

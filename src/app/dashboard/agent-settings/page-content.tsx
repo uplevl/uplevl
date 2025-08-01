@@ -1,12 +1,11 @@
 import { redirect } from "next/navigation";
 
-import { getAgent } from "@/api/actions/agent/queries";
+import { getAgent } from "@/features/agent-settings/api/queries";
+import { AgentSettingsFormProvider } from "@/features/agent-settings/components/agent-settings-form-provider";
+import { BusinessForm } from "@/features/agent-settings/components/business-form";
+import { OfferingsForm } from "@/features/offerings/components/offerings-form";
 
-import { AgentSettingsFormProvider } from "@/components/features/agent-settings/agent-settings-form-provider";
-import { BusinessForm } from "@/components/features/agent-settings/business-form";
-import { OfferingsForm } from "@/components/features/agent-settings/offerings-form";
-
-export default async function PageContent() {
+export async function PageContent() {
   const agent = await getAgent();
 
   if (!agent) {

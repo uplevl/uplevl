@@ -1,6 +1,4 @@
 import { boolean, index, integer, pgTable, serial, text, timestamp, varchar } from "drizzle-orm/pg-core";
-import { createInsertSchema } from "drizzle-zod";
-import { type z } from "zod/v4";
 
 import { SessionTable } from "./sessions.schema";
 
@@ -24,13 +22,3 @@ export const SessionSummaryTable = pgTable(
   },
   (table) => [index("sessions_summaries_session_id_idx").on(table.sessionId)],
 );
-
-export const SessionSummaryInsertSchema = createInsertSchema(SessionSummaryTable).omit({
-  id: true,
-  createdAt: true,
-});
-
-export const SessionSummaryUpdateSchema = SessionSummaryInsertSchema.partial();
-
-export type SessionSummaryInsert = z.infer<typeof SessionSummaryInsertSchema>;
-export type SessionSummaryUpdate = z.infer<typeof SessionSummaryUpdateSchema>;
