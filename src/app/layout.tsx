@@ -94,7 +94,7 @@ export const metadata: Metadata = {
       "Generate more real estate leads and close more deals with marketing automation designed specifically for realtors.",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "https://uplevl.ai/og-image.jpg",
         width: 1200,
         height: 630,
         alt: "Uplevl - Automated Marketing System for Real Estate Agents",
@@ -111,7 +111,7 @@ export const metadata: Metadata = {
       "Generate more real estate leads and close more deals with marketing automation designed specifically for realtors.",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "https://uplevl.ai/og-image.jpg",
         width: 1200,
         height: 630,
         alt: "Uplevl - Automated Marketing System for Real Estate Agents",
