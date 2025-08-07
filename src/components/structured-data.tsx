@@ -4,6 +4,10 @@ interface StructuredDataProps {
   data: WithContext<Organization | WebSite | SoftwareApplication> | Record<string, unknown>;
 }
 
+/**
+ * Renders structured data as JSON-LD script tag for SEO and rich snippets.
+ * @param data - Schema.org structured data object
+ */
 export function StructuredData({ data }: StructuredDataProps) {
   return (
     <script
