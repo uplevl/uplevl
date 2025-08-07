@@ -11,6 +11,9 @@ import { SolutionStatement } from "@/features/website/components/solution-statem
 import { SubscriptionSuccess } from "@/features/website/components/subscription-success";
 import { VisualProcess } from "@/features/website/components/visual-process";
 
+// Force static generation for better social media crawler support
+export const dynamic = "force-static";
+
 export default function WebsiteHome() {
   return (
     <main className="flex-1">
